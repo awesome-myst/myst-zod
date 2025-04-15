@@ -1,3 +1,3 @@
 # myst-zod
 
-> Zode schema for MyST Markdown
+> Zod schema for MyST Markdown
