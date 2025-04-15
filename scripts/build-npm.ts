@@ -15,7 +15,7 @@ await build({
   },
   package: {
     // package.json properties
-    name: "myst-zod",
+    name: denoJson.name,
     version: denoJson.version,
     description: denoJson.description,
     license: denoJson.license,
