@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: MIT
 
 import { z } from "zod";
+import { nodeSchema } from "./node.ts";
 
-export const nodeSchema = z.object({
+export const parentSchema = z.object({
+  children: z.array(nodeSchema).describe("List of child nodes"),
   type: z.string().describe("identifier for node variant"),
   data: z.record(z.any()).optional().describe(
     "information associated by the ecosystem with the node; never specified by mdast",
@@ -32,8 +34,6 @@ export const nodeSchema = z.object({
     .optional().describe(
       "location of node in source file; must not be present for generated nodes",
     ),
-}).describe(
-  "Base node object, based on the [unist](https://github.com/syntax-tree/unist) syntax tree.",
-);
+}).describe("Basic node with required node children");
 
-export type Node = z.infer<typeof nodeSchema>;
+export type Parent = z.infer<typeof parentSchema>;
