@@ -1,12 +1,21 @@
 // SPDX-License-Identifier: MIT
 
-import { z } from "zod";
+import { z, type ZodType } from "zod";
 
-import { parentSchema } from "./parent.ts";
-import { phrasingContentSchema } from "./phrasing-content.ts";
-import { flowContentSchema } from "./flow-content.ts";
+import { parentSchema, type Parent } from "./parent.ts";
+import { phrasingContentSchema, type PhrasingContent } from "./phrasing-content.ts";
+import { flowContentSchema, type FlowContent } from "./flow-content.ts";
 
-export const directiveSchema = parentSchema.extend({
+export type Directive = Parent & {
+  type: "mystDirective";
+  name: string;
+  args?: string;
+  options?: Record<string, unknown>;
+  value?: string;
+  children?: (PhrasingContent | FlowContent)[];
+};
+
+export const directiveSchema: ZodType<Directive> = parentSchema.extend({
   type: z.literal("mystDirective").describe("identifier for node variant"),
   name: z.string().describe("name of the directive"),
   args: z
@@ -26,5 +35,3 @@ export const directiveSchema = parentSchema.extend({
     .optional()
     .describe("parsed directive content"),
 }).describe("Content block with predefined behavior");
-
-export type Directive = z.infer<typeof directiveSchema>;

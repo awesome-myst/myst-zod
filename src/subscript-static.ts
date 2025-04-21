@@ -1,11 +1,16 @@
 // SPDX-License-Identifier: MIT
 
-import { z } from "zod";
+import { z, type ZodType } from "zod";
 
-import { parentSchema } from "./parent.ts";
-import { staticPhrasingContentSchema } from "./static-phrasing-content.ts";
+import { parentSchema, type Parent } from "./parent.ts";
+import { staticPhrasingContentSchema, type StaticPhrasingContent } from "./static-phrasing-content.ts";
 
-export const subscriptStaticSchema = parentSchema.extend({
+export type SubscriptStatic = Parent & {
+  type: "subscriptStatic";
+  children: StaticPhrasingContent[];
+};
+
+export const subscriptStaticSchema: ZodType<SubscriptStatic> = parentSchema.extend({
   type: z.literal("subscriptStatic").describe("identifier for node variant"),
   children: z
     .array(staticPhrasingContentSchema)
@@ -13,5 +18,3 @@ export const subscriptStaticSchema = parentSchema.extend({
 }).describe(
   "Subscripted content, with static children; used when parent node requires static content.",
 );
-
-export type SubscriptStatic = z.infer<typeof subscriptStaticSchema>;

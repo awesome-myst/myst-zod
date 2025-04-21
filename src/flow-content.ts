@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z } from "zod";
+import { z, type ZodType } from "zod";
 
 import { type Paragraph, paragraphSchema } from "./paragraph.ts";
 import { type Definition, definitionSchema } from "./definition.ts";
@@ -39,7 +39,7 @@ export type FlowContent =
   | Table
   | FootnoteDefinition;
 
-export const flowContentSchema = z.union([
+export const flowContentSchema: ZodType<FlowContent> = z.union([
   paragraphSchema,
   definitionSchema,
   headingSchema,

@@ -1,11 +1,16 @@
 // SPDX-License-Identifier: MIT
 
-import { z } from "zod";
+import { z, type ZodType } from "zod";
 
-import { parentSchema } from "./parent.ts";
-import { phrasingContentSchema } from "./phrasing-content.ts";
+import { parentSchema, type Parent } from "./parent.ts";
+import { phrasingContentSchema, type PhrasingContent } from "./phrasing-content.ts";
 
-export const emphasisSchema = parentSchema
+export type Emphasis = Parent & {
+  type: "emphasis";
+  children?: PhrasingContent[];
+}
+
+export const emphasisSchema: ZodType<Emphasis> = parentSchema
   .extend({
     type: z.literal("emphasis").describe("identifier for node variant"),
     children: z
@@ -13,5 +18,3 @@ export const emphasisSchema = parentSchema
       .describe("children of the emphasis node"),
   })
   .describe("Stressed, italicized content");
-
-export type Emphasis = z.infer<typeof emphasisSchema>;

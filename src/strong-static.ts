@@ -1,11 +1,16 @@
 // SPDX-License-Identifier: MIT
 
-import { z } from "zod";
+import { z, type ZodType } from "zod";
 
-import { parentSchema } from "./parent.ts";
-import { staticPhrasingContentSchema } from "./static-phrasing-content.ts";
+import { parentSchema, type Parent } from "./parent.ts";
+import { staticPhrasingContentSchema, type StaticPhrasingContent } from "./static-phrasing-content.ts";
 
-export const strongStaticSchema = parentSchema
+export type StrongStatic = Parent & {
+  type: "strong";
+  children: StaticPhrasingContent[];
+};
+
+export const strongStaticSchema: ZodType<StrongStatic> = parentSchema
   .extend({
     type: z.literal("strong").describe("identifier for node variant"),
     children: z
@@ -15,5 +20,3 @@ export const strongStaticSchema = parentSchema
   .describe(
     "Important, serious, urgent, bold content, with static children; used when parent node requires static content.",
   );
-
-export type StrongStatic = z.infer<typeof strongStaticSchema>;

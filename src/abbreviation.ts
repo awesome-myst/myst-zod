@@ -1,14 +1,21 @@
 // SPDX-License-Identifier: MIT
 
-import { z } from "zod";
+import { z, type ZodType } from "zod";
 
-import { parentSchema } from "./parent.ts";
-import { staticPhrasingContentSchema } from "./static-phrasing-content.ts";
+import { parentSchema, type Parent } from "./parent.ts";
+import { staticPhrasingContentSchema, type StaticPhrasingContent } from "./static-phrasing-content.ts";
 
-export const abbreviationSchema = parentSchema.extend({
+export type Abbreviation = Parent & {
+  type: "abbreviation";
+  children?: StaticPhrasingContent[];
+  title?: string;
+};
+
+export const abbreviationSchema: ZodType<Abbreviation> = parentSchema.extend({
   type: z.literal("abbreviation").describe("identifier for node variant"),
   children: z
     .array(staticPhrasingContentSchema)
+    .optional()
     .describe("children of the abbreviation node"),
   title: z
     .string()
@@ -17,5 +24,3 @@ export const abbreviationSchema = parentSchema.extend({
 }).describe(
   "Abbreviation node described by title",
 );
-
-export type Abbreviation = z.infer<typeof abbreviationSchema>;

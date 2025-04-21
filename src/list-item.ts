@@ -1,12 +1,18 @@
 // SPDX-License-Identifier: MIT
 
-import { z } from "zod";
+import { z, type ZodType } from "zod";
 
-import { parentSchema } from "./parent.ts";
-import { flowContentSchema } from "./flow-content.ts";
-import { phrasingContentSchema } from "./phrasing-content.ts";
+import { parentSchema, type Parent } from "./parent.ts";
+import { flowContentSchema, type FlowContent } from "./flow-content.ts";
+import { phrasingContentSchema, type PhrasingContent } from "./phrasing-content.ts";
 
-export const listItemSchema = parentSchema.extend({
+export type ListItem = Parent & {
+  type: "listItem";
+  spread?: boolean;
+  children?: (FlowContent | PhrasingContent)[];
+};
+
+export const listItemSchema: ZodType<ListItem> = parentSchema.extend({
   type: z.literal("listItem").describe("identifier for node variant"),
   spread: z
     .boolean()
@@ -19,5 +25,3 @@ export const listItemSchema = parentSchema.extend({
     .optional()
     .describe("content of the list item"),
 }).describe("List item");
-
-export type ListItem = z.infer<typeof listItemSchema>;

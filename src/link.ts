@@ -1,11 +1,18 @@
 // SPDX-License-Identifier: MIT
 
-import { z } from "zod";
+import { z, type ZodType } from "zod";
 
-import { parentSchema } from "./parent.ts";
-import { staticPhrasingContentSchema } from "./static-phrasing-content.ts";
+import { parentSchema, type Parent } from "./parent.ts";
+import { staticPhrasingContentSchema, type StaticPhrasingContent } from "./static-phrasing-content.ts";
 
-export const linkSchema = parentSchema.extend({
+export type Link = Parent & {
+  type: "link";
+  children: StaticPhrasingContent[];
+  url: string;
+  title?: string;
+};
+
+export const linkSchema: ZodType<Link> = parentSchema.extend({
   type: z.literal("link").describe("identifier for node variant"),
   children: z
     .array(staticPhrasingContentSchema)
@@ -20,5 +27,3 @@ export const linkSchema = parentSchema.extend({
 }).describe(
   "Hyperlink",
 );
-
-export type Link = z.infer<typeof linkSchema>;

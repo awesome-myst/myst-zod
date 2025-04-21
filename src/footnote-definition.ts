@@ -1,12 +1,19 @@
 // SPDX-License-Identifier: MIT
 
-import { z } from "zod";
+import { z, type ZodType } from "zod";
 
-import { parentSchema } from "./parent.ts";
-import { flowContentSchema } from "./flow-content.ts";
+import { parentSchema, type Parent } from "./parent.ts";
+import { flowContentSchema, type FlowContent } from "./flow-content.ts";
 
-export const footnoteDefinitionSchema = parentSchema.extend({
-  type: z.literal("footenoteDefinition").describe(
+export type FootnoteDefinition = Parent & {
+  type: "footnoteDefinition";
+  children?: FlowContent[];
+  identifier?: string;
+  label?: string;
+};
+
+export const footnoteDefinitionSchema: ZodType<FootnoteDefinition> = parentSchema.extend({
+  type: z.literal("footnoteDefinition").describe(
     "identifier for node variant",
   ),
   children: z
@@ -20,5 +27,3 @@ export const footnoteDefinitionSchema = parentSchema.extend({
     "node label; character escapes and references are parsed; may be normalized to a unique identifier",
   ),
 }).describe("Rich footnote content associated with footnote reference");
-
-export type FootnoteDefinition = z.infer<typeof footnoteDefinitionSchema>;

@@ -1,17 +1,21 @@
 // SPDX-License-Identifier: MIT
 
-import { z } from "zod";
+import { z, type ZodType } from "zod";
 
-import { parentSchema } from "./parent.ts";
-import { phrasingContentSchema } from "./phrasing-content.ts";
+import { parentSchema, type Parent } from "./parent.ts";
+import { phrasingContentSchema, type PhrasingContent } from "./phrasing-content.ts";
 
-export const underlineSchema = parentSchema.extend({
+export type Underline = Parent & {
+  type: "underline";
+  children: PhrasingContent[];
+};
+
+export const underlineSchema: ZodType<Parent> = parentSchema.extend({
   type: z.literal("underline").describe("identifier for node variant"),
   children: z
     .array(phrasingContentSchema)
+    .optional()
     .describe("children of the underline node"),
 }).describe(
   "Underline content, using role {underline}",
 );
-
-export type Underline = z.infer<typeof underlineSchema>;

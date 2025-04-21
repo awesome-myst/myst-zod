@@ -6,10 +6,10 @@ import { nodeSchema } from "./node.ts";
 
 export const imageReferenceSchema = nodeSchema.extend({
   type: z.literal("imageReference").describe("identifier for node variant"),
-  referenceType: z.union([
-    z.literal("shortcut"),
-    z.literal("collapsed"),
-    z.literal("full"),
+  referenceType: z.enum([
+    "shortcut",
+    "collapsed",
+    "full",
   ]).describe(
     "explicitness of the reference: `shortcut` - reference is implicit, identifier inferred, `collapsed` - reference explicit, identifier inferred, `full` - reference explicit, identifier explicit",
   ),

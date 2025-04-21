@@ -1,11 +1,16 @@
 // SPDX-License-Identifier: MIT
 
-import { z } from "zod";
+import { z, type ZodType } from "zod";
 
-import { parentSchema } from "./parent.ts";
-import { staticPhrasingContentSchema } from "./static-phrasing-content.ts";
+import { parentSchema, type Parent } from "./parent.ts";
+import { staticPhrasingContentSchema, type StaticPhrasingContent } from "./static-phrasing-content.ts";
 
-export const underlineStaticSchema = parentSchema.extend({
+export type UnderlineStatic = Parent & {
+  type: "underlineStatic";
+  children: StaticPhrasingContent[];
+};
+
+export const underlineStaticSchema: ZodType<UnderlineStatic> = parentSchema.extend({
   type: z.literal("underlineStatic").describe("identifier for node variant"),
   children: z
     .array(staticPhrasingContentSchema)
@@ -13,5 +18,3 @@ export const underlineStaticSchema = parentSchema.extend({
 }).describe(
   "Underline content, with static children; used when parent node requires static content.",
 );
-
-export type UnderlineStatic = z.infer<typeof underlineStaticSchema>;

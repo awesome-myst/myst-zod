@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z } from "zod";
+import { z, type ZodType } from "zod";
 
 import {
   type StaticPhrasingContent,
@@ -37,7 +37,7 @@ export type PhrasingContent =
   | CrossReference
   | FootnoteReference;
 
-export const phrasingContentSchema = z.union([
+export const phrasingContentSchema: ZodType<PhrasingContent> = z.union([
   staticPhrasingContentSchema,
   emphasisSchema,
   strongSchema,

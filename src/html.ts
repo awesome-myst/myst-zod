@@ -9,4 +9,4 @@ export const htmlSchema = nodeSchema.extend({
   value: z.string().describe("HTML content of the HTML node"),
 }).describe("A HTML node");
 
-export type Html = z.infer<typeof htmlSchema>;
+export type HTML = z.infer<typeof htmlSchema>;

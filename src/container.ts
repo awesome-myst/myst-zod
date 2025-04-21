@@ -1,16 +1,25 @@
 // SPDX-License-Identifier: MIT
 
-import { z } from "zod";
+import { z, type ZodType } from "zod";
 
-import { parentSchema } from "./parent.ts";
-import { captionSchema } from "./caption.ts";
-import { legendSchema } from "./legend.ts";
-import { imageSchema } from "./image.ts";
-import { tableSchema } from "./table.ts";
+import { parentSchema, type Parent } from "./parent.ts";
+import { captionSchema, type Caption } from "./caption.ts";
+import { legendSchema, type Legend } from "./legend.ts";
+import { imageSchema, type Image } from "./image.ts";
+import { tableSchema, type Table } from "./table.ts";
 
-export const containerSchema = parentSchema.extend({
+export type Container = Parent & {
+  type: "container";
+  kind: "figure" | "table";
+  class?: string;
+  enumerated?: boolean;
+  enumerator?: string;
+  children?: (Caption | Legend | Image | Table)[];
+};
+
+export const containerSchema: ZodType<Container> = parentSchema.extend({
   type: z.literal("container").describe("identifier for node variant"),
-  kind: z.union([z.literal("figure"), z.literal("table")]).describe(
+  kind: z.enum(["figure", "table"]).describe(
     "kind of container elements",
   ),
   class: z.string().optional().describe("any custom class information"),
@@ -30,5 +39,3 @@ export const containerSchema = parentSchema.extend({
 }).describe(
   "Container node for drawing attention to text, separate from the neighboring content",
 );
-
-export type Container = z.infer<typeof containerSchema>;
