@@ -2,11 +2,16 @@
 
 import { z } from "zod";
 
-import { nodeSchema } from "./node.ts";
+import { type Node, nodeSchema } from "./node.ts";
 
-export const textSchema = nodeSchema.extend({
-  type: z.literal("text").describe("identifier for node variant"),
-  value: z.string().describe("text content of the text node"),
-}).describe("A text node");
+export type Text = Node & {
+  type: "text";
+  value: string;
+};
 
-export type Text = z.infer<typeof textSchema>;
+export const textSchema = nodeSchema
+  .extend({
+    type: z.literal("text").describe("identifier for node variant"),
+    value: z.string().describe("text content of the text node"),
+  })
+  .describe("A text node");

@@ -1,16 +1,25 @@
 // SPDX-License-Identifier: MIT
 
-import { z } from "zod";
+import { z, type ZodType } from "zod";
 
-import { parentSchema } from "./parent.ts";
-import { phrasingContentSchema } from "./phrasing-content.ts";
+import { type Parent, parentSchema } from "./parent.ts";
+import {
+  type PhrasingContent,
+  phrasingContentSchema,
+} from "./phrasing-content.ts";
 
-export const paragraphSchema = parentSchema.extend({
-  type: z.literal("paragraph").describe("identifier for node variant"),
-  children: z
-    .array(phrasingContentSchema)
-    .optional()
-    .describe("text content of the paragraph"),
-}).describe("A paragraph of text");
+export type Paragraph = Parent & {
+  type: "paragraph";
+  children?: PhrasingContent[];
+};
 
-export type Paragraph = z.infer<typeof paragraphSchema>;
+// @ts-expect-error TS2352
+export const paragraphSchema: ZodType<Paragraph> = parentSchema
+  .extend({
+    type: z.literal("paragraph").describe("identifier for node variant"),
+    children: z
+      .array(phrasingContentSchema)
+      .optional()
+      .describe("text content of the paragraph"),
+  })
+  .describe("A paragraph of text");

@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z, type ZodType } from "zod";
-
+import { z } from "zod";
 import {
   type StaticPhrasingContent,
   staticPhrasingContentSchema,
@@ -10,8 +9,8 @@ import { type Emphasis, emphasisSchema } from "./emphasis.ts";
 import { type Strong, strongSchema } from "./strong.ts";
 import { type Link, linkSchema } from "./link.ts";
 import { type LinkReference, linkReferenceSchema } from "./link-reference.ts";
-import { type Subscript, subscriptSchema } from "./subscript.ts";
 import { type Superscript, superscriptSchema } from "./superscript.ts";
+import { type Subscript, subscriptSchema } from "./subscript.ts";
 import { type Underline, underlineSchema } from "./underline.ts";
 import { type Abbreviation, abbreviationSchema } from "./abbreviation.ts";
 import {
@@ -23,7 +22,6 @@ import {
   footnoteReferenceSchema,
 } from "./footnote-reference.ts";
 
-// Define the type directly first to break circular dependency
 export type PhrasingContent =
   | StaticPhrasingContent
   | Emphasis
@@ -34,19 +32,25 @@ export type PhrasingContent =
   | Superscript
   | Underline
   | Abbreviation
-  | CrossReference
-  | FootnoteReference;
+  | FootnoteReference
+  | CrossReference;
 
-export const phrasingContentSchema: ZodType<PhrasingContent> = z.union([
-  staticPhrasingContentSchema,
-  emphasisSchema,
-  strongSchema,
-  linkSchema,
-  linkReferenceSchema,
-  subscriptSchema,
-  superscriptSchema,
-  underlineSchema,
-  abbreviationSchema,
-  crossReferenceSchema,
-  footnoteReferenceSchema,
-]);
+export const phrasingContentSchema = z
+  .discriminatedUnion(
+    "type",
+    // @ts-expect-error TS2345
+    [
+      ...staticPhrasingContentSchema.options,
+      emphasisSchema,
+      strongSchema,
+      linkSchema,
+      linkReferenceSchema,
+      subscriptSchema,
+      superscriptSchema,
+      underlineSchema,
+      abbreviationSchema,
+      footnoteReferenceSchema,
+      crossReferenceSchema,
+    ],
+  )
+  .describe("Any inline phrasing content");

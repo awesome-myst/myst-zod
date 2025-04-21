@@ -2,7 +2,12 @@
 
 import { z } from "zod";
 
-import { nodeSchema } from "./node.ts";
+import { type Node, nodeSchema } from "./node.ts";
+
+export type BlockBreak = Node & {
+  type: "blockBreak";
+  meta?: string;
+};
 
 export const blockBreakSchema = nodeSchema
   .extend({
@@ -13,9 +18,5 @@ export const blockBreakSchema = nodeSchema
       .describe(
         "Block metadata. Conventionally this is a stringified JSON dictionary but it may be any arbitrary string.",
       ),
-    position: z.any().optional(),
-    data: z.any().optional(),
   })
   .describe("Top-level break in the myst document, breaking it into Blocks");
-
-export type BlockBreak = z.infer<typeof blockBreakSchema>;

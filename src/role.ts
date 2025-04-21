@@ -2,8 +2,11 @@
 
 import { z, type ZodType } from "zod";
 
-import { nodeSchema, type Node } from "./node.ts";
-import { phrasingContentSchema, type PhrasingContent } from "./phrasing-content.ts";
+import { type Node, nodeSchema } from "./node.ts";
+import {
+  type PhrasingContent,
+  phrasingContentSchema,
+} from "./phrasing-content.ts";
 
 export type Role = Node & {
   type: "mystRole";
@@ -12,11 +15,14 @@ export type Role = Node & {
   children?: PhrasingContent[];
 };
 
-export const roleSchema: ZodType<Role> = nodeSchema.extend({
-  type: z.literal("mystRole").describe("identifier for node variant"),
-  name: z.string().describe("name of the role"),
-  value: z.string().optional().describe("content of the directive"),
-  children: z.array(phrasingContentSchema).optional().describe(
-    "parsed role content",
-  ),
-}).describe("A role directive in MyST Markdown");
+// @ts-expect-error TS2352
+export const roleSchema: ZodType<Role> = nodeSchema
+  .extend({
+    type: z.literal("mystRole").describe("identifier for node variant"),
+    name: z.string().describe("name of the role"),
+    value: z.string().optional().describe("content of the directive"),
+    children: z.lazy(() =>
+      z.array(phrasingContentSchema).optional().describe("parsed role content")
+    ),
+  })
+  .describe("A role directive in MyST Markdown");

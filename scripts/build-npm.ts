@@ -26,6 +26,9 @@ await build({
     bugs: {
       url: "https://github.com/awesome-myst/myst-zod/issues",
     },
+    dependencies: {
+      "zod": "^3.24.2",
+    }
   },
   postBuild() {
     Deno.copyFileSync("LICENSE.txt", "npm/LICENSE.txt");

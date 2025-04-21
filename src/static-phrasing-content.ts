@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z, type ZodType } from "zod";
+import { z } from "zod";
 
 import { type Text, textSchema } from "./text.ts";
 import { type HTML, htmlSchema } from "./html.ts";
@@ -46,7 +46,8 @@ export type StaticPhrasingContent =
   | UnderlineStatic
   | InlineMath;
 
-export const staticPhrasingContentSchema: ZodType<StaticPhrasingContent> = z.union([
+// @ts-expect-error TS2345
+export const staticPhrasingContentSchema = z.discriminatedUnion("type", [
   textSchema,
   htmlSchema,
   emphasisStaticSchema,

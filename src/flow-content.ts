@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z, type ZodType } from "zod";
+import { z } from "zod";
 
 import { type Paragraph, paragraphSchema } from "./paragraph.ts";
 import { type Definition, definitionSchema } from "./definition.ts";
@@ -21,7 +21,6 @@ import {
   footnoteDefinitionSchema,
 } from "./footnote-definition.ts";
 
-// Define the type directly first to break circular dependency
 export type FlowContent =
   | Paragraph
   | Definition
@@ -39,22 +38,25 @@ export type FlowContent =
   | Table
   | FootnoteDefinition;
 
-export const flowContentSchema: ZodType<FlowContent> = z.union([
-  paragraphSchema,
-  definitionSchema,
-  headingSchema,
-  thematicBreakSchema,
-  listSchema,
-  htmlSchema,
-  codeSchema,
-  commentSchema,
-  targetSchema,
-  directiveSchema,
-  admonitionSchema,
-  containerSchema,
-  mathSchema,
-  tableSchema,
-  footnoteDefinitionSchema,
-]).describe(
-  "Flow content is a block of text that can contain other blocks of text. It is the most common type of content in Markdown. It includes paragraphs, definitions, headings, and thematic breaks.",
-);
+export const flowContentSchema = z
+  .discriminatedUnion("type", [
+    // @ts-expect-error TS2740
+    paragraphSchema,
+    definitionSchema,
+    headingSchema,
+    thematicBreakSchema,
+    listSchema,
+    htmlSchema,
+    codeSchema,
+    commentSchema,
+    targetSchema,
+    directiveSchema,
+    admonitionSchema,
+    containerSchema,
+    mathSchema,
+    tableSchema,
+    footnoteDefinitionSchema,
+  ])
+  .describe(
+    "Flow content is a block of text that can contain other blocks of text. It is the most common type of content in Markdown. It includes paragraphs, definitions, headings, and thematic breaks.",
+  );

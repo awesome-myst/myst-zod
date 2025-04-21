@@ -2,10 +2,14 @@
 
 import { z } from "zod";
 
-import { nodeSchema } from "./node.ts";
+import { type Node, nodeSchema } from "./node.ts";
 
-export const parentSchema = nodeSchema.extend({
-  children: z.array(nodeSchema).optional().describe("List of child nodes"),
-}).describe("Basic node with required node children");
+export type Parent = Node & {
+  children: Node[];
+};
 
-export type Parent = z.infer<typeof parentSchema>;
+export const parentSchema = nodeSchema
+  .extend({
+    children: z.array(nodeSchema).describe("children of the parent node"),
+  })
+  .describe("Basic node with node children");
