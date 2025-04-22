@@ -1,6 +1,6 @@
 {
   "name": "@awesome-myst/myst-zod",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "exports": "./src/index.ts",
   "description": "Zod schema for MyST Markdown",
   "tasks": {
