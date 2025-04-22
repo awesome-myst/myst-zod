@@ -46,10 +46,10 @@ export type StaticPhrasingContent =
   | UnderlineStatic
   | InlineMath;
 
-// @ts-expect-error TS2740
+// @ts-ignore - Error thrown during test but not during deno publish
 export const staticPhrasingContentSchema: ZodType<StaticPhrasingContent> = z
   .discriminatedUnion("type", [
-    // @ts-expect-error TS2740
+    // @ts-ignore - Error thrown during test but not during deno publish
     textSchema,
     htmlSchema,
     emphasisStaticSchema,
