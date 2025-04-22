@@ -15,8 +15,8 @@ export type Role = Node & {
   children?: PhrasingContent[];
 };
 
-// @ts-expect-error TS2352
 export const roleSchema: ZodType<Role> = nodeSchema
+  // @ts-expect-error TS2740
   .extend({
     type: z.literal("mystRole").describe("identifier for node variant"),
     name: z.string().describe("name of the role"),

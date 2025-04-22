@@ -10,8 +10,8 @@ export type Legend = Parent & {
   children?: FlowContent[];
 };
 
-// @ts-expect-error TS2352
 export const legendSchema: ZodType<Legend> = parentSchema
+  // @ts-expect-error TS2740
   .extend({
     type: z.literal("legend").describe("identifier for node variant"),
     children: z.lazy(() =>

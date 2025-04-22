@@ -13,8 +13,8 @@ export type Subscript = Parent & {
   children?: PhrasingContent[];
 };
 
-// @ts-expect-error TS2352
 export const subscriptSchema: ZodType<Subscript> = parentSchema
+  // @ts-expect-error TS2740
   .extend({
     type: z.literal("subscript").describe("identifier for node variant"),
     children: z.lazy(() =>

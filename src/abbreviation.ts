@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z } from "zod";
+import { z, type ZodType } from "zod";
 
 import { type Parent, parentSchema } from "./parent.ts";
 import {
@@ -14,7 +14,8 @@ export type Abbreviation = Parent & {
   title?: string;
 };
 
-export const abbreviationSchema = parentSchema
+export const abbreviationSchema: ZodType<Abbreviation> = parentSchema
+  // @ts-expect-error TS2740
   .extend({
     type: z.literal("abbreviation").describe("identifier for node variant"),
     children: z

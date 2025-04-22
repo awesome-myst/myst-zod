@@ -13,8 +13,8 @@ export type AdmonitionTitle = Parent & {
   children?: PhrasingContent[];
 };
 
-// @ts-expect-error TS2352
 export const admonitionTitleSchema: ZodType<AdmonitionTitle> = parentSchema
+  // @ts-expect-error TS2740
   .extend({
     type: z.literal("admonitionTitle").describe("identifier for node variant"),
     children: z

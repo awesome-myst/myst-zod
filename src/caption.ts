@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z } from "zod";
+import { z, type ZodType } from "zod";
 
 import { type Parent, parentSchema } from "./parent.ts"; // Assuming Parent type is exported
 import { type FlowContent, flowContentSchema } from "./flow-content.ts"; // Assuming FlowContent type is exported
@@ -10,7 +10,8 @@ export type Caption = Parent & {
   children?: FlowContent[];
 };
 
-export const captionSchema = parentSchema
+export const captionSchema: ZodType<Caption> = parentSchema
+  // @ts-expect-error TS2740
   .extend({
     type: z.literal("caption").describe("identifier for node variant"),
     children: z.lazy(() =>

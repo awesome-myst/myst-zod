@@ -13,8 +13,8 @@ export type Paragraph = Parent & {
   children?: PhrasingContent[];
 };
 
-// @ts-expect-error TS2352
 export const paragraphSchema: ZodType<Paragraph> = parentSchema
+  // @ts-expect-error TS2740
   .extend({
     type: z.literal("paragraph").describe("identifier for node variant"),
     children: z

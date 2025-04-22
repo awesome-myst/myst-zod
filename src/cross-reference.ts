@@ -16,8 +16,8 @@ export type CrossReference = Parent & {
   label?: string;
 };
 
-// @ts-expect-error TS2352
 export const crossReferenceSchema: ZodType<CrossReference> = parentSchema
+  // @ts-expect-error TS2740
   .extend({
     type: z.literal("crossReference").describe("identifier for node variant"),
     kind: z

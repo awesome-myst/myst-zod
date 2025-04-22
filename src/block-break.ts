@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z } from "zod";
+import { z, type ZodType } from "zod";
 
 import { type Node, nodeSchema } from "./node.ts";
 
@@ -9,7 +9,8 @@ export type BlockBreak = Node & {
   meta?: string;
 };
 
-export const blockBreakSchema = nodeSchema
+export const blockBreakSchema: ZodType<BlockBreak> = nodeSchema
+  // @ts-expect-error TS2740
   .extend({
     type: z.literal("blockBreak").describe("identifier for node variant"),
     meta: z

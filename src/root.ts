@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z } from "zod";
+import { z, type ZodType } from "zod";
 
 import { type Parent, parentSchema } from "./parent.ts";
 import { type FlowContent, flowContentSchema } from "./flow-content.ts";
@@ -13,7 +13,8 @@ export type Root = Parent & {
   children?: (FlowContent | Block | BlockBreak)[];
 };
 
-export const rootSchema = parentSchema
+export const rootSchema: ZodType<Root> = parentSchema
+  // @ts-expect-error TS2339
   .extend({
     type: z.literal("root").describe("identifier for node variant"),
     meta: z

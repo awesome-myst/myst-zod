@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z } from "zod";
+import { z, type ZodType } from "zod";
 
 import { nodeSchema } from "./node.ts";
 
@@ -16,7 +16,8 @@ export type Code = {
   label?: string;
 };
 
-export const codeSchema = nodeSchema
+export const codeSchema: ZodType<Code> = nodeSchema
+  // @ts-expect-error TS2740
   .extend({
     type: z.literal("code").describe("identifier for node variant"),
     lang: z.string().optional().describe("The language of the code block"),

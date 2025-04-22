@@ -15,8 +15,8 @@ export type ListItem = Parent & {
   children?: (FlowContent | PhrasingContent)[];
 };
 
-// @ts-expect-error TS2352
 export const listItemSchema: ZodType<ListItem> = parentSchema
+  // @ts-expect-error TS2740
   .extend({
     type: z.literal("listItem").describe("identifier for node variant"),
     spread: z

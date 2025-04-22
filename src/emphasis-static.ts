@@ -13,8 +13,8 @@ export type EmphasisStatic = Parent & {
   children?: StaticPhrasingContent[];
 };
 
-// @ts-expect-error TS2352
 export const emphasisStaticSchema: ZodType<EmphasisStatic> = parentSchema
+  // @ts-expect-error TS2740
   .extend({
     type: z.literal("emphasisStatic").describe("identifier for node variant"),
     children: z.lazy(() =>

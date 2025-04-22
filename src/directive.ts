@@ -18,8 +18,8 @@ export type Directive = Parent & {
   children?: (PhrasingContent | FlowContent)[];
 };
 
-// @ts-expect-error TS2352
 export const directiveSchema: ZodType<Directive> = parentSchema
+  // @ts-expect-error TS2740
   .extend({
     type: z.literal("mystDirective").describe("identifier for node variant"),
     name: z.string().describe("name of the directive"),

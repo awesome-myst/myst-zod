@@ -1,11 +1,16 @@
 // SPDX-License-Identifier: MIT
 
-import { z } from "zod";
+import { z, type ZodType } from "zod";
 
-import { nodeSchema } from "./node.ts";
+import { type Node, nodeSchema } from "./node.ts";
 
-export const thematicBreakSchema = nodeSchema.extend({
-  type: z.literal("thematicBreak").describe("identifier for node variant"),
-}).describe("Thematic break");
+export type ThematicBreak = Node & {
+  type: "thematicBreak";
+};
 
-export type ThematicBreak = z.infer<typeof thematicBreakSchema>;
+export const thematicBreakSchema: ZodType<ThematicBreak> = nodeSchema
+  // @ts-expect-error TS2740
+  .extend({
+    type: z.literal("thematicBreak").describe("identifier for node variant"),
+  })
+  .describe("Thematic break");

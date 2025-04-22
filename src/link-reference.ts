@@ -16,8 +16,8 @@ export type LinkReference = Parent & {
   label?: string;
 };
 
-// @ts-expect-error TS2352
 export const linkReferenceSchema: ZodType<LinkReference> = parentSchema
+  // @ts-expect-error TS2740
   .extend({
     type: z.literal("linkReference").describe("identifier for node variant"),
     children: z

@@ -18,8 +18,8 @@ export type Heading = Parent & {
   label?: string;
 };
 
-// @ts-expect-error TS2352
 export const headingSchema: ZodType<Heading> = parentSchema
+  // @ts-expect-error TS2740
   .extend({
     type: z.literal("heading").describe("identifier for node variant"),
     depth: z.number().min(1).max(6).describe("heading level; 1-6, inclusive"),

@@ -4,7 +4,7 @@ import denoJson from "../deno.json" with { type: "json" };
 await emptyDir("./npm");
 
 await build({
-  entryPoints: ["./src/mod.ts"],
+  entryPoints: ["./src/index.ts"],
   outDir: "./npm",
   compilerOptions: {
     lib: ["esnext", "dom"],

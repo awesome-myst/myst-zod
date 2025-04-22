@@ -13,8 +13,8 @@ export type Underline = Parent & {
   children?: PhrasingContent[];
 };
 
-// @ts-expect-error TS2352
 export const underlineSchema: ZodType<Underline> = parentSchema
+  // @ts-expect-error TS2740
   .extend({
     type: z.literal("underline").describe("identifier for node variant"),
     children: z.lazy(() =>

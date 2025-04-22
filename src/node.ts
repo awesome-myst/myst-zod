@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z } from "zod";
+import { z, type ZodType } from "zod";
 
 export type Node = {
   type: string;
@@ -20,7 +20,7 @@ export type Node = {
   };
 };
 
-export const nodeSchema = z
+export const nodeSchema: ZodType<Node> = z
   .object({
     type: z.string().describe("identifier for node variant"),
     data: z

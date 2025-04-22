@@ -17,8 +17,8 @@ export type Container = Parent & {
   children?: (Caption | Legend | Image | Table)[];
 };
 
-// @ts-expect-error TS2352
 export const containerSchema: ZodType<Container> = parentSchema
+  // @ts-expect-error TS2740
   .extend({
     type: z.literal("container").describe("identifier for node variant"),
     kind: z.enum(["figure", "table"]).describe("kind of container elements"),

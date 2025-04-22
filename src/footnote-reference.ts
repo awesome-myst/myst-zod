@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z } from "zod";
+import { z, type ZodType } from "zod";
 
 import { type Node, nodeSchema } from "./node.ts";
 
@@ -10,7 +10,8 @@ export type FootnoteReference = Node & {
   label?: string;
 };
 
-export const footnoteReferenceSchema = nodeSchema
+export const footnoteReferenceSchema: ZodType<FootnoteReference> = nodeSchema
+  // @ts-expect-error TS2740
   .extend({
     type: z
       .literal("footnoteReference")

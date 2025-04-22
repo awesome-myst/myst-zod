@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z } from "zod";
+import { z, type ZodType } from "zod";
 
 import { type Node, nodeSchema } from "./node.ts";
 
@@ -9,7 +9,8 @@ export type InlineMath = Node & {
   value: string;
 };
 
-export const inlineMathSchema = nodeSchema
+export const inlineMathSchema: ZodType<InlineMath> = nodeSchema
+  // @ts-expect-error TS2740
   .extend({
     type: z.literal("inlineMath").describe("identifier for node variant"),
     value: z.string().describe("The text content of the inline math"),

@@ -13,8 +13,8 @@ export type UnderlineStatic = Parent & {
   children?: StaticPhrasingContent[];
 };
 
-// @ts-expect-error TS2352
 export const underlineStaticSchema: ZodType<UnderlineStatic> = parentSchema
+  // @ts-expect-error TS2740
   .extend({
     type: z.literal("underlineStatic").describe("identifier for node variant"),
     children: z.lazy(() =>

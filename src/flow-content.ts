@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z } from "zod";
+import { z, type ZodType } from "zod";
 
 import { type Paragraph, paragraphSchema } from "./paragraph.ts";
 import { type Definition, definitionSchema } from "./definition.ts";
@@ -38,7 +38,8 @@ export type FlowContent =
   | Table
   | FootnoteDefinition;
 
-export const flowContentSchema = z
+// @ts-expect-error TS2740
+export const flowContentSchema: ZodType<FlowContent> = z
   .discriminatedUnion("type", [
     // @ts-expect-error TS2740
     paragraphSchema,

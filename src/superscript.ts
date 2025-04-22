@@ -13,8 +13,8 @@ export type Superscript = Parent & {
   children?: PhrasingContent[];
 };
 
-// @ts-expect-error TS2352
 export const superscriptSchema: ZodType<Superscript> = parentSchema
+  // @ts-expect-error TS2740
   .extend({
     type: z.literal("superscript").describe("identifier for node variant"),
     children: z.lazy(() =>

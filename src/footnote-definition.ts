@@ -12,9 +12,9 @@ export type FootnoteDefinition = Parent & {
   label?: string;
 };
 
-// @ts-expect-error TS2352
 export const footnoteDefinitionSchema: ZodType<FootnoteDefinition> =
   parentSchema
+    // @ts-expect-error TS2740
     .extend({
       type: z
         .literal("footnoteDefinition")

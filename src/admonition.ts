@@ -24,8 +24,8 @@ export type Admonition = Parent & {
   children?: (AdmonitionTitle | FlowContent)[];
 };
 
-// @ts-expect-error TS2352
 export const admonitionSchema: ZodType<Admonition> = parentSchema
+  // @ts-expect-error TS2740
   .extend({
     type: z.literal("admonition").describe("identifier for node variant"),
     kind: z

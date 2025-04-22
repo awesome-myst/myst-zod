@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z } from "zod";
+import { z, type ZodType } from "zod";
 
 import { type Node, nodeSchema } from "./node.ts";
 
@@ -14,7 +14,8 @@ export type Image = Node & {
   alt?: string;
 };
 
-export const imageSchema = nodeSchema
+export const imageSchema: ZodType<Image> = nodeSchema
+  // @ts-expect-error TS2740
   .extend({
     type: z.literal("image").describe("identifier for node variant"),
     class: z.string().optional().describe("user-defined class for the image"),

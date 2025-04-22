@@ -13,8 +13,8 @@ export type SubscriptStatic = Parent & {
   children?: StaticPhrasingContent[];
 };
 
-// @ts-expect-error TS2352
 export const subscriptStaticSchema: ZodType<SubscriptStatic> = parentSchema
+  // @ts-expect-error TS2740
   .extend({
     type: z.literal("subscriptStatic").describe("identifier for node variant"),
     children: z.lazy(() =>

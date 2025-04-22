@@ -1,7 +1,7 @@
 {
   "name": "@awesome-myst/myst-zod",
   "version": "0.0.1",
-  "exports": "./src/mod.ts",
+  "exports": "./src/index.ts",
   "description": "Zod schema for MyST Markdown",
   "tasks": {
     "dev": "deno test --watch",

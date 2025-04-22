@@ -13,8 +13,8 @@ export type Strong = Parent & {
   children?: PhrasingContent[];
 };
 
-// @ts-expect-error TS2352
 export const strongSchema: ZodType<Strong> = parentSchema
+  // @ts-expect-error TS2740
   .extend({
     type: z.literal("strong").describe("identifier for node variant"),
     children: z.lazy(() =>
