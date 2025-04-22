@@ -18,7 +18,10 @@ Deno.test("Root schema test", () => {
     children: [
       {
         type: "paragraph",
-        children: [{ type: "text", value: 123 }, { type: "text", value: true }],
+        children: [
+          { type: "text", value: 123 },
+          { type: "text", value: true },
+        ],
       },
     ],
   };
@@ -26,3 +29,20 @@ Deno.test("Root schema test", () => {
   assertEquals(rootSchema.safeParse(validRoot).success, true);
   assertEquals(rootSchema.safeParse(invalidRoot).success, false);
 });
+
+interface MystTest {
+  title: string;
+  mdast: object;
+  myst: string;
+}
+
+const allTests: MystTest[] = JSON.parse(
+  Deno.readTextFileSync(new URL("./myst.tests.json", import.meta.url))
+);
+
+for (const testCase of allTests) {
+  Deno.test(`Test for – ${testCase.title}`, () => {
+    const result = rootSchema.safeParse(testCase.mdast);
+    assertEquals(result.success, true);
+  });
+}
