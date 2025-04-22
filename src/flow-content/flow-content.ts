@@ -58,7 +58,7 @@ export const uniqueFlowContentSchema = [
   footnoteDefinitionSchema,
 ] as const;
 
-// @ts-expect-error TS2740
+// @ts-ignore - Error thrown during test but not during deno publish
 export const flowContentSchema: ZodType<FlowContent> = z
   // @ts-expect-error TS2740
   .discriminatedUnion("type", uniqueFlowContentSchema.concat([htmlSchema]))

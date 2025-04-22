@@ -35,7 +35,7 @@ export type PhrasingContent =
   | FootnoteReference
   | CrossReference;
 
-// @ts-expect-error TS2345
+// @ts-ignore - Error thrown during test but not during deno publish
 export const phrasingContentSchema: ZodType<PhrasingContent> = z
   .discriminatedUnion(
     "type",
