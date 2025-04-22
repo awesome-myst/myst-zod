@@ -28,19 +28,19 @@ export const crossReferenceSchema: ZodType<CrossReference> = parentSchema
       .array(staticPhrasingContentSchema)
       .optional()
       .describe(
-        'Children of the crossReference, can include text with "%s" or "{number}" and enumerated references will be filled in.'
+        'Children of the crossReference, can include text with "%s" or "{number}" and enumerated references will be filled in.',
       ),
     identifier: z
       .string()
       .optional()
       .describe(
-        "identifier that may match another node; value is unparsed and must be normalized such that whitespace is collapsed to single space, initial/final space is trimmed, and case is folded"
+        "identifier that may match another node; value is unparsed and must be normalized such that whitespace is collapsed to single space, initial/final space is trimmed, and case is folded",
       ),
     label: z
       .string()
       .optional()
       .describe(
-        "node label; character escapes and references are parsed; may be normalized to a unique identifier"
+        "node label; character escapes and references are parsed; may be normalized to a unique identifier",
       ),
   })
   .describe("In-line reference to an associated node");

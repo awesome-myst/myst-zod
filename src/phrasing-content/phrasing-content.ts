@@ -53,6 +53,6 @@ export const phrasingContentSchema: ZodType<PhrasingContent> = z
       abbreviationSchema,
       footnoteReferenceSchema,
       crossReferenceSchema,
-    ]
+    ],
   )
   .describe("Any inline phrasing content");

@@ -27,5 +27,5 @@ export const superscriptStaticSchema: ZodType<SuperscriptStatic> = parentSchema
     ),
   })
   .describe(
-    "Superscripted content, with static children; used when parent node requires static content."
+    "Superscripted content, with static children; used when parent node requires static content.",
   );

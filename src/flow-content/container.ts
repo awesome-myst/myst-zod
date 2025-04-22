@@ -27,7 +27,7 @@ export const containerSchema: ZodType<Container> = parentSchema
       .boolean()
       .optional()
       .describe(
-        "count this container for numbering based on kind, e.g. Figure 1a"
+        "count this container for numbering based on kind, e.g. Figure 1a",
       ),
     enumerator: z
       .string()
@@ -37,9 +37,9 @@ export const containerSchema: ZodType<Container> = parentSchema
       .array(z.union([captionSchema, legendSchema, imageSchema, tableSchema]))
       .optional()
       .describe(
-        "An optional `containerTitle` followed by the containers content."
+        "An optional `containerTitle` followed by the containers content.",
       ),
   })
   .describe(
-    "Container node for drawing attention to text, separate from the neighboring content"
+    "Container node for drawing attention to text, separate from the neighboring content",
   );

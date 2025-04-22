@@ -29,13 +29,13 @@ export const footnoteDefinitionSchema: ZodType<FootnoteDefinition> =
         .string()
         .optional()
         .describe(
-          "identifier that may match another node; value is unparsed and must be normalized such that whitespace is collapsed to single space, initial/final space is trimmed, and case is folded"
+          "identifier that may match another node; value is unparsed and must be normalized such that whitespace is collapsed to single space, initial/final space is trimmed, and case is folded",
         ),
       label: z
         .string()
         .optional()
         .describe(
-          "node label; character escapes and references are parsed; may be normalized to a unique identifier"
+          "node label; character escapes and references are parsed; may be normalized to a unique identifier",
         ),
     })
     .describe("Rich footnote content associated with footnote reference");

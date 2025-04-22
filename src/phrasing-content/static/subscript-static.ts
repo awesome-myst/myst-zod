@@ -25,5 +25,5 @@ export const subscriptStaticSchema: ZodType<SubscriptStatic> = parentSchema
     ),
   })
   .describe(
-    "Subscripted content, with static children; used when parent node requires static content."
+    "Subscripted content, with static children; used when parent node requires static content.",
   );

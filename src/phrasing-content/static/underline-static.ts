@@ -25,5 +25,5 @@ export const underlineStaticSchema: ZodType<UnderlineStatic> = parentSchema
     ),
   })
   .describe(
-    "Underline content, with static children; used when parent node requires static content."
+    "Underline content, with static children; used when parent node requires static content.",
   );

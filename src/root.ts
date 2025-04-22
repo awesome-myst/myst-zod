@@ -33,7 +33,7 @@ export const rootSchema: ZodType<Root> = parentSchema
       .string()
       .optional()
       .describe(
-        "block metadata from preceding break; conventionally, a stringified JSON dictionary but may be any arbitrary string"
+        "block metadata from preceding break; conventionally, a stringified JSON dictionary but may be any arbitrary string",
       ),
     children: z
       .array(
@@ -45,7 +45,7 @@ export const rootSchema: ZodType<Root> = parentSchema
           listItemSchema,
           // @ts-expect-error TS2339
           ...phrasingContentSchema.options,
-        ])
+        ]),
       )
       .optional()
       .describe("Top-level children of myst document"),

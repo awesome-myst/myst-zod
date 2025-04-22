@@ -26,7 +26,7 @@ export const listSchema: ZodType<List> = parentSchema
       .boolean()
       .optional()
       .describe(
-        "One or more children are separated with a blank line from others"
+        "One or more children are separated with a blank line from others",
       ),
     children: z
       .array(listItemSchema)

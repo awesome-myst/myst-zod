@@ -21,7 +21,7 @@ export const mathSchema: ZodType<Math> = nodeSchema
       .boolean()
       .optional()
       .describe(
-        "count this math block for numbering based on kind, e.g. See equation (1a)"
+        "count this math block for numbering based on kind, e.g. See equation (1a)",
       ),
     enumerator: z
       .string()
@@ -31,13 +31,13 @@ export const mathSchema: ZodType<Math> = nodeSchema
       .string()
       .optional()
       .describe(
-        "identifier that may match another node; value is unparsed and must be normalized such that whitespace is collapsed to single space, initial/final space is trimmed, and case is folded"
+        "identifier that may match another node; value is unparsed and must be normalized such that whitespace is collapsed to single space, initial/final space is trimmed, and case is folded",
       ),
     label: z
       .string()
       .optional()
       .describe(
-        "node label; character escapes and references are parsed; may be normalized to a unique identifier"
+        "node label; character escapes and references are parsed; may be normalized to a unique identifier",
       ),
     value: z.string().describe("The value of the math node"),
   })

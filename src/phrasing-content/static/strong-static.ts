@@ -25,5 +25,5 @@ export const strongStaticSchema: ZodType<StrongStatic> = parentSchema
     ),
   })
   .describe(
-    "Important, serious, urgent, bold content, with static children; used when parent node requires static content."
+    "Important, serious, urgent, bold content, with static children; used when parent node requires static content.",
   );

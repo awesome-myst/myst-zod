@@ -37,7 +37,7 @@ interface MystTest {
 }
 
 const allTests: MystTest[] = JSON.parse(
-  Deno.readTextFileSync(new URL("./myst.tests.json", import.meta.url))
+  Deno.readTextFileSync(new URL("./myst.tests.json", import.meta.url)),
 );
 
 for (const testCase of allTests) {

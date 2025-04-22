@@ -63,5 +63,5 @@ export const flowContentSchema: ZodType<FlowContent> = z
   // @ts-expect-error TS2740
   .discriminatedUnion("type", uniqueFlowContentSchema.concat([htmlSchema]))
   .describe(
-    "Flow content is a block of text that can contain other blocks of text. It is the most common type of content in Markdown. It includes paragraphs, definitions, headings, and thematic breaks."
+    "Flow content is a block of text that can contain other blocks of text. It is the most common type of content in Markdown. It includes paragraphs, definitions, headings, and thematic breaks.",
   );

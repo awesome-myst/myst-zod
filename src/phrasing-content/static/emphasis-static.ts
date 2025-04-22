@@ -25,5 +25,5 @@ export const emphasisStaticSchema: ZodType<EmphasisStatic> = parentSchema
     ),
   })
   .describe(
-    "Stressed, italicized content, with static children; used when parent node requires static content"
+    "Stressed, italicized content, with static children; used when parent node requires static content",
   );

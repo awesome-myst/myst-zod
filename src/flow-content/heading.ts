@@ -27,7 +27,7 @@ export const headingSchema: ZodType<Heading> = parentSchema
       .boolean()
       .optional()
       .describe(
-        "count this heading for numbering based on kind, e.g. Section 2.4.1"
+        "count this heading for numbering based on kind, e.g. Section 2.4.1",
       ),
     enumerator: z
       .string()
@@ -41,13 +41,13 @@ export const headingSchema: ZodType<Heading> = parentSchema
       .string()
       .optional()
       .describe(
-        "identifier that may match another node; value is unparsed and must be normalized such that whitespace is collapsed to single space, initial/final space is trimmed, and case is folded"
+        "identifier that may match another node; value is unparsed and must be normalized such that whitespace is collapsed to single space, initial/final space is trimmed, and case is folded",
       ),
     label: z
       .string()
       .optional()
       .describe(
-        "node label; character escapes and references are parsed; may be normalized to a unique identifier"
+        "node label; character escapes and references are parsed; may be normalized to a unique identifier",
       ),
   })
   .describe("Reference to a url resource");

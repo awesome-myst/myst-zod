@@ -27,7 +27,7 @@ export const blockSchema: ZodType<Block> = parentSchema
       .string()
       .optional()
       .describe(
-        "block metadata from preceding break; conventionally, a stringified JSON dictionary but may be any arbitrary string"
+        "block metadata from preceding break; conventionally, a stringified JSON dictionary but may be any arbitrary string",
       ),
     children: z.lazy(() =>
       z
@@ -37,12 +37,12 @@ export const blockSchema: ZodType<Block> = parentSchema
             flowContentSchema,
             listItemSchema,
             phrasingContentSchema,
-          ])
+          ]),
         )
         .optional()
         .describe("Top-level children of myst document")
     ),
   })
   .describe(
-    "Top-level content blocks or cells the myst document, delimited by BlockBreaks"
+    "Top-level content blocks or cells the myst document, delimited by BlockBreaks",
   );
