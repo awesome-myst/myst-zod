@@ -1,0 +1,31 @@
+{
+  "name": "@awesome-myst/myst-zod",
+  "version": "0.1.5",
+  "description": "Zod schema for MyST Markdown",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/awesome-myst/myst-zod.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/awesome-myst/myst-zod/issues"
+  },
+  "module": "./esm/src/index.js",
+  "exports": {
+    ".": {
+      "import": "./esm/src/index.js"
+    }
+  },
+  "scripts": {
+    "test": "node test_runner.js"
+  },
+  "dependencies": {
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.9.0",
+    "picocolors": "^1.0.0",
+    "@deno/shim-deno": "~0.18.0"
+  },
+  "_generatedBy": "dnt@dev"
+}
