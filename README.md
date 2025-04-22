@@ -43,10 +43,7 @@ const result = rootSchema.parse(myst);
 console.log(result);
 // {
 //   type: 'root',
-//   children: [
-//     { type: 'paragraph',
-//       children: [ [Object] ] }
-//   ]
+//   children: [ { type: 'paragraph', children: [Array] } ]
 // }
 ```
 
