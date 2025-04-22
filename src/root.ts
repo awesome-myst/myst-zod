@@ -3,15 +3,18 @@
 import { z, type ZodType } from "zod";
 
 import { type Parent, parentSchema } from "./parent.ts";
-import { type FlowContent, uniqueFlowContentSchema } from "./flow-content.ts";
+import {
+  type FlowContent,
+  uniqueFlowContentSchema,
+} from "./flow-content/flow-content.ts";
 import { type Block, blockSchema } from "./block.ts";
 import { type BlockBreak, blockBreakSchema } from "./block-break.ts";
-import { type ListContent } from "./list-content.ts";
-import { listItemSchema } from "./list-item.ts";
+import type { ListContent } from "./flow-content/list-content.ts";
+import { listItemSchema } from "./flow-content/list-item.ts";
 import {
   type PhrasingContent,
   phrasingContentSchema,
-} from "./phrasing-content.ts";
+} from "./phrasing-content/phrasing-content.ts";
 
 export type Root = Parent & {
   type: "root";

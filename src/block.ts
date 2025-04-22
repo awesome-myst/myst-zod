@@ -3,12 +3,15 @@
 import { z, type ZodType } from "zod";
 
 import { type Parent, parentSchema } from "./parent.ts";
-import { type FlowContent, flowContentSchema } from "./flow-content.ts";
-import { type ListItem, listItemSchema } from "./list-item.ts";
+import {
+  type FlowContent,
+  flowContentSchema,
+} from "./flow-content/flow-content.ts";
+import { type ListItem, listItemSchema } from "./flow-content/list-item.ts";
 import {
   type PhrasingContent,
   phrasingContentSchema,
-} from "./phrasing-content.ts";
+} from "./phrasing-content/phrasing-content.ts";
 
 export type Block = Parent & {
   type: "block";
