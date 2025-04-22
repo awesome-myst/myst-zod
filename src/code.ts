@@ -6,6 +6,7 @@ import { nodeSchema } from "./node.ts";
 
 export type Code = {
   type: "code";
+  value: string;
   lang?: string;
   meta?: string;
   class?: string;
@@ -20,6 +21,7 @@ export const codeSchema: ZodType<Code> = nodeSchema
   // @ts-expect-error TS2740
   .extend({
     type: z.literal("code").describe("identifier for node variant"),
+    value: z.string().describe("The text content of the code block"),
     lang: z.string().optional().describe("The language of the code block"),
     meta: z
       .string()

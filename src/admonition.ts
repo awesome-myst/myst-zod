@@ -17,8 +17,11 @@ export type Admonition = Parent & {
     | "danger"
     | "error"
     | "info"
+    | "important"
     | "note"
     | "tip"
+    | "hint"
+    | "seealso"
     | "warning";
   class?: string;
   children?: (AdmonitionTitle | FlowContent)[];
@@ -35,8 +38,11 @@ export const admonitionSchema: ZodType<Admonition> = parentSchema
         "danger",
         "error",
         "info",
+        "important",
         "note",
         "tip",
+        "hint",
+        "seealso",
         "warning",
       ])
       .optional()
@@ -50,10 +56,10 @@ export const admonitionSchema: ZodType<Admonition> = parentSchema
         .array(z.union([admonitionTitleSchema, flowContentSchema]))
         .optional()
         .describe(
-          "An optional `admonitionTitle` followed by the admonitions content.",
+          "An optional `admonitionTitle` followed by the admonitions content."
         )
     ),
   })
   .describe(
-    "Admonition node for drawing attention to text, separate from the neighboring content",
+    "Admonition node for drawing attention to text, separate from the neighboring content"
   );

@@ -6,6 +6,7 @@ import { type Paragraph, paragraphSchema } from "./paragraph.ts";
 import { type Definition, definitionSchema } from "./definition.ts";
 import { type Heading, headingSchema } from "./heading.ts";
 import { type ThematicBreak, thematicBreakSchema } from "./thematic-break.ts";
+import { type Blockquote, blockquoteSchema } from "./blockquote.ts";
 import { type List, listSchema } from "./list.ts";
 import { type HTML, htmlSchema } from "./html.ts";
 import { type Code, codeSchema } from "./code.ts";
@@ -26,6 +27,7 @@ export type FlowContent =
   | Definition
   | Heading
   | ThematicBreak
+  | Blockquote
   | List
   | HTML
   | Code
@@ -38,26 +40,28 @@ export type FlowContent =
   | Table
   | FootnoteDefinition;
 
+export const uniqueFlowContentSchema = [
+  paragraphSchema,
+  definitionSchema,
+  headingSchema,
+  thematicBreakSchema,
+  blockquoteSchema,
+  listSchema,
+  codeSchema,
+  commentSchema,
+  targetSchema,
+  directiveSchema,
+  admonitionSchema,
+  containerSchema,
+  mathSchema,
+  tableSchema,
+  footnoteDefinitionSchema,
+] as const;
+
 // @ts-expect-error TS2740
 export const flowContentSchema: ZodType<FlowContent> = z
-  .discriminatedUnion("type", [
-    // @ts-expect-error TS2740
-    paragraphSchema,
-    definitionSchema,
-    headingSchema,
-    thematicBreakSchema,
-    listSchema,
-    htmlSchema,
-    codeSchema,
-    commentSchema,
-    targetSchema,
-    directiveSchema,
-    admonitionSchema,
-    containerSchema,
-    mathSchema,
-    tableSchema,
-    footnoteDefinitionSchema,
-  ])
+  // @ts-expect-error TS2740
+  .discriminatedUnion("type", uniqueFlowContentSchema.concat([htmlSchema]))
   .describe(
-    "Flow content is a block of text that can contain other blocks of text. It is the most common type of content in Markdown. It includes paragraphs, definitions, headings, and thematic breaks.",
+    "Flow content is a block of text that can contain other blocks of text. It is the most common type of content in Markdown. It includes paragraphs, definitions, headings, and thematic breaks."
   );

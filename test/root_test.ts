@@ -43,6 +43,9 @@ const allTests: MystTest[] = JSON.parse(
 for (const testCase of allTests) {
   Deno.test(`Test for – ${testCase.title}`, () => {
     const result = rootSchema.safeParse(testCase.mdast);
+    if (!result.success) {
+      console.error(result.error.format());
+    }
     assertEquals(result.success, true);
   });
 }

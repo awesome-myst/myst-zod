@@ -24,15 +24,22 @@ export const blockSchema: ZodType<Block> = parentSchema
       .string()
       .optional()
       .describe(
-        "block metadata from preceding break; conventionally, a stringified JSON dictionary but may be any arbitrary string",
+        "block metadata from preceding break; conventionally, a stringified JSON dictionary but may be any arbitrary string"
       ),
-    children: z
-      .array(
-        z.union([flowContentSchema, listItemSchema, phrasingContentSchema]),
-      )
-      .optional()
-      .describe("Top-level children of myst document"),
+    children: z.lazy(() =>
+      z
+        .array(
+          z.discriminatedUnion("type", [
+            // @ts-expect-error TS2339
+            flowContentSchema,
+            listItemSchema,
+            phrasingContentSchema,
+          ])
+        )
+        .optional()
+        .describe("Top-level children of myst document")
+    ),
   })
   .describe(
-    "Top-level content blocks or cells the myst document, delimited by BlockBreaks",
+    "Top-level content blocks or cells the myst document, delimited by BlockBreaks"
   );
