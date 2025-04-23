@@ -6,7 +6,7 @@
 
 > [Zod] schema for [MyST Markdown]
 
-Parse [MyST Markdown] abstract syntax trees with a [Zod] schema. This package provides a set of Zod schemas that can be used to validate and parse MyST Markdown documents.
+Parse [MyST Markdown] abstract syntax trees (ASTs) with a [Zod] schema. This package provides a set of Zod schemas that can be used to validate and parse MyST Markdown ASTs.
 
 ## Installation
 
@@ -21,7 +21,7 @@ deno add @awesome-myst/myst-zod
 
 ## Usage
 
-A Zod schema is a TypeScript type-safe way to validate and parse data. The `rootSchema` is a Zod schema that can be used to validate and parse MyST Markdown documents.
+A Zod schema is a TypeScript type-safe way to validate and parse data. The `rootSchema` is a Zod schema that can be used to validate and parse MyST Markdown ASTs.
 
 ```typescript
 import { rootSchema } from '@awesome-myst/myst-zod';
@@ -49,7 +49,7 @@ console.log(result);
 // }
 ```
 
-An [example validator application](https://awesome-myst.github.io/myst-zod/examples/validator/) is available [in the `examples` directory](https://github.com/awesome-myst/myst-zod/blob/aaf48d575310e07d1c8795d935af3836f4d578be/examples/validator/index.html#L56-L62). It uses the `rootSchema` to validate and parse MyST Markdown documents.
+An [example validator application](https://awesome-myst.github.io/myst-zod/examples/validator/) is available [in the `examples` directory](https://github.com/awesome-myst/myst-zod/blob/aaf48d575310e07d1c8795d935af3836f4d578be/examples/validator/index.html#L56-L62).
 
 See also [awesome-myst] for more information about the MyST Markdown format.
 
