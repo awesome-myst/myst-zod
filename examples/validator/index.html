@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>myst-zod validator</title>
+  <style>
+    body { font-family: sans-serif; margin: 1em; }
+    textarea { width: 100%; box-sizing: border-box; }
+    .error { color: red; }
+    .success { color: green; }
+    pre { background: #f5f5f5; padding: .5em; overflow: auto; }
+  </style>
+</head>
+<body>
+  <h1>myst-zod Validator</h1>
+  <p>Select a Myst AST <code>.json</code> or <code>.yaml/.yml</code> file, or paste its content below:</p>
+  <input type="file" id="fileInput" accept=".json,.yaml,.yml" />
+  <br/><br/>
+  <textarea id="textInput" rows="10" placeholder="Paste JSON or YAML here…"></textarea>
+  <br/><br/>
+  <button id="validateBtn">Validate</button>
+  <hr/>
+  <div id="output"></div>
+
+  <script type="module">
+    import { rootSchema } from 'https://cdn.jsdelivr.net/npm/@awesome-myst/myst-zod@0.1.5/+esm';
+    import yaml from 'https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/+esm';
+
+    const fileInput = document.getElementById('fileInput');
+    const textInput = document.getElementById('textInput');
+    const validateBtn = document.getElementById('validateBtn');
+    const output = document.getElementById('output');
+
+    fileInput.addEventListener('change', async (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      const text = await file.text();
+      textInput.value = text;
+    });
+
+    validateBtn.addEventListener('click', () => {
+      output.innerHTML = '';
+      let doc;
+      try {
+        doc = JSON.parse(textInput.value);
+      } catch (jsonErr) {
+        try {
+          doc = yaml.load(textInput.value);
+        } catch (yamlErr) {
+          output.innerHTML = '<p class="error">Parsing failed:</p>'
+            + '<pre>' + yamlErr + '</pre>';
+          return;
+        }
+      }
+
+      const result = rootSchema.safeParse(doc);
+      if (result.success) {
+        output.innerHTML = '<p class="success">✔ Valid!</p>'
+          + '<pre>' + JSON.stringify(result.data, null, 2) + '</pre>';
+      } else {
+        output.innerHTML = '<p class="error">❌ Validation errors:</p>'
+          + '<pre>' + JSON.stringify(result.error.format(), null, 2) + '</pre>';
+      }
+    });
+  </script>
+</body>
+</html>
