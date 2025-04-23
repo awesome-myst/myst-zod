@@ -35,10 +35,3 @@ jobs:
 
       - name: Publish to JSR
         run: npx jsr publish
-
-      - name: Publish to npm
-        run: |
-          cd npm
-          npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
