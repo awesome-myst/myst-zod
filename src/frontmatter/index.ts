@@ -9,3 +9,4 @@ export * from "./jupytext.ts";
 export * from "./kernelspec.ts";
 export * from "./licenses.ts";
 export * from "./math.ts";
+export * from "./numbering.ts";
