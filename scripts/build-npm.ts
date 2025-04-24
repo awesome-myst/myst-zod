@@ -28,7 +28,15 @@ await build({
     },
     dependencies: {
       "credit-roles": "^2.1.0",
+      "doi-utils": "^2.0.5",
+      "orcid": "^1.0.0",
+      "simple-validators": "^1.1.0",
+      "spdx-correct": "^3.2.0",
       "zod": "^3.24.2",
+    },
+    devDependencies: {
+      "glob": "^11.0.2",
+      "js-yaml": "^4.1.0",
     }
   },
   postBuild() {

@@ -10,10 +10,11 @@ export type KernelSpec = {
   env?: Record<string, unknown>;
 };
 
+// @ts-expect-error TS2322
 export const kernelSpecSchema: ZodType<KernelSpec> = z
   .object({
-    name: z.string().describe("Name of the kernel"),
-    display_name: z.string().describe("Display name of the kernel"),
+    name: z.string().default("python3").describe("Name of the kernel"),
+    display_name: z.string().default("Python 3 Kernel").describe("Display name of the kernel"),
     language: z
       .string()
       .optional()
@@ -23,7 +24,7 @@ export const kernelSpecSchema: ZodType<KernelSpec> = z
       .optional()
       .describe("Arguments for the kernel"),
     env: z
-      .object()
+      .record(z.string(), z.any())
       .optional()
       .describe("Environment variables for the kernel"),
   })

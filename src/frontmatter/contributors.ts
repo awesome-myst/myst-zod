@@ -1,10 +1,17 @@
 // SPDX-License-Identifier: MIT
 
-import { z, type ZodType } from "zod";
+import { z, type ZodType, RefinementCtx } from "zod";
+
+import { orcid } from "orcid";
 
 // https://credit.niso.org/
-import type { CreditRole } from 'credit-roles';
-import { type Affiliation, affiliationSchema } from "./affiliations.ts";
+import { credit, type CreditRole } from "credit-roles";
+import {
+  type Affiliation,
+  affiliationSchemaBase,
+  affiliationSchema,
+  affiliationTransform,
+} from "./affiliations.ts";
 
 export type ContributorRole = CreditRole | string;
 
@@ -27,7 +34,7 @@ export type Person = {
   deceased?: boolean;
   email?: string;
   roles?: ContributorRole[];
-  affiliations?: string[];
+  affiliations?: Affiliation[];
   twitter?: string;
   github?: string;
   url?: string;
@@ -36,7 +43,7 @@ export type Person = {
   fax?: string;
   // Computed property; only 'name' should be set in frontmatter as string or Name object
   nameParsed?: Name;
-}
+};
 
 /**
  * Person or Collaboration contributor type
@@ -54,36 +61,141 @@ export type Contributor = Person & Affiliation;
 // https://credit.niso.org/
 // U+2013 hyphen is used in CRT spec
 export const contributorRoleSchema: ZodType<ContributorRole> = z
-  .enum(['Conceptualization', 'Data curation', 'Formal analysis', 'Funding acquisition', 'Investigation', 'Methodology', 'Project administration', 'Resources', 'Software', 'Supervision', 'Validation', 'Visualization', 'Writing – original draft', 'Writing – review & editing'])
-  .or(z.string())
+  .union([
+    z.enum([
+      "Conceptualization",
+      "Data curation",
+      "Formal analysis",
+      "Funding acquisition",
+      "Investigation",
+      "Methodology",
+      "Project administration",
+      "Resources",
+      "Software",
+      "Supervision",
+      "Validation",
+      "Visualization",
+      "Writing – original draft",
+      "Writing – review & editing",
+    ]),
+    z.string(),
+  ])
   .describe("Contributor role");
 
-export const nameSchema: ZodType<Name> = z.object({
-  literal: z.string().optional(),
-  given: z.string().optional(),
-  family: z.string().optional(),
-  dropping_particle: z.string().optional(),
-  non_dropping_particle: z.string().optional(),
-  suffix: z.string().optional(),
-}).describe("Name frontmatter");
+export const nameSchema: ZodType<Name> = z
+  .object({
+    literal: z.string().optional(),
+    given: z.string().optional(),
+    family: z.string().optional(),
+    dropping_particle: z.string().optional(),
+    non_dropping_particle: z.string().optional(),
+    suffix: z.string().optional(),
+  })
+  .describe("Name frontmatter");
 
-export const personSchema: ZodType<Person> = z.object({
-  id: z.string().optional(),
-  name: z.union([z.string(), nameSchema]).optional(),
-  userId: z.string().optional(),
-  orcid: z.string().optional(),
-  corresponding: z.boolean().optional(),
-  equal_contributor: z.boolean().optional(),
-  deceased: z.boolean().optional(),
-  email: z.string().email().optional(),
-  roles: z.array(contributorRoleSchema).optional(),
-  affiliations: z.array(z.string()).optional(),
-  twitter: z.string().optional(),
-  github: z.string().optional(),
-  url: z.string().url().optional(),
-  note: z.string().optional(),
-  phone: z.string().optional(),
-  fax: z.string().optional(),
-}).describe("Person frontmatter");
+const orcidTransform = (data: string, ctx: RefinementCtx) => {
+  const id = orcid.normalize(data);
+  if (!id) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Invalid ORCID ID",
+    });
+  }
+  return id;
+};
 
-export const contributorSchema: ZodType<Contributor> = personSchema.extend(affiliationSchema)
+const personTransform = (
+  data: Record<string, unknown>,
+  ctx: RefinementCtx
+): Record<string, unknown> => {
+  if (data.roles) {
+    if (typeof data.roles === "string") {
+      data.roles = data.roles.split(/[,;]/).map((s) => s.trim());
+    }
+    if (Array.isArray(data.roles)) {
+      data.roles = (data.roles as string[]).map((role: string) => {
+        const normalizedRole = credit.normalize(role);
+        if (normalizedRole) {
+          return normalizedRole;
+        }
+        return role.trim();
+      });
+    }
+  }
+  return data;
+};
+
+// @ts-expect-error TS2322
+export const personSchemaBase: ZodType<Person> = z
+  .object({
+    id: z.string().optional(),
+    name: z.union([z.string(), nameSchema]).optional(),
+    userId: z.string().optional(),
+    orcid: z.string().superRefine(orcidTransform).optional(),
+    corresponding: z.boolean().optional(),
+    equal_contributor: z.boolean().optional(),
+    deceased: z.boolean().optional(),
+    email: z.string().email().optional(),
+    roles: z.union([z.string(), z.array(contributorRoleSchema)]).optional(),
+    affiliations: z
+      .union([affiliationSchema, z.array(affiliationSchema)])
+      .optional(),
+    twitter: z.string().optional(),
+    github: z.string().optional(),
+    url: z.string().url().optional(),
+    note: z.string().optional(),
+    phone: z.string().optional(),
+    fax: z.string().optional(),
+  })
+  .describe("Person frontmatter");
+
+export const personSchema: ZodType<Person> =
+  personSchemaBase.superRefine(personTransform);
+
+const contributorTransform = (
+  data: string | Record<string, unknown>,
+  ctx: RefinementCtx
+) => {
+  if (typeof data === "string") {
+    return { name: data };
+  }
+
+  if (data.corresponding && !data.email) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Contributor must have an email if corresponding is true",
+    });
+  }
+
+  const affilationResult = affiliationTransform(data, ctx);
+  const personResult = personTransform(affilationResult, ctx);
+  return personResult;
+};
+
+const contributorPreprocessor = (
+  data: string | Record<string, unknown>,
+  ctx: RefinementCtx
+) => {
+  if (typeof data === "object" && typeof data.collaborations !== "undefined") {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "collaborations is deprecated, use collaboration instead",
+    });
+  }
+
+  return data;
+};
+
+// @ts-expect-error TS2339
+export const contributorSchema: ZodType<Contributor> = z.preprocess(
+  // @ts-expect-error TS2322
+  contributorPreprocessor,
+  z
+    .union([
+      z.string(),
+      // Note: Person `name` overrides Affiliation `name`
+      // @ts-expect-error TS2339
+      affiliationSchemaBase.merge(personSchemaBase),
+    ])
+    .superRefine(contributorTransform)
+);
