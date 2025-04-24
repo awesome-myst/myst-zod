@@ -8,3 +8,4 @@ export * from "./funding.ts";
 export * from "./jupytext.ts";
 export * from "./kernelspec.ts";
 export * from "./licenses.ts";
+export * from "./math.ts";
