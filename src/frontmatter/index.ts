@@ -4,3 +4,4 @@ export * from "./affiliations.ts";
 export * from "./biblio.ts";
 export * from "./downloads.ts";
 export * from "./exports.ts";
+export * from "./funding.ts";
