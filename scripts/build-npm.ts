@@ -27,6 +27,7 @@ await build({
       url: "https://github.com/awesome-myst/myst-zod/issues",
     },
     dependencies: {
+      "credit-roles": "^2.1.0",
       "zod": "^3.24.2",
     }
   },

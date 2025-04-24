@@ -23,6 +23,7 @@
     "jsr:@std/path@~0.225.2": "0.225.2",
     "jsr:@ts-morph/bootstrap@0.24": "0.24.0",
     "jsr:@ts-morph/common@0.24": "0.24.0",
+    "npm:credit-roles@^2.1.0": "2.1.0",
     "npm:zod@^3.24.2": "3.24.2"
   },
   "jsr": {
@@ -132,6 +133,9 @@
     }
   },
   "npm": {
+    "credit-roles@2.1.0": {
+      "integrity": "sha512-wt1jw7lDnzY1Ob4cDHpXboN4Bfu6l7reKal0zxtKnxogqw916l+Iu862LxIze4U4y44ssAd0TOQqVg2cXY2V6Q=="
+    },
     "zod@3.24.2": {
       "integrity": "sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ=="
     }
@@ -140,6 +144,7 @@
     "dependencies": [
       "jsr:@deno/dnt@~0.41.3",
       "jsr:@std/assert@1",
+      "npm:credit-roles@^2.1.0",
       "npm:zod@^3.24.2"
     ]
   }
