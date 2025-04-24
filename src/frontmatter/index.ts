@@ -7,3 +7,4 @@ export * from "./exports.ts";
 export * from "./funding.ts";
 export * from "./jupytext.ts";
 export * from "./kernelspec.ts";
+export * from "./licenses.ts";
