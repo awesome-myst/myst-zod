@@ -35,7 +35,6 @@ export type PhrasingContent =
   | FootnoteReference
   | CrossReference;
 
-// @ts-ignore
 export const phrasingContentSchema: ZodType<PhrasingContent> = z
   .discriminatedUnion(
     "type",

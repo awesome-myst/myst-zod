@@ -1,9 +1,8 @@
 // SPDX-License-Identifier: MIT
 
-import { preprocess, RefinementCtx, z, type ZodType } from "zod";
+import { type RefinementCtx, z, type ZodType } from "zod";
 
 import { type TOC, tocSchema } from "../toc.ts";
-import { defined } from "simple-validators";
 
 export enum ExportFormats {
   pdf = "pdf",
@@ -173,7 +172,7 @@ const exportTransform = (
       data.format as ExportFormats,
     ) &&
     data.articles &&
-    (data.articles as any[]).length > 1
+    (data.articles as ExportArticle[]).length > 1
   ) {
     ctx.addIssue({
       code: z.ZodIssueCode.custom,

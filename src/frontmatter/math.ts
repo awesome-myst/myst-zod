@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { union, z, type ZodType } from "zod";
+import { z, type ZodType } from "zod";
 
 export type MathMacro = {
   title?: string;

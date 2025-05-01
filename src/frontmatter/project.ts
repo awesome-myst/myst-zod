@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { RefinementCtx, z, type ZodType } from "zod";
+import { type RefinementCtx, z, type ZodType } from "zod";
 
 import { doi } from "doi-utils";
 
@@ -17,13 +17,12 @@ import { validateLicense } from "./licenses-vendor/validators.ts";
 import { type PublicationMeta, publicationMetaSchema } from "./biblio.ts";
 import { type Download, downloadSchema } from "./downloads.ts";
 import { type Export, exportSchema } from "./exports.ts";
-import { type Licenses, licensesSchema } from "./licenses.ts";
+import { type License, type Licenses, licensesSchema } from "./licenses.ts";
 import { type MathMacro, mathMacroSchema } from "./math.ts";
 import { type Numbering, numberingSchema } from "./numbering.ts";
 import {
   type ExternalReferences,
   externalReferencesSchema,
-  KNOWN_REFERENCE_KINDS,
 } from "./references.ts";
 import { type ProjectSettings, projectSettingsSchema } from "./settings.ts";
 import {
@@ -123,7 +122,7 @@ export type ProjectFrontmatter = ProjectAndPageFrontmatter & {
 export const dateTransform = (
   data: Record<string, unknown>,
   ctx: RefinementCtx,
-) => {
+): Record<string, unknown> => {
   if (defined(data.date)) {
     const opts: ValidationOptions = {
       property: "date",
@@ -144,7 +143,7 @@ export const dateTransform = (
 export const licenseTransform = (
   data: Record<string, unknown>,
   ctx: RefinementCtx,
-) => {
+): Record<string, unknown> => {
   if (defined(data.license)) {
     const opts: ValidationOptions = {
       property: "license",
@@ -157,7 +156,7 @@ export const licenseTransform = (
       },
     };
 
-    data.license = validateLicense(data.license, opts);
+    data.license = validateLicense(data.license as License, opts);
   }
   return data;
 };
@@ -391,7 +390,7 @@ const referencesTransform = (
 export const projectAndPageTransform = (
   data: Record<string, unknown>,
   ctx: RefinementCtx,
-) => {
+): Record<string, unknown> => {
   const siteResult = siteTransform(data, ctx);
   const dateResult = dateTransform(siteResult, ctx);
   const licenceResult = licenseTransform(dateResult, ctx);

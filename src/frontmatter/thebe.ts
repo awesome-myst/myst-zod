@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { RefinementCtx, z, type ZodType } from "zod";
-
-import { defined } from "simple-validators";
+import { type RefinementCtx, z, type ZodType } from "zod";
 
 export type ThebeFrontmatter = boolean | string | ThebeFrontmatterObject;
 
@@ -34,60 +32,41 @@ export type ThebeFrontmatterObject = {
 
 // NOTE: currently a subtle difference but will likely grow with lite options
 export type ExpandedThebeFrontmatter =
-  & Omit<ThebeFrontmatterObject, "binder">
+  & Omit<
+    ThebeFrontmatterObject,
+    "binder"
+  >
   & {
     binder?: BinderHubOptions;
   };
 
 export const wellKnownRepoProvidersSchema: ZodType<WellKnownRepoProviders> = z
-  .enum([
-    "github",
-    "gitlab",
-    "git",
-    "gist",
-  ]);
+  .enum(["github", "gitlab", "git", "gist"]);
 
 export const binderProvidersSchema: ZodType<BinderProviders> = z.union([
   wellKnownRepoProvidersSchema,
   z.string(),
 ]);
 
-export const bunderHubOptionsSchema: ZodType<BinderHubOptions> = z.object({
-  url: z
-    .string()
-    .url()
-    .optional()
-    .describe("BinderHub URL"),
-  ref: z
-    .string()
-    .optional()
-    .describe("BinderHub reference"),
-  repo: z
-    .string()
-    .optional()
-    .describe("BinderHub repo"),
-  provider: binderProvidersSchema
-    .optional()
-    .describe("Binder provider"),
-}).describe("BinderHub options");
+export const bunderHubOptionsSchema: ZodType<BinderHubOptions> = z
+  .object({
+    url: z.string().url().optional().describe("BinderHub URL"),
+    ref: z.string().optional().describe("BinderHub reference"),
+    repo: z.string().optional().describe("BinderHub repo"),
+    provider: binderProvidersSchema.optional().describe("Binder provider"),
+  })
+  .describe("BinderHub options");
 
 export const jupyterServerOptionsSchema: ZodType<JupyterServerOptions> = z
   .object({
-    url: z
-      .string()
-      .url()
-      .describe("Jupyter server URL"),
-    token: z
-      .string()
-      .describe("Jupyter server token"),
-  }).describe("Jupyter server options");
+    url: z.string().url().describe("Jupyter server URL"),
+    token: z.string().describe("Jupyter server token"),
+  })
+  .describe("Jupyter server options");
 
 export const thebeFrontmatterObjectSchema: ZodType<ThebeFrontmatterObject> = z
   .object({
-    lite: z
-      .boolean()
-      .optional()
-      .describe("Enable thebe lite"),
+    lite: z.boolean().optional().describe("Enable thebe lite"),
     binder: z
       .union([z.boolean(), bunderHubOptionsSchema])
       .optional()
@@ -95,27 +74,16 @@ export const thebeFrontmatterObjectSchema: ZodType<ThebeFrontmatterObject> = z
     server: jupyterServerOptionsSchema
       .optional()
       .describe("Jupyter server options"),
-    kernelName: z
-      .string()
-      .optional()
-      .describe("Kernel name"),
-    sessionName: z
-      .string()
-      .optional()
-      .describe("Session name"),
+    kernelName: z.string().optional().describe("Kernel name"),
+    sessionName: z.string().optional().describe("Session name"),
     disableSessionSaving: z
       .boolean()
       .optional()
       .describe("Disable session saving"),
-    mathjaxUrl: z
-      .string()
-      .optional()
-      .describe("MathJax URL"),
-    mathjaxConfig: z
-      .string()
-      .optional()
-      .describe("MathJax config"),
-  }).describe("Thebe frontmatter options");
+    mathjaxUrl: z.string().optional().describe("MathJax URL"),
+    mathjaxConfig: z.string().optional().describe("MathJax config"),
+  })
+  .describe("Thebe frontmatter options");
 
 const thebeTransform = (
   data: string | boolean | Record<string, unknown>,
@@ -145,7 +113,9 @@ const thebeTransform = (
   }
 
   if (
-    "binder" in data && typeof data.binder === "object" && data.binder !== null
+    "binder" in data &&
+    typeof data.binder === "object" &&
+    data.binder !== null
   ) {
     const binder = data.binder as BinderHubOptions;
     if (binder.provider === "custom" && binder.repo === undefined) {
@@ -155,12 +125,6 @@ const thebeTransform = (
           `BinderHub options must include a repo when using a custom provider`,
       });
     }
-  }
-
-  if (
-    "server" in data && typeof data.server === "object" && data.server !== null
-  ) {
-    const server = data.server as JupyterServerOptions;
   }
 
   return data;

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { RefinementCtx, z, type ZodType } from "zod";
+import { type RefinementCtx, z, type ZodType } from "zod";
 
 import spdxCorrect from "spdx-correct";
 
@@ -91,7 +91,7 @@ function isUrl(url: string) {
   try {
     const parsed = new URL(url);
     return parsed.protocol.includes("http");
-  } catch (error) {
+  } catch (_error) {
     return false;
   }
 }
@@ -124,7 +124,10 @@ const URL_ID_LOOKUP: Record<string, string> = Object.fromEntries(
     }),
 );
 
-const licensePreprocessor = (data: unknown, ctx: RefinementCtx) => {
+const licensePreprocessor = (
+  data: string | Record<string, unknown>,
+  ctx: RefinementCtx,
+) => {
   if (typeof data === "string") {
     const valueSpdx = data.length < 15 ? correctLicense(data) : undefined;
     if (URL_ID_LOOKUP[cleanUrl(data)]) {
@@ -142,15 +145,15 @@ const licensePreprocessor = (data: unknown, ctx: RefinementCtx) => {
     }
   }
 
-  if (typeof data === "object" && data !== null && "cc" in data) {
+  if ("cc" in data) {
     if ("CC" in data) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: "License must define only one of `cc` or `CC`, not both",
       });
     }
-    (data as any).CC = (data as any).cc;
-    delete (data as any).cc;
+    data.CC = data.cc;
+    delete data.cc;
   }
 
   return data;
@@ -158,6 +161,7 @@ const licensePreprocessor = (data: unknown, ctx: RefinementCtx) => {
 
 // @ts-expect-error TS2322
 export const licenseSchema: ZodType<License> = z.preprocess(
+  // @ts-expect-error TS2339
   licensePreprocessor,
   z
     .object({

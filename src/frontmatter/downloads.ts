@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { RefinementCtx, z, type ZodType } from "zod";
+import { type RefinementCtx, z, type ZodType } from "zod";
 
 import { type ExportFormats, exportFormatsSchema } from "./exports.ts";
 

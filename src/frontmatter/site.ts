@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { RefinementCtx, z, type ZodType } from "zod";
+import { type RefinementCtx, z, type ZodType } from "zod";
 
 import { type Affiliation, affiliationSchema } from "./affiliations.ts";
 import { type Contributor, contributorSchema } from "./contributors.ts";
@@ -186,7 +186,7 @@ const partsTransform = (data: SiteFrontmatter, ctx: RefinementCtx) => {
 
   // 1. move known-page-part fields into `parts`
   for (const key of PAGE_KNOWN_PARTS) {
-    const val = (result as any)[key];
+    const val = result[key];
     if (val !== undefined) {
       // If the key is already in parts, addIssue
       if (parts[key]) {
@@ -196,7 +196,7 @@ const partsTransform = (data: SiteFrontmatter, ctx: RefinementCtx) => {
         });
       }
       parts[key] = Array.isArray(val) ? val : [val as string];
-      delete (result as any)[key];
+      delete result[key];
     }
   }
 
@@ -282,7 +282,7 @@ const optionsTransform = (
 export const siteTransform = (
   data: Record<string, unknown>,
   ctx: RefinementCtx,
-) => {
+): Record<string, unknown> => {
   const aliasResult = aliasTransform(data, ctx);
   const partsResult = partsTransform(aliasResult as SiteFrontmatter, ctx);
   const githubResult = githubTransform(partsResult, ctx);

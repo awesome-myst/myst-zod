@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { RefinementCtx, z, type ZodType } from "zod";
+import { z, type ZodType } from "zod";
 
 export const KNOWN_REFERENCE_KINDS = ["myst", "intersphinx"] as const;
 
@@ -11,7 +11,7 @@ export type ExternalReference = {
 
 export type ExternalReferences = Record<string, ExternalReference>;
 
-const kindPreprocessor = (data: unknown, ctx: RefinementCtx) => {
+const kindPreprocessor = (data: unknown) => {
   if (typeof data === "string") {
     let result = data.toLowerCase();
     if (result === "sphinx" || result === "inv") {
@@ -29,7 +29,6 @@ const kindPreprocessor = (data: unknown, ctx: RefinementCtx) => {
 
 const externalReferenceTransform = (
   data: string | Record<string, unknown>,
-  ctx: RefinementCtx,
 ): Record<string, unknown> => {
   if (typeof data === "string") {
     data = { url: data };

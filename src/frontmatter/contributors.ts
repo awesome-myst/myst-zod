@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { RefinementCtx, z, type ZodType } from "zod";
+import { type RefinementCtx, z, type ZodType } from "zod";
 
 import { orcid } from "orcid";
 
@@ -106,7 +106,7 @@ const orcidTransform = (data: string, ctx: RefinementCtx) => {
 
 const personTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx,
+  _ctx: RefinementCtx,
 ): Record<string, unknown> => {
   if (data.roles) {
     if (typeof data.roles === "string") {

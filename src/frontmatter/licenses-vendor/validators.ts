@@ -89,7 +89,7 @@ function isUrl(url: string) {
   try {
     const parsed = new URL(url);
     return parsed.protocol.includes("http");
-  } catch (error) {
+  } catch (_error) {
     return false;
   }
 }
@@ -118,7 +118,7 @@ const URL_ID_LOOKUP: Record<string, string> = Object.fromEntries(
  * Validate input to be known license id and return corresponding License object
  */
 export function validateLicense(
-  input: any,
+  input: string | Record<string, unknown>,
   opts: ValidationOptions,
 ): License | undefined {
   if (typeof input === "string") {
@@ -270,7 +270,7 @@ export function validateLicense(
  * license ids for 'code' and/or 'content'
  */
 export function validateLicenses(
-  input: any,
+  input: string | Record<string, unknown>,
   opts: ValidationOptions,
 ): Licenses | undefined {
   let contentOpts: ValidationOptions;
@@ -323,7 +323,7 @@ export function licensesToString(licenses: Licenses) {
 }
 
 function removeExpectedKeys(license: License, expected: License): License {
-  const output: Record<string, any> = {};
+  const output: Record<string, unknown> = {};
   Object.entries(license).forEach(([key, val]) => {
     const licenseKey = key as keyof License;
     if (licenseKey === "id" || val !== expected[licenseKey]) {
@@ -335,8 +335,8 @@ function removeExpectedKeys(license: License, expected: License): License {
 }
 
 function objectsEqual(
-  a?: Record<string, any> | string,
-  b?: Record<string, any> | string,
+  a?: Record<string, unknown> | string,
+  b?: Record<string, unknown> | string,
 ) {
   if (a == null || b == null) return false;
   const aAsString = typeof a === "string"
