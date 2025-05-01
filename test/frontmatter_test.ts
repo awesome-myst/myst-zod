@@ -39,10 +39,10 @@ const casesList = files
 
 casesList.forEach(({ title, frontmatter, cases }) => {
   const casesToUse = cases.filter(
-    (c) => (!only && !c.skip) || (only && c.title === only)
+    (c) => (!only && !c.skip) || (only && c.title === only),
   );
   const skippedCases = cases.filter(
-    (c) => c.skip || (only && c.title !== only)
+    (c) => c.skip || (only && c.title !== only),
   );
   if (casesToUse.length === 0) return;
   if (skippedCases.length > 0) {
@@ -67,8 +67,9 @@ casesList.forEach(({ title, frontmatter, cases }) => {
           assertEquals(result.success, true);
         }
         if (normalized && !errors) {
-          const normalizedResult =
-            projectFrontmatterSchema.safeParse(normalized);
+          const normalizedResult = projectFrontmatterSchema.safeParse(
+            normalized,
+          );
           assertEquals(normalizedResult.success, true);
         }
       } else {

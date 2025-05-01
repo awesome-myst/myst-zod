@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z, type ZodType, RefinementCtx, preprocess } from "zod";
+import { preprocess, RefinementCtx, z, type ZodType } from "zod";
 
 import { type TOC, tocSchema } from "../toc.ts";
 import { defined } from "simple-validators";
@@ -73,7 +73,7 @@ export const exportFormatsSchema: ZodType<ExportFormats> = z
 
 const exportArticleTransform = (
   data: string | Record<string, unknown>,
-  ctx: RefinementCtx
+  ctx: RefinementCtx,
 ) => {
   if (typeof data === "string") {
     return { file: data };
@@ -110,7 +110,7 @@ export const exportArticleSchema: ZodType<ExportArticle> = z
 
 const exportTransform = (
   data: string | Record<string, unknown>,
-  ctx: RefinementCtx
+  ctx: RefinementCtx,
 ) => {
   if (typeof data === "string") {
     // If export is a string it may be (1) format, (2) extension, or (3) output filename
@@ -170,7 +170,7 @@ const exportTransform = (
   if (
     data.format &&
     [ExportFormats.md, ExportFormats.docx].includes(
-      data.format as ExportFormats
+      data.format as ExportFormats,
     ) &&
     data.articles &&
     (data.articles as any[]).length > 1

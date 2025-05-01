@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z, type ZodType, RefinementCtx } from "zod";
+import { RefinementCtx, z, type ZodType } from "zod";
 
 import { doi } from "doi-utils";
 
@@ -27,10 +27,10 @@ import {
 } from "./references.ts";
 import { type ProjectSettings, projectSettingsSchema } from "./settings.ts";
 import {
+  SITE_FRONTMATTER_KEYS,
   type SiteFrontmatter,
   siteFrontmatterSchemaBase,
   siteTransform,
-  SITE_FRONTMATTER_KEYS,
 } from "./site.ts";
 import {
   type ExpandedThebeFrontmatter,
@@ -122,7 +122,7 @@ export type ProjectFrontmatter = ProjectAndPageFrontmatter & {
 
 export const dateTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx
+  ctx: RefinementCtx,
 ) => {
   if (defined(data.date)) {
     const opts: ValidationOptions = {
@@ -143,7 +143,7 @@ export const dateTransform = (
 
 export const licenseTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx
+  ctx: RefinementCtx,
 ) => {
   if (defined(data.license)) {
     const opts: ValidationOptions = {
@@ -164,7 +164,7 @@ export const licenseTransform = (
 
 const identifiersTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx
+  ctx: RefinementCtx,
 ): Record<string, unknown> => {
   // move known external identifiers into the identifiers object
   for (const key of KNOWN_EXTERNAL_IDENTIFIERS) {
@@ -260,7 +260,7 @@ const identifiersTransform = (
 
 const doiTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx
+  ctx: RefinementCtx,
 ): Record<string, unknown> => {
   if (defined(data.doi)) {
     if (typeof data.doi === "string") {
@@ -282,13 +282,14 @@ const doiTransform = (
 
 const abbreviationsTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx
+  ctx: RefinementCtx,
 ): Record<string, unknown> => {
   if (defined(data.abbreviations)) {
     if (typeof data.abbreviations !== "object") {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: `Abbreviations must be an object, got ${typeof data.abbreviations}`,
+        message: `Abbreviations must be an object, got ${typeof data
+          .abbreviations}`,
       });
     } else {
       const abbreviations = data.abbreviations as Record<string, unknown>;
@@ -299,7 +300,9 @@ const abbreviationsTransform = (
           if (key.length < 2) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
-              message: `Abbreviations must be two characters or more, got "${abbreviations[key]}"`,
+              message: `Abbreviations must be two characters or more, got "${
+                abbreviations[key]
+              }"`,
             });
           }
         }
@@ -312,7 +315,7 @@ const abbreviationsTransform = (
 
 const downloadsTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx
+  ctx: RefinementCtx,
 ): Record<string, unknown> => {
   if (defined(data.downloads)) {
     if (!Array.isArray(data.downloads)) {
@@ -362,7 +365,7 @@ const thebeTransform = (data: Record<string, unknown>, ctx: RefinementCtx) => {
 
 const referencesTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx
+  ctx: RefinementCtx,
 ): Record<string, unknown> => {
   if (defined(data.references)) {
     if (typeof data.references !== "object") {
@@ -387,7 +390,7 @@ const referencesTransform = (
 
 export const projectAndPageTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx
+  ctx: RefinementCtx,
 ) => {
   const siteResult = siteTransform(data, ctx);
   const dateResult = dateTransform(siteResult, ctx);
@@ -401,80 +404,82 @@ export const projectAndPageTransform = (
   return referencesResult;
 };
 
-export const projectAndPageFrontmatterSchemaBase: ZodType<ProjectAndPageFrontmatter> =
-  siteFrontmatterSchemaBase
-    // @ts-expect-error TS2339
-    .extend({
-      date: z.string().optional().describe("Date of the project"),
-      doi: z.string().optional().describe("DOI of the project"),
-      identifiers: z
-        .record(z.string(), z.union([z.string(), z.number()]))
-        .optional()
-        .describe("Identifiers of the project"),
-      open_access: z.boolean().optional().describe("Open access status"),
-      license: z
-        .union([z.string(), licensesSchema])
-        .optional()
-        .describe("License of the project"),
-      binder: z.string().optional().describe("Binder URL"),
-      source: z.string().optional().describe("Source code URL"),
-      subject: z.string().optional().describe("Subject of the project"),
-      volume: publicationMetaSchema
-        .optional()
-        .describe("Volume of the project"),
-      issue: publicationMetaSchema.optional().describe("Issue of the project"),
-      first_page: z
-        .union([z.string(), z.number()])
-        .optional()
-        .describe("First page of the project"),
-      last_page: z
-        .union([z.string(), z.number()])
-        .optional()
-        .describe("Last page of the project"),
-      oxa: z.string().optional().describe("OXA ID of the project"),
-      numbering: numberingSchema
-        .optional()
-        .describe("Numbering scheme for the project"),
-      bibliography: z
-        .union([z.string(), z.array(z.string())])
-        .optional()
-        .describe("Bibliography files for the project"),
-      math: z
-        .record(z.string(), mathMacroSchema)
-        .optional()
-        .describe("Math macros for the project"),
-      abbreviations: z
-        .record(z.string(), z.union([z.string(), z.boolean(), z.null()]))
-        .optional()
-        .describe("Abbreviations used in the project"),
-      exports: z
-        .union([exportSchema, exportSchema.array()])
-        .optional()
-        .describe("Exports for the project"),
-      downloads: downloadSchema
-        .array()
-        .optional()
-        .describe("Downloads for the project"),
-      settings: projectSettingsSchema.optional().describe("Project settings"),
-      edit_url: z
-        .string()
-        .optional()
-        .nullable()
-        .describe("Edit URL for the project"),
-      arxiv: z.string().optional().describe("arXiv ID of the project"),
-      pmid: z
-        .union([z.string(), z.number()])
-        .optional()
-        .describe("PMID of the project"),
-      pmcid: z.string().optional().describe("PMCID of the project"),
-      zenodo: z.string().optional().describe("Zenodo ID of the project"),
-    })
-    .describe(
-      "Project and page frontmatter. This is a superset of site frontmatter, and should be used in all projects."
-    );
+export const projectAndPageFrontmatterSchemaBase: ZodType<
+  ProjectAndPageFrontmatter
+> = siteFrontmatterSchemaBase
+  // @ts-expect-error TS2339
+  .extend({
+    date: z.string().optional().describe("Date of the project"),
+    doi: z.string().optional().describe("DOI of the project"),
+    identifiers: z
+      .record(z.string(), z.union([z.string(), z.number()]))
+      .optional()
+      .describe("Identifiers of the project"),
+    open_access: z.boolean().optional().describe("Open access status"),
+    license: z
+      .union([z.string(), licensesSchema])
+      .optional()
+      .describe("License of the project"),
+    binder: z.string().optional().describe("Binder URL"),
+    source: z.string().optional().describe("Source code URL"),
+    subject: z.string().optional().describe("Subject of the project"),
+    volume: publicationMetaSchema
+      .optional()
+      .describe("Volume of the project"),
+    issue: publicationMetaSchema.optional().describe("Issue of the project"),
+    first_page: z
+      .union([z.string(), z.number()])
+      .optional()
+      .describe("First page of the project"),
+    last_page: z
+      .union([z.string(), z.number()])
+      .optional()
+      .describe("Last page of the project"),
+    oxa: z.string().optional().describe("OXA ID of the project"),
+    numbering: numberingSchema
+      .optional()
+      .describe("Numbering scheme for the project"),
+    bibliography: z
+      .union([z.string(), z.array(z.string())])
+      .optional()
+      .describe("Bibliography files for the project"),
+    math: z
+      .record(z.string(), mathMacroSchema)
+      .optional()
+      .describe("Math macros for the project"),
+    abbreviations: z
+      .record(z.string(), z.union([z.string(), z.boolean(), z.null()]))
+      .optional()
+      .describe("Abbreviations used in the project"),
+    exports: z
+      .union([exportSchema, exportSchema.array()])
+      .optional()
+      .describe("Exports for the project"),
+    downloads: downloadSchema
+      .array()
+      .optional()
+      .describe("Downloads for the project"),
+    settings: projectSettingsSchema.optional().describe("Project settings"),
+    edit_url: z
+      .string()
+      .optional()
+      .nullable()
+      .describe("Edit URL for the project"),
+    arxiv: z.string().optional().describe("arXiv ID of the project"),
+    pmid: z
+      .union([z.string(), z.number()])
+      .optional()
+      .describe("PMID of the project"),
+    pmcid: z.string().optional().describe("PMCID of the project"),
+    zenodo: z.string().optional().describe("Zenodo ID of the project"),
+  })
+  .describe(
+    "Project and page frontmatter. This is a superset of site frontmatter, and should be used in all projects.",
+  );
 
-export const projectAndPageFrontmatterSchema: ZodType<ProjectAndPageFrontmatter> =
-  projectAndPageFrontmatterSchemaBase.superRefine(projectAndPageTransform);
+export const projectAndPageFrontmatterSchema: ZodType<
+  ProjectAndPageFrontmatter
+> = projectAndPageFrontmatterSchemaBase.superRefine(projectAndPageTransform);
 
 export const projectFrontmatterSchemaBase: ZodType<ProjectFrontmatter> =
   projectAndPageFrontmatterSchemaBase
@@ -503,7 +508,7 @@ export const projectFrontmatterSchemaBase: ZodType<ProjectFrontmatter> =
         .describe("Thebe frontmatter for the project"),
     })
     .describe(
-      "Project frontmatter. This is a superset of site frontmatter, and should be used in all projects."
+      "Project frontmatter. This is a superset of site frontmatter, and should be used in all projects.",
     );
 
 export const projectFrontmatterSchema: ZodType<ProjectFrontmatter> =

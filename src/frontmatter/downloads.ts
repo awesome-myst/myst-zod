@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z, type ZodType, RefinementCtx } from "zod";
+import { RefinementCtx, z, type ZodType } from "zod";
 
 import { type ExportFormats, exportFormatsSchema } from "./exports.ts";
 
@@ -15,7 +15,7 @@ export type Download = {
 
 const downloadTransform = (
   data: string | Record<string, unknown>,
-  ctx: RefinementCtx
+  ctx: RefinementCtx,
 ) => {
   if (typeof data === "string") {
     return { url: data };

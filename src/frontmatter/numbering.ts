@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z, type ZodType, RefinementCtx } from "zod";
+import { RefinementCtx, z, type ZodType } from "zod";
 
 export type NumberingItem = {
   enabled?: boolean;
@@ -109,6 +109,6 @@ export const numberingSchema: ZodType<Numbering> = z
       heading_4: numberingItemSchema.optional().describe("Heading 4"),
       heading_5: numberingItemSchema.optional().describe("Heading 5"),
       heading_6: numberingItemSchema.optional().describe("Heading 6"),
-    })
+    }),
   )
   .describe("Numbering configuration for the notebook");

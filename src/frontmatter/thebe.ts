@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z, type ZodType, RefinementCtx } from "zod";
+import { RefinementCtx, z, type ZodType } from "zod";
 
 import { defined } from "simple-validators";
 
@@ -38,7 +38,6 @@ export type ExpandedThebeFrontmatter =
   & {
     binder?: BinderHubOptions;
   };
-
 
 export const wellKnownRepoProvidersSchema: ZodType<WellKnownRepoProviders> = z
   .enum([
@@ -120,7 +119,7 @@ export const thebeFrontmatterObjectSchema: ZodType<ThebeFrontmatterObject> = z
 
 const thebeTransform = (
   data: string | boolean | Record<string, unknown>,
-  ctx: RefinementCtx
+  ctx: RefinementCtx,
 ) => {
   if (typeof data === "boolean" || typeof data === "string") {
     if (data === true) {
@@ -132,29 +131,35 @@ const thebeTransform = (
     } else {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: `Thebe frontmatter must be a boolean, an object, "lite" or "binder", not a string: ${data}`,
+        message:
+          `Thebe frontmatter must be a boolean, an object, "lite" or "binder", not a string: ${data}`,
       });
       return z.NEVER;
     }
   }
 
-  if ('binder' in data && data.binder === true) {
+  if ("binder" in data && data.binder === true) {
     data.binder = { url: "https://mybinder.org" };
   } else if (typeof data.binder === "string") {
     data.binder = { url: data.binder };
   }
 
-  if ('binder' in data && typeof data.binder === 'object' && data.binder !== null) {
+  if (
+    "binder" in data && typeof data.binder === "object" && data.binder !== null
+  ) {
     const binder = data.binder as BinderHubOptions;
     if (binder.provider === "custom" && binder.repo === undefined) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: `BinderHub options must include a repo when using a custom provider`,
+        message:
+          `BinderHub options must include a repo when using a custom provider`,
       });
     }
   }
 
-  if ('server' in data && typeof data.server === 'object' && data.server !== null) {
+  if (
+    "server" in data && typeof data.server === "object" && data.server !== null
+  ) {
     const server = data.server as JupyterServerOptions;
   }
 

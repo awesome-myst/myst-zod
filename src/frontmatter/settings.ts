@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z, type ZodType, RefinementCtx } from "zod";
+import { RefinementCtx, z, type ZodType } from "zod";
 
 export type OutputRemovalOptions =
   | "show"
@@ -35,7 +35,7 @@ export const outputRemovalOptionsSchema: ZodType<OutputRemovalOptions> = z
 
 const mystToTexSettingsPreprocessor = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx
+  ctx: RefinementCtx,
 ): Record<string, unknown> => {
   if (data.code_style) {
     if (data.codeStyle) {
@@ -67,12 +67,12 @@ export const mystToTexSettingsSchema: ZodType<MystToTexSettings> = z.preprocess(
         .optional()
         .describe("Beamer option for myst to tex conversion"),
     })
-    .describe("Myst to tex settings")
+    .describe("Myst to tex settings"),
 );
 
 const projectSettingsPreprocessor = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx
+  ctx: RefinementCtx,
 ): Record<string, unknown> => {
   for (const [alias, key] of Object.entries(PROJECT_SETTINGS_ALIAS)) {
     if (alias in data) {
@@ -109,5 +109,5 @@ export const projectSettingsSchema: ZodType<ProjectSettings> = z.preprocess(
         .optional()
         .describe("Myst to tex settings"),
     })
-    .describe("Project settings")
+    .describe("Project settings"),
 );

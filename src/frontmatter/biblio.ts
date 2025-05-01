@@ -9,21 +9,27 @@ export type PublicationMeta = {
   subject?: string;
 };
 
-const publicationMetaTransform = (data: string | number | Record<string, unknown>) => {
+const publicationMetaTransform = (
+  data: string | number | Record<string, unknown>,
+) => {
   if (typeof data === "number" || typeof data == "string") {
-    return { number: data }
+    return { number: data };
   }
 
-  return data
-}
+  return data;
+};
 
 // @ts-expect-error TS2322
-export const publicationMetaSchema: ZodType<PublicationMeta> = z.union([z.string(), z.number(), z
-  .object({
-    number: z.union([z.string(), z.number()]).optional(),
-    doi: z.string().optional(),
-    title: z.string().optional(),
-    subject: z.string().optional(),
-  })])
+export const publicationMetaSchema: ZodType<PublicationMeta> = z.union([
+  z.string(),
+  z.number(),
+  z
+    .object({
+      number: z.union([z.string(), z.number()]).optional(),
+      doi: z.string().optional(),
+      title: z.string().optional(),
+      subject: z.string().optional(),
+    }),
+])
   .transform(publicationMetaTransform)
   .describe("Publication meta frontmatter");

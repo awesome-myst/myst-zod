@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z, type ZodType, RefinementCtx } from "zod";
+import { RefinementCtx, z, type ZodType } from "zod";
 
 import { orcid } from "orcid";
 
@@ -8,8 +8,8 @@ import { orcid } from "orcid";
 import { credit, type CreditRole } from "credit-roles";
 import {
   type Affiliation,
-  affiliationSchemaBase,
   affiliationSchema,
+  affiliationSchemaBase,
   affiliationTransform,
 } from "./affiliations.ts";
 
@@ -106,7 +106,7 @@ const orcidTransform = (data: string, ctx: RefinementCtx) => {
 
 const personTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx
+  ctx: RefinementCtx,
 ): Record<string, unknown> => {
   if (data.roles) {
     if (typeof data.roles === "string") {
@@ -149,12 +149,13 @@ export const personSchemaBase: ZodType<Person> = z
   })
   .describe("Person frontmatter");
 
-export const personSchema: ZodType<Person> =
-  personSchemaBase.superRefine(personTransform);
+export const personSchema: ZodType<Person> = personSchemaBase.superRefine(
+  personTransform,
+);
 
 const contributorTransform = (
   data: string | Record<string, unknown>,
-  ctx: RefinementCtx
+  ctx: RefinementCtx,
 ) => {
   if (typeof data === "string") {
     return { name: data };
@@ -174,7 +175,7 @@ const contributorTransform = (
 
 const contributorPreprocessor = (
   data: string | Record<string, unknown>,
-  ctx: RefinementCtx
+  ctx: RefinementCtx,
 ) => {
   if (typeof data === "object" && typeof data.collaborations !== "undefined") {
     ctx.addIssue({
@@ -197,5 +198,5 @@ export const contributorSchema: ZodType<Contributor> = z.preprocess(
       // @ts-expect-error TS2339
       affiliationSchemaBase.merge(personSchemaBase),
     ])
-    .superRefine(contributorTransform)
+    .superRefine(contributorTransform),
 );

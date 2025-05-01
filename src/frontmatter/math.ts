@@ -9,7 +9,7 @@ export type MathMacro = {
 };
 
 const mathMacroTransform = (
-  data: string | Record<string, string>
+  data: string | Record<string, string>,
 ): Record<string, string> => {
   if (typeof data === "string") {
     return { macro: data };

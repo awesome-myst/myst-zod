@@ -1,12 +1,12 @@
 import type { ValidationOptions } from "simple-validators";
 import {
-  validationWarning,
   defined,
   incrementOptions,
+  validateBoolean,
   validateObjectKeys,
   validateString,
   validateUrl,
-  validateBoolean,
+  validationWarning,
 } from "simple-validators";
 import spdxCorrect from "spdx-correct";
 import LICENSES from "./licenses.ts";
@@ -23,9 +23,10 @@ function correctLicense(license?: string): string | undefined {
 function createURL(id: string, cc?: boolean, osi?: boolean): string {
   if (cc) {
     const match =
-      /^([CBYSAND0ZEROPDM-]+)(?:(?:-)([0-9].[0-9]))?(?:(?:-)([A-Z]{2,3}))?$/.exec(
-        id
-      );
+      /^([CBYSAND0ZEROPDM-]+)(?:(?:-)([0-9].[0-9]))?(?:(?:-)([A-Z]{2,3}))?$/
+        .exec(
+          id,
+        );
     if (!match) {
       throw new Error("Creative Commons license not found");
     }
@@ -70,10 +71,12 @@ function createURL(id: string, cc?: boolean, osi?: boolean): string {
     return `https://creativecommons.org/licenses${link}`;
   }
   if (osi) {
-    return `https://opensource.org/licenses/${id.replace(
-      /(-or-later)|(-only)$/,
-      ""
-    )}`;
+    return `https://opensource.org/licenses/${
+      id.replace(
+        /(-or-later)|(-only)$/,
+        "",
+      )
+    }`;
   }
   return `https://spdx.org/licenses/${id}`;
 }
@@ -97,18 +100,18 @@ const ID_LICENSE_LOOKUP: Record<string, License> = Object.fromEntries(
       key,
       { id: key, ...value, url: createURL(key, value.CC, value.osi) },
     ];
-  })
+  }),
 );
 
 const URL_ID_LOOKUP: Record<string, string> = Object.fromEntries(
   Object.values(ID_LICENSE_LOOKUP)
     .filter(
       (value): value is License & { url: string; id: string } =>
-        !!value.url && !!value.id
+        !!value.url && !!value.id,
     )
     .map((value) => {
       return [cleanUrl(value.url), value.id];
-    })
+    }),
 );
 
 /**
@@ -116,7 +119,7 @@ const URL_ID_LOOKUP: Record<string, string> = Object.fromEntries(
  */
 export function validateLicense(
   input: any,
-  opts: ValidationOptions
+  opts: ValidationOptions,
 ): License | undefined {
   if (typeof input === "string") {
     const value = validateString(input, opts);
@@ -143,7 +146,7 @@ export function validateLicense(
       optional: ["id", "name", "url", "note", "free", "CC", "osi"],
       alias: { cc: "CC" },
     },
-    opts
+    opts,
   );
   if (!value) return undefined;
   const output: License = {};
@@ -153,12 +156,12 @@ export function validateLicense(
     if (!idSpdx) {
       validationWarning(
         `unknown license ID "${id}" - using a SPDX license ID is recommended, see https://spdx.org/licenses/`,
-        opts
+        opts,
       );
     } else if (idSpdx !== id) {
       validationWarning(
         `The SPDX ID for the license is "${idSpdx}". Corrected from "${id}".`,
-        opts
+        opts,
       );
     }
     output.id = idSpdx ?? id;
@@ -174,7 +177,7 @@ export function validateLicense(
     if (!output.id) {
       validationWarning(
         `no license ID - using a SPDX license ID is recommended, see https://spdx.org/licenses/`,
-        opts
+        opts,
       );
     }
   }
@@ -185,7 +188,7 @@ export function validateLicense(
     if (url && expected?.url && cleanUrl(url) !== cleanUrl(expected.url)) {
       validationWarning(
         `incorrect URL for SPDX license ${expected.id} - "${url}"`,
-        urlOpts
+        urlOpts,
       );
     }
     output.url = url;
@@ -198,7 +201,7 @@ export function validateLicense(
     if (name && expected?.name && name !== expected.name) {
       validationWarning(
         `incorrect name for SPDX license ${expected.id} - "${name}"`,
-        nameOpts
+        nameOpts,
       );
     }
     output.name = name;
@@ -214,7 +217,7 @@ export function validateLicense(
     if (free && !expected?.free) {
       validationWarning(
         'only SPDX licenses may specify they are "free" as listed by the FSF',
-        freeOpts
+        freeOpts,
       );
     } else {
       output.free = free;
@@ -234,7 +237,7 @@ export function validateLicense(
     ) {
       validationWarning(
         'only licenses that link to creativecommons.org may specify that they are "CC"',
-        ccOpts
+        ccOpts,
       );
     } else {
       output.CC = cc;
@@ -248,7 +251,7 @@ export function validateLicense(
     if (osi && !expected?.osi) {
       validationWarning(
         'only SPDX licenses may specify they are "OSI approved"',
-        osiOpts
+        osiOpts,
       );
     } else {
       output.osi = osi;
@@ -268,7 +271,7 @@ export function validateLicense(
  */
 export function validateLicenses(
   input: any,
-  opts: ValidationOptions
+  opts: ValidationOptions,
 ): Licenses | undefined {
   let contentOpts: ValidationOptions;
   if (
@@ -284,7 +287,7 @@ export function validateLicenses(
   const value = validateObjectKeys(
     input,
     { optional: ["content", "code"] },
-    opts
+    opts,
   );
   if (value === undefined) return undefined;
   const output: Licenses = {};
@@ -333,13 +336,15 @@ function removeExpectedKeys(license: License, expected: License): License {
 
 function objectsEqual(
   a?: Record<string, any> | string,
-  b?: Record<string, any> | string
+  b?: Record<string, any> | string,
 ) {
   if (a == null || b == null) return false;
-  const aAsString =
-    typeof a === "string" ? a : JSON.stringify(Object.entries(a).sort());
-  const bAsString =
-    typeof b === "string" ? b : JSON.stringify(Object.entries(b).sort());
+  const aAsString = typeof a === "string"
+    ? a
+    : JSON.stringify(Object.entries(a).sort());
+  const bAsString = typeof b === "string"
+    ? b
+    : JSON.stringify(Object.entries(b).sort());
   return aAsString === bAsString;
 }
 
@@ -347,7 +352,7 @@ function objectsEqual(
  * Simplify license object as much as possible without losing any custom fields
  */
 export function simplifyLicenses(
-  licenses: Licenses
+  licenses: Licenses,
 ): string | { content?: string | License; code?: string | License } {
   const { content, code } = licenses;
   const simplified: { content?: string | License; code?: string | License } =
@@ -356,7 +361,7 @@ export function simplifyLicenses(
     if (content.id) {
       simplified.content = removeExpectedKeys(
         content,
-        ID_LICENSE_LOOKUP[content.id] ?? {}
+        ID_LICENSE_LOOKUP[content.id] ?? {},
       );
     } else {
       simplified.content = { ...content };
@@ -366,7 +371,7 @@ export function simplifyLicenses(
     if (code.id) {
       simplified.code = removeExpectedKeys(
         code,
-        ID_LICENSE_LOOKUP[code.id] ?? {}
+        ID_LICENSE_LOOKUP[code.id] ?? {},
       );
     } else {
       simplified.code = { ...code };

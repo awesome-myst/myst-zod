@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z, type ZodType, RefinementCtx } from "zod";
+import { RefinementCtx, z, type ZodType } from "zod";
 
 import spdxCorrect from "spdx-correct";
 
@@ -25,9 +25,10 @@ export type Licenses = {
 function createURL(id: string, cc?: boolean, osi?: boolean): string {
   if (cc) {
     const match =
-      /^([CBYSAND0ZEROPDM-]+)(?:(?:-)([0-9].[0-9]))?(?:(?:-)([A-Z]{2,3}))?$/.exec(
-        id
-      );
+      /^([CBYSAND0ZEROPDM-]+)(?:(?:-)([0-9].[0-9]))?(?:(?:-)([A-Z]{2,3}))?$/
+        .exec(
+          id,
+        );
     if (!match) {
       throw new Error("Creative Commons license not found");
     }
@@ -72,10 +73,12 @@ function createURL(id: string, cc?: boolean, osi?: boolean): string {
     return `https://creativecommons.org/licenses${link}`;
   }
   if (osi) {
-    return `https://opensource.org/licenses/${id.replace(
-      /(-or-later)|(-only)$/,
-      ""
-    )}`;
+    return `https://opensource.org/licenses/${
+      id.replace(
+        /(-or-later)|(-only)$/,
+        "",
+      )
+    }`;
   }
   return `https://spdx.org/licenses/${id}`;
 }
@@ -107,18 +110,18 @@ const ID_LICENSE_LOOKUP: Record<string, License> = Object.fromEntries(
       key,
       { id: key, ...value, url: createURL(key, value.CC, value.osi) },
     ];
-  })
+  }),
 );
 
 const URL_ID_LOOKUP: Record<string, string> = Object.fromEntries(
   Object.values(ID_LICENSE_LOOKUP)
     .filter(
       (value): value is License & { url: string; id: string } =>
-        !!value.url && !!value.id
+        !!value.url && !!value.id,
     )
     .map((value) => {
       return [cleanUrl(value.url), value.id];
-    })
+    }),
 );
 
 const licensePreprocessor = (data: unknown, ctx: RefinementCtx) => {
@@ -166,7 +169,7 @@ export const licenseSchema: ZodType<License> = z.preprocess(
       CC: z.boolean().optional(),
       osi: z.boolean().optional(),
     })
-    .describe("License information")
+    .describe("License information"),
 );
 
 export const licensesSchema: ZodType<Licenses> = z

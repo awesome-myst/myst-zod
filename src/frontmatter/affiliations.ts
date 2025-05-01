@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z, type ZodType, RefinementCtx } from "zod";
+import { RefinementCtx, z, type ZodType } from "zod";
 
 import { doi } from "doi-utils";
 
@@ -37,7 +37,7 @@ export type Affiliation = {
 
 export const affiliationTransform = (
   data: string | Record<string, unknown>,
-  ctx: RefinementCtx
+  ctx: RefinementCtx,
 ): Record<string, unknown> => {
   if (typeof data === "string") {
     return { name: data };

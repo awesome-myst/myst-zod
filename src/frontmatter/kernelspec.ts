@@ -14,7 +14,9 @@ export type KernelSpec = {
 export const kernelSpecSchema: ZodType<KernelSpec> = z
   .object({
     name: z.string().default("python3").describe("Name of the kernel"),
-    display_name: z.string().default("Python 3 Kernel").describe("Display name of the kernel"),
+    display_name: z.string().default("Python 3 Kernel").describe(
+      "Display name of the kernel",
+    ),
     language: z
       .string()
       .optional()

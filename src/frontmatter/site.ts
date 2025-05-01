@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z, type ZodType, RefinementCtx } from "zod";
+import { RefinementCtx, z, type ZodType } from "zod";
 
 import { type Affiliation, affiliationSchema } from "./affiliations.ts";
 import { type Contributor, contributorSchema } from "./contributors.ts";
@@ -117,7 +117,7 @@ export type SiteFrontmatter = {
 
 const aliasTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx
+  ctx: RefinementCtx,
 ): Record<string, unknown> => {
   for (const [alias, key] of Object.entries(FRONTMATTER_ALIASES)) {
     if (alias in data) {
@@ -217,7 +217,7 @@ const partsTransform = (data: SiteFrontmatter, ctx: RefinementCtx) => {
 
 const githubTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx
+  ctx: RefinementCtx,
 ): Record<string, unknown> => {
   if (defined(data.github)) {
     if (typeof data.github === "string") {
@@ -243,7 +243,7 @@ const githubTransform = (
 };
 
 const fundingTransform = (
-  data: Record<string, unknown>
+  data: Record<string, unknown>,
 ): Record<string, unknown> => {
   if (data.funding && !Array.isArray(data.funding)) {
     data.funding = [data.funding];
@@ -253,7 +253,7 @@ const fundingTransform = (
 
 const optionsTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx
+  ctx: RefinementCtx,
 ): Record<string, unknown> => {
   if (data.options) {
     const disallowedKeys = [
@@ -281,7 +281,7 @@ const optionsTransform = (
 
 export const siteTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx
+  ctx: RefinementCtx,
 ) => {
   const aliasResult = aliasTransform(data, ctx);
   const partsResult = partsTransform(aliasResult as SiteFrontmatter, ctx);
