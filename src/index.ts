@@ -62,3 +62,5 @@ export * from "./phrasing-content/underline.ts";
 export * from "./toc.ts";
 
 export * from "./frontmatter/index.ts";
+
+export * from "./myst-xref.ts";
