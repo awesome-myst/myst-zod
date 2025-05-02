@@ -57,6 +57,7 @@
         <option value="ast">AST Schema (rootSchema)</option>
         <option value="pageFrontmatter">Page Frontmatter Schema</option>
         <option value="projectFrontmatter">Project Frontmatter Schema</option>
+        <option value="xref">Cross Reference Schema (xrefSchema)</option>
       </select>
       <button id="validateBtn">Validate</button>
     </div>
@@ -68,7 +69,8 @@
         pageFrontmatterSchema,
         projectFrontmatterSchema,
         rootSchema,
-      } from "https://cdn.jsdelivr.net/npm/@awesome-myst/myst-zod@0.2.2/+esm";
+        xrefSchema,
+      } from "https://cdn.jsdelivr.net/npm/@awesome-myst/myst-zod@0.3.0/+esm";
       import yaml from "https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/+esm";
 
       const fileInput = document.getElementById("fileInput");
@@ -114,6 +116,10 @@
           case "projectFrontmatter":
             schema = projectFrontmatterSchema;
             schemaName = "Project Frontmatter Schema";
+            break;
+          case "xref":
+            schema = xrefSchema;
+            schemaName = "Cross Reference Schema";
             break;
           default:
             schema = rootSchema;
