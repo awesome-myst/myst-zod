@@ -94,7 +94,7 @@ const nameTransform = (data: string | Name, ctx: RefinementCtx): Name => {
   return data;
 };
 
-// @ts-expect-error TS2322
+// @ts-ignore: // inconsistent TS2322
 export const nameSchema: ZodType<Name> = z
   .union([
     z.string(),
@@ -142,7 +142,7 @@ const personTransform = (
   return data;
 };
 
-// @ts-expect-error TS2322
+// @ts-ignore: // inconsistent TS2322
 export const personSchemaBase: ZodType<Person> = z
   .object({
     id: z.string().optional(),
@@ -204,7 +204,7 @@ const contributorPreprocessor = (
   return data;
 };
 
-// @ts-expect-error TS2339
+// @ts-ignore: // inconsistent TS2322
 export const contributorSchema: ZodType<Contributor> = z.preprocess(
   // @ts-expect-error TS2322
   contributorPreprocessor,

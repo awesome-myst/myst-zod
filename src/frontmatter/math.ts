@@ -17,7 +17,7 @@ const mathMacroTransform = (
   return data;
 };
 
-// @ts-expect-error TS2339
+// @ts-ignore: // inconsistent TS2322
 export const mathMacroSchema: ZodType<MathMacro> = z
   .union([
     z.string(),

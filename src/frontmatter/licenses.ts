@@ -159,7 +159,7 @@ const licensePreprocessor = (
   return data;
 };
 
-// @ts-expect-error TS2322
+// @ts-ignore: // inconsistent TS2322
 export const licenseSchema: ZodType<License> = z.preprocess(
   // @ts-expect-error TS2339
   licensePreprocessor,

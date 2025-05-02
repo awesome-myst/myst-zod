@@ -51,7 +51,7 @@ const numberingItemTransform = (data: unknown, ctx: RefinementCtx) => {
  * - An object with any of enabled/start/template - specifying the above types
  *   will coerce to this object
  */
-// @ts-expect-error TS2339
+// @ts-ignore: // inconsistent TS2322
 export const numberingItemSchema: ZodType<NumberingItem> = z
   .union([
     z.boolean().transform((data) => ({ enabled: data })),
@@ -80,7 +80,7 @@ export const numberingItemSchema: ZodType<NumberingItem> = z
   ])
   .describe("Numbering item");
 
-// @ts-expect-error TS2339
+// @ts-ignore: // inconsistent TS2322
 export const numberingSchema: ZodType<Numbering> = z
   .preprocess(
     (data) => {

@@ -57,7 +57,7 @@ const downloadTransform = (
   return data;
 };
 
-// @ts-expect-error TS2339
+// @ts-ignore: // inconsistent TS2322
 export const downloadSchema: ZodType<Download> = z
   .union([
     z.string(),

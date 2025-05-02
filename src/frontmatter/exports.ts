@@ -65,7 +65,7 @@ const exportFormatPreprocessor = (data: unknown) => {
   return data;
 };
 
-// @ts-expect-error TS2339
+// @ts-ignore: // inconsistent TS2322
 export const exportFormatsSchema: ZodType<ExportFormats> = z
   .preprocess(exportFormatPreprocessor, z.nativeEnum(ExportFormats))
   .describe("export formats");
@@ -88,7 +88,7 @@ const exportArticleTransform = (
   return data;
 };
 
-// @ts-expect-error TS2322
+// @ts-ignore: // inconsistent TS2322
 export const exportArticleSchema: ZodType<ExportArticle> = z
   .union([
     z.string(),
@@ -233,7 +233,7 @@ const exportTransform = (
   return data;
 };
 
-// @ts-expect-error TS2322
+// @ts-ignore: // inconsistent TS2322
 export const exportSchema: ZodType<Export> = z
   .union([
     z.string(),
