@@ -305,7 +305,7 @@ const keywordsTransform = (data: string | string[]) => {
 };
 
 // Note: we change the type of `parts` to be a record of string arrays
-// @ts-expect-error TS2339
+// @ts-ignore: // inconsistent TS2322
 export const siteFrontmatterSchemaBase: ZodType<SiteFrontmatter> = z
   .object({
     title: z.string().optional().describe("Title of the project"),

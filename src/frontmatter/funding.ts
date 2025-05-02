@@ -72,7 +72,7 @@ const awardTransform = (
   return data;
 };
 
-// @ts-expect-error TS2322
+// @ts-ignore: // inconsistent TS2322
 export const awardSchema: ZodType<Award> = z
   .object({
     id: z.string().optional().describe("identifier for the award"),
@@ -121,7 +121,7 @@ const fundingTransform = (
   return data;
 };
 
-// @ts-expect-error TS2339
+// @ts-ignore: // inconsistent TS2322
 export const fundingSchema: ZodType<Funding> = z
   .union([
     z.string(),

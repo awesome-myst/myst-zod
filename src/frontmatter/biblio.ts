@@ -19,17 +19,17 @@ const publicationMetaTransform = (
   return data;
 };
 
-// @ts-expect-error TS2322
-export const publicationMetaSchema: ZodType<PublicationMeta> = z.union([
-  z.string(),
-  z.number(),
-  z
-    .object({
+// @ts-ignore: // inconsistent TS2322
+export const publicationMetaSchema: ZodType<PublicationMeta> = z
+  .union([
+    z.string(),
+    z.number(),
+    z.object({
       number: z.union([z.string(), z.number()]).optional(),
       doi: z.string().optional(),
       title: z.string().optional(),
       subject: z.string().optional(),
     }),
-])
+  ])
   .transform(publicationMetaTransform)
   .describe("Publication meta frontmatter");

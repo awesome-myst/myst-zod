@@ -39,7 +39,7 @@ const externalReferenceTransform = (
   return data;
 };
 
-// @ts-expect-error TS2322
+// @ts-ignore: // inconsistent TS2322
 export const externalReferenceSchema: ZodType<ExternalReference> = z
   .union([
     z.string(),

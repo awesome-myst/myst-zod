@@ -79,7 +79,7 @@ export const affiliationTransform = (
   return data;
 };
 
-// @ts-expect-error TS2339
+// @ts-ignore: // inconsistent TS2322
 export const affiliationSchemaBase: ZodType<Affiliation> = z
   .object({
     id: z.string().optional(),
@@ -111,7 +111,7 @@ export const affiliationSchemaBase: ZodType<Affiliation> = z
   })
   .describe("Affiliation frontmatter");
 
-// @ts-expect-error TS2339
+// @ts-ignore: // inconsistent TS2322
 export const affiliationSchema: ZodType<Affiliation> = z.union([
   z.string(),
   affiliationSchemaBase.superRefine(affiliationTransform),
