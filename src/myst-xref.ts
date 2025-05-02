@@ -5,14 +5,29 @@ import { z, type ZodType } from "zod";
 export type XRefReference = {
   identifier?: string;
   html_id?: string;
-  kind: "page" | "heading" | "figure" | "table" | "equation";
+  // kind:
+  //   | "page"
+  //   | "heading"
+  //   | "figure"
+  //   | "table"
+  //   | "equation"
+  //   | "tabSet"
+  //   | "tabItem"
+  //   | "blockquote"
+  //   | "block"
+  //   | "code"
+  //   | "definitionList"
+  //   | "myst"
+  //   | "image"
+  //   ...
+  kind: string;
   data: string;
   url: string;
   implicit?: boolean;
 };
 export type XRef = {
   version: string;
-  myst: string;
+  myst?: string;
   references: XRefReference[];
 };
 
@@ -31,7 +46,7 @@ export const xrefReferenceSchema: ZodType<XRefReference> = z
       .describe("HTML identifier, stricter than the regular identifier"),
 
     kind: z
-      .enum(["page", "heading", "figure", "table", "equation"])
+      .string()
       .describe("Kind of reference (e.g., page, heading, figure, table)"),
 
     data: z.string().describe("Relative URL path to the reference data"),
@@ -61,7 +76,10 @@ export const xrefSchema: ZodType<XRef> = z
   .object({
     version: z.string().describe("Version of the myst.xref.json schema"),
 
-    myst: z.string().describe("Version of mystmd CLI that created this data"),
+    myst: z
+      .string()
+      .optional()
+      .describe("Version of mystmd CLI that created this data"),
 
     references: z
       .array(xrefReferenceSchema)
