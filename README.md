@@ -57,7 +57,11 @@ console.log(result);
 An
 [example validator application](https://awesome-myst.github.io/myst-zod/examples/validator/)
 is available
-[in the `examples` directory](https://github.com/awesome-myst/myst-zod/blob/aaf48d575310e07d1c8795d935af3836f4d578be/examples/validator/index.html#L56-L62).
+[in the `examples` directory](https://github.com/awesome-myst/myst-zod/blob/aaf48d575310e07d1c8795d935af3836f4d578be/examples/validator/index.html#L56-L62). The example allows for selection from three commonly-used MyST schemas:
+
+1. `rootSchema` - the root schema for MyST Markdown AST.
+2. `pageFrontmatterSchema` - the frontmatter schema for a MyST Markdown article or documentation page.
+3. `projectFrontmatterSchema` - the frontmatter schema for a MyST book or project documentation.
 
 See also [awesome-myst] for more information about the MyST Markdown format.
 
