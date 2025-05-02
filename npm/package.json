@@ -1,6 +1,6 @@
 {
   "name": "@awesome-myst/myst-zod",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Zod schema for MyST Markdown",
   "repository": {
     "type": "git",
