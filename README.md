@@ -60,11 +60,16 @@ is available
 [in the `examples` directory](https://github.com/awesome-myst/myst-zod/blob/aaf48d575310e07d1c8795d935af3836f4d578be/examples/validator/index.html#L56-L62).
 The example allows for selection from three commonly-used MyST schemas:
 
-1. `rootSchema` - the root schema for MyST Markdown AST.
-2. `pageFrontmatterSchema` - the frontmatter schema for a MyST Markdown article
-   or documentation page.
+1. `rootSchema` - the root schema for
+   [MyST Markdown AST](https://mystmd.org/spec).
+2. `pageFrontmatterSchema` - the
+   [frontmatter](https://mystmd.org/guide/frontmatter) schema for a MyST
+   Markdown article or documentation page.
 3. `projectFrontmatterSchema` - the frontmatter schema for a MyST book or
    project documentation.
+4. `xrefSchema` - the
+   [cross-reference schema](https://mystmd.org/guide/website-metadata#myst-xref-json)
+   for a MyST Markdown project.
 
 See also [awesome-myst] for more information about the MyST Markdown format.
 
