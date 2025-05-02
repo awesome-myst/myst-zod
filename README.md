@@ -76,7 +76,7 @@ Contributions are welcome!
 To run the tests, use the following command:
 
 ```shell
-deno test -R
+deno test -ER
 ```
 
 [awesome-myst]: https://github.com/awesome-myst/awesome-myst

@@ -28,7 +28,7 @@ jobs:
         run: deno install
 
       - name: Run tests
-        run: deno test -R
+        run: deno test -ER
 
       - name: Lint code
         run: deno lint
