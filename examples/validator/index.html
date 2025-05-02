@@ -23,6 +23,16 @@
         padding: 0.5em;
         overflow: auto;
       }
+      .controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      .schema-select {
+        padding: 5px;
+        border-radius: 4px;
+      }
     </style>
   </head>
   <body>
@@ -41,17 +51,26 @@
     ></textarea>
     <br />
     <br />
-    <button id="validateBtn">Validate</button>
+    <div class="controls">
+      <label for="schemaSelect">Validate using:</label>
+      <select id="schemaSelect" class="schema-select">
+        <option value="ast">AST Schema (rootSchema)</option>
+        <option value="pageFrontmatter">Page Frontmatter Schema</option>
+        <option value="projectFrontmatter">Project Frontmatter Schema</option>
+      </select>
+      <button id="validateBtn">Validate</button>
+    </div>
     <hr />
     <div id="output"></div>
 
     <script type="module">
-      import { rootSchema } from "https://cdn.jsdelivr.net/npm/@awesome-myst/myst-zod@0.1.5/+esm";
+      import { rootSchema, projectFrontmatterSchema, pageFrontmatterSchema } from "https://cdn.jsdelivr.net/npm/@awesome-myst/myst-zod@0.2.2/+esm";
       import yaml from "https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/+esm";
 
       const fileInput = document.getElementById("fileInput");
       const textInput = document.getElementById("textInput");
       const validateBtn = document.getElementById("validateBtn");
+      const schemaSelect = document.getElementById("schemaSelect");
       const output = document.getElementById("output");
 
       fileInput.addEventListener("change", async (e) => {
@@ -64,6 +83,8 @@
       validateBtn.addEventListener("click", () => {
         output.innerHTML = "";
         let doc;
+
+        // Parse the input as JSON or YAML
         try {
           doc = JSON.parse(textInput.value);
         } catch (jsonErr) {
@@ -76,13 +97,33 @@
           }
         }
 
-        const result = rootSchema.safeParse(doc);
+        // Select the appropriate schema based on dropdown value
+        const schemaType = schemaSelect.value;
+        let schema;
+        let schemaName;
+
+        switch (schemaType) {
+          case "pageFrontmatter":
+            schema = pageFrontmatterSchema;
+            schemaName = "Page Frontmatter Schema";
+            break;
+          case "projectFrontmatter":
+            schema = projectFrontmatterSchema;
+            schemaName = "Project Frontmatter Schema";
+            break;
+          default:
+            schema = rootSchema;
+            schemaName = "AST Schema";
+        }
+
+        // Validate with the selected schema
+        const result = schema.safeParse(doc);
         if (result.success) {
-          output.innerHTML = '<p class="success">✔ Valid!</p>' +
+          output.innerHTML = `<p class="success">✔ Valid according to ${schemaName}!</p>` +
             "<pre>" + JSON.stringify(result.data, null, 2) + "</pre>";
         } else {
           output.innerHTML =
-            '<p class="error">❌ Validation errors:</p>' +
+            `<p class="error">❌ Validation errors (${schemaName}):</p>` +
             "<pre>" + JSON.stringify(result.error.format(), null, 2) +
             "</pre>";
         }
