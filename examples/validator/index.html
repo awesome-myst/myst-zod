@@ -64,7 +64,11 @@
     <div id="output"></div>
 
     <script type="module">
-      import { rootSchema, projectFrontmatterSchema, pageFrontmatterSchema } from "https://cdn.jsdelivr.net/npm/@awesome-myst/myst-zod@0.2.2/+esm";
+      import {
+        pageFrontmatterSchema,
+        projectFrontmatterSchema,
+        rootSchema,
+      } from "https://cdn.jsdelivr.net/npm/@awesome-myst/myst-zod@0.2.2/+esm";
       import yaml from "https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/+esm";
 
       const fileInput = document.getElementById("fileInput");
@@ -119,7 +123,8 @@
         // Validate with the selected schema
         const result = schema.safeParse(doc);
         if (result.success) {
-          output.innerHTML = `<p class="success">✔ Valid according to ${schemaName}!</p>` +
+          output.innerHTML =
+            `<p class="success">✔ Valid according to ${schemaName}!</p>` +
             "<pre>" + JSON.stringify(result.data, null, 2) + "</pre>";
         } else {
           output.innerHTML =
