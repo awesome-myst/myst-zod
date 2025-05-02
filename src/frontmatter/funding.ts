@@ -35,7 +35,7 @@ export type Funding = {
  */
 const awardTransform = (
   data: Record<string, unknown>,
-  ctx: z.RefinementCtx,
+  ctx: z.RefinementCtx
 ): Record<string, unknown> => {
   for (const [alias, key] of Object.entries(AWARD_ALIASES)) {
     if (alias in data) {
@@ -50,19 +50,18 @@ const awardTransform = (
     }
   }
 
-  if (
-    Array.isArray(data.recipients) && data.recipients.length > 0 &&
-    typeof data.recipients[0] === "object" && data.recipients[0] !== null
-  ) {
-    const recipientObj = data.recipients[0] as Record<string, unknown>;
-    if (typeof recipientObj.name === "string") {
-      data.recipients = [recipientObj.name];
-    }
+  if (typeof data.recipients === "string") {
+    data.recipients = [data.recipients];
+  }
+  if (typeof data.investigators === "string") {
+    data.investigators = [data.investigators];
   }
 
   if (
-    Array.isArray(data.investigators) && data.investigators.length > 0 &&
-    typeof data.investigators[0] === "object" && data.investigators[0] !== null
+    Array.isArray(data.investigators) &&
+    data.investigators.length > 0 &&
+    typeof data.investigators[0] === "object" &&
+    data.investigators[0] !== null
   ) {
     const investigatorsObj = data.investigators[0] as Record<string, unknown>;
     if (typeof investigatorsObj.name === "string") {
@@ -80,16 +79,12 @@ export const awardSchema: ZodType<Award> = z
     name: z.string().optional().describe("name of the award"),
     description: z.string().optional().describe("description of the award"),
     sources: z.array(z.string()).optional().describe("sources of the award"),
-    recipients: z.union([
-      z.array(z.record(z.string(), z.string())),
-      z.array(z.string()),
-    ])
+    recipients: z
+      .union([z.array(z.record(z.string(), z.string())), z.array(z.string())])
       .optional()
       .describe("recipients of the award"),
-    investigators: z.union([
-      z.array(z.record(z.string(), z.string())),
-      z.array(z.string()),
-    ])
+    investigators: z
+      .union([z.array(z.record(z.string(), z.string())), z.array(z.string())])
       .optional()
       .describe("investigators of the award"),
   })
@@ -98,7 +93,7 @@ export const awardSchema: ZodType<Award> = z
 
 const fundingTransform = (
   data: string | Record<string, unknown>,
-  ctx: z.RefinementCtx,
+  ctx: z.RefinementCtx
 ): Record<string, unknown> => {
   if (typeof data === "string") {
     return { statement: data };
@@ -133,9 +128,10 @@ export const fundingSchema: ZodType<Funding> = z
     z.object({
       statement: z.string().optional().describe("statement of the funding"),
       open_access: z.string().optional().describe("open access statement"),
-      awards: z.union([awardSchema, z.array(awardSchema)]).optional().describe(
-        "awards of the funding",
-      ),
+      awards: z
+        .union([awardSchema, z.array(awardSchema)])
+        .optional()
+        .describe("awards of the funding"),
 
       // Aliases
       award: z.union([awardSchema, z.array(awardSchema)]).optional(),
