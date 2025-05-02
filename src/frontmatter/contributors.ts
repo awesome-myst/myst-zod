@@ -13,16 +13,10 @@ import {
   affiliationTransform,
 } from "./affiliations.ts";
 
-export type ContributorRole = CreditRole | string;
+import { formatName, type Name, parseName } from "./parse-name.ts";
 
-export type Name = {
-  literal?: string;
-  given?: string;
-  family?: string;
-  dropping_particle?: string;
-  non_dropping_particle?: string;
-  suffix?: string;
-};
+export type ContributorRole = CreditRole | string;
+export type { Name };
 
 export type Person = {
   id?: string;
@@ -41,8 +35,6 @@ export type Person = {
   note?: string;
   phone?: string;
   fax?: string;
-  // Computed property; only 'name' should be set in frontmatter as string or Name object
-  nameParsed?: Name;
 };
 
 /**
@@ -82,15 +74,40 @@ export const contributorRoleSchema: ZodType<ContributorRole> = z
   ])
   .describe("Contributor role");
 
+const nameTransform = (data: string | Name, ctx: RefinementCtx): Name => {
+  if (typeof data === "string") {
+    data = parseName(data);
+    if (!data) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Invalid name format",
+      });
+    }
+  }
+
+  if (Object.keys(data).length === 1 && data.literal) {
+    data = { ...data, ...parseName(data.literal) };
+  } else if (!data.literal) {
+    data.literal = formatName(data);
+  }
+
+  return data;
+};
+
+// @ts-expect-error TS2322
 export const nameSchema: ZodType<Name> = z
-  .object({
-    literal: z.string().optional(),
-    given: z.string().optional(),
-    family: z.string().optional(),
-    dropping_particle: z.string().optional(),
-    non_dropping_particle: z.string().optional(),
-    suffix: z.string().optional(),
-  })
+  .union([
+    z.string(),
+    z.object({
+      literal: z.string().optional(),
+      given: z.string().optional(),
+      family: z.string().optional(),
+      dropping_particle: z.string().optional(),
+      non_dropping_particle: z.string().optional(),
+      suffix: z.string().optional(),
+    }),
+  ])
+  .transform(nameTransform)
   .describe("Name frontmatter");
 
 const orcidTransform = (data: string, ctx: RefinementCtx) => {
@@ -129,7 +146,7 @@ const personTransform = (
 export const personSchemaBase: ZodType<Person> = z
   .object({
     id: z.string().optional(),
-    name: z.union([z.string(), nameSchema]).optional(),
+    name: nameSchema.optional(),
     userId: z.string().optional(),
     orcid: z.string().superRefine(orcidTransform).optional(),
     corresponding: z.boolean().optional(),

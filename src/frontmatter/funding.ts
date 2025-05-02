@@ -35,7 +35,7 @@ export type Funding = {
  */
 const awardTransform = (
   data: Record<string, unknown>,
-  ctx: z.RefinementCtx
+  ctx: z.RefinementCtx,
 ): Record<string, unknown> => {
   for (const [alias, key] of Object.entries(AWARD_ALIASES)) {
     if (alias in data) {
@@ -93,7 +93,7 @@ export const awardSchema: ZodType<Award> = z
 
 const fundingTransform = (
   data: string | Record<string, unknown>,
-  ctx: z.RefinementCtx
+  ctx: z.RefinementCtx,
 ): Record<string, unknown> => {
   if (typeof data === "string") {
     return { statement: data };
