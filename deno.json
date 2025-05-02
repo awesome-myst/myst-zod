@@ -12,6 +12,15 @@
   "imports": {
     "@deno/dnt": "jsr:@deno/dnt@^0.41.3",
     "@std/assert": "jsr:@std/assert@1",
+    "@std/fs": "jsr:@std/fs@^1.0.17",
+    "@std/path": "jsr:@std/path@^1.0.9",
+    "credit-roles": "npm:credit-roles@^2.1.0",
+    "doi-utils": "npm:doi-utils@^2.0.5",
+    "glob": "npm:glob@^11.0.2",
+    "js-yaml": "npm:js-yaml@^4.1.0",
+    "orcid": "npm:orcid@^1.0.0",
+    "simple-validators": "npm:simple-validators@^1.1.0",
+    "spdx-correct": "npm:spdx-correct@^3.2.0",
     "zod": "npm:zod@^3.24.2"
   }
 }
