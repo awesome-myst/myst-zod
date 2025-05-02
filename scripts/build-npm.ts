@@ -35,6 +35,8 @@ await build({
       "zod": "^3.24.2",
     },
     devDependencies: {
+      "@types/js-yaml": "^4.0.9",
+      "@types/spdx-correct": "^3.1.3",
       "glob": "^11.0.2",
       "js-yaml": "^4.1.0",
     }
