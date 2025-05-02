@@ -157,7 +157,7 @@ export function formatName(name: Name, alwaysReversed = false): string {
     const reParsedName = parseName(formattedName);
     delete reParsedName.literal;
     const serializedParsedName = JSON.stringify(
-      Object.entries(reParsedName).sort()
+      Object.entries(reParsedName).sort(),
     );
     const serializedSourceName = JSON.stringify(Object.entries(name).sort());
     if (serializedParsedName === serializedSourceName) {
@@ -166,8 +166,9 @@ export function formatName(name: Name, alwaysReversed = false): string {
   }
   // Otherwise, format the string "reversed"
   let output = ",";
-  if (suffix || hasCommas)
+  if (suffix || hasCommas) {
     output = `${output}${suffix ? " " : ""}${suffix ?? ""},`;
+  }
   if (given) output = `${output} ${given}`;
   if (family) output = `${family}${output}`;
   if (dropping_particle) output = `${output} ${dropping_particle}`;

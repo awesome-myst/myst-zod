@@ -13,7 +13,7 @@ import {
   affiliationTransform,
 } from "./affiliations.ts";
 
-import { type Name, parseName, formatName } from "./parse-name.ts";
+import { formatName, type Name, parseName } from "./parse-name.ts";
 
 export type ContributorRole = CreditRole | string;
 export type { Name };
@@ -123,7 +123,7 @@ const orcidTransform = (data: string, ctx: RefinementCtx) => {
 
 const personTransform = (
   data: Record<string, unknown>,
-  _ctx: RefinementCtx
+  _ctx: RefinementCtx,
 ): Record<string, unknown> => {
   if (data.roles) {
     if (typeof data.roles === "string") {
@@ -166,12 +166,13 @@ export const personSchemaBase: ZodType<Person> = z
   })
   .describe("Person frontmatter");
 
-export const personSchema: ZodType<Person> =
-  personSchemaBase.superRefine(personTransform);
+export const personSchema: ZodType<Person> = personSchemaBase.superRefine(
+  personTransform,
+);
 
 const contributorTransform = (
   data: string | Record<string, unknown>,
-  ctx: RefinementCtx
+  ctx: RefinementCtx,
 ) => {
   if (typeof data === "string") {
     return { name: data };
@@ -191,7 +192,7 @@ const contributorTransform = (
 
 const contributorPreprocessor = (
   data: string | Record<string, unknown>,
-  ctx: RefinementCtx
+  ctx: RefinementCtx,
 ) => {
   if (typeof data === "object" && typeof data.collaborations !== "undefined") {
     ctx.addIssue({
@@ -214,5 +215,5 @@ export const contributorSchema: ZodType<Contributor> = z.preprocess(
       // @ts-expect-error TS2339
       affiliationSchemaBase.merge(personSchemaBase),
     ])
-    .superRefine(contributorTransform)
+    .superRefine(contributorTransform),
 );
