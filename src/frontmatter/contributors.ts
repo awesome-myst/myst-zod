@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { type RefinementCtx, z, type ZodType } from "zod";
+import { type RefinementCtx, z, type ZodType } from "zod/v4";
 
 import { orcid } from "orcid";
 
@@ -78,9 +78,10 @@ const nameTransform = (data: string | Name, ctx: RefinementCtx): Name => {
   if (typeof data === "string") {
     data = parseName(data);
     if (!data) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+      ctx.issues.push({
+        code: "custom",
         message: "Invalid name format",
+        input: data,
       });
     }
   }
@@ -113,9 +114,10 @@ export const nameSchema: ZodType<Name> = z
 const orcidTransform = (data: string, ctx: RefinementCtx) => {
   const id = orcid.normalize(data);
   if (!id) {
-    ctx.addIssue({
-      code: z.ZodIssueCode.custom,
+    ctx.issues.push({
+      code: "custom",
       message: "Invalid ORCID ID",
+      input: data,
     });
   }
   return id;
@@ -123,7 +125,7 @@ const orcidTransform = (data: string, ctx: RefinementCtx) => {
 
 const personTransform = (
   data: Record<string, unknown>,
-  _ctx: RefinementCtx,
+  _ctx: RefinementCtx
 ): Record<string, unknown> => {
   if (data.roles) {
     if (typeof data.roles === "string") {
@@ -148,7 +150,7 @@ export const personSchemaBase: ZodType<Person> = z
     id: z.string().optional(),
     name: nameSchema.optional(),
     userId: z.string().optional(),
-    orcid: z.string().superRefine(orcidTransform).optional(),
+    orcid: z.string().transform(orcidTransform).optional(),
     corresponding: z.boolean().optional(),
     equal_contributor: z.boolean().optional(),
     deceased: z.boolean().optional(),
@@ -166,22 +168,22 @@ export const personSchemaBase: ZodType<Person> = z
   })
   .describe("Person frontmatter");
 
-export const personSchema: ZodType<Person> = personSchemaBase.superRefine(
-  personTransform,
-);
+export const personSchema: ZodType<Person> =
+  personSchemaBase.transform(personTransform);
 
 const contributorTransform = (
   data: string | Record<string, unknown>,
-  ctx: RefinementCtx,
+  ctx: RefinementCtx
 ) => {
   if (typeof data === "string") {
     return { name: data };
   }
 
   if (data.corresponding && !data.email) {
-    ctx.addIssue({
-      code: z.ZodIssueCode.custom,
+    ctx.issues.push({
+      code: "custom",
       message: "Contributor must have an email if corresponding is true",
+      input: data,
     });
   }
 
@@ -192,12 +194,13 @@ const contributorTransform = (
 
 const contributorPreprocessor = (
   data: string | Record<string, unknown>,
-  ctx: RefinementCtx,
+  ctx: RefinementCtx
 ) => {
   if (typeof data === "object" && typeof data.collaborations !== "undefined") {
-    ctx.addIssue({
-      code: z.ZodIssueCode.custom,
+    ctx.issues.push({
+      code: "custom",
       message: "collaborations is deprecated, use collaboration instead",
+      input: data,
     });
   }
 
@@ -206,7 +209,6 @@ const contributorPreprocessor = (
 
 // @ts-ignore: // inconsistent TS2322
 export const contributorSchema: ZodType<Contributor> = z.preprocess(
-  // @ts-expect-error TS2322
   contributorPreprocessor,
   z
     .union([
@@ -215,5 +217,5 @@ export const contributorSchema: ZodType<Contributor> = z.preprocess(
       // @ts-expect-error TS2339
       affiliationSchemaBase.merge(personSchemaBase),
     ])
-    .superRefine(contributorTransform),
+    .transform(contributorTransform)
 );

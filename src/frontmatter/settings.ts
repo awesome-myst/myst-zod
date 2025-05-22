@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { type RefinementCtx, z, type ZodType } from "zod";
+import { type RefinementCtx, z, type ZodType } from "zod/v4";
 
 export type OutputRemovalOptions =
   | "show"
@@ -35,14 +35,15 @@ export const outputRemovalOptionsSchema: ZodType<OutputRemovalOptions> = z
 
 const mystToTexSettingsPreprocessor = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx,
+  ctx: RefinementCtx
 ): Record<string, unknown> => {
   if (data.code_style) {
     if (data.codeStyle) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+      ctx.issues.push({
+        code: "custom",
         message:
           "myst_to_tex must define only one of code_style and codeStyle, not both",
+        input: data,
       });
     }
     data.codeStyle = data.code_style;
@@ -52,9 +53,7 @@ const mystToTexSettingsPreprocessor = (
   return data;
 };
 
-// @ts-expect-error TS2322
 export const mystToTexSettingsSchema: ZodType<MystToTexSettings> = z.preprocess(
-  // @ts-expect-error TS2345
   mystToTexSettingsPreprocessor,
   z
     .object({
@@ -67,19 +66,20 @@ export const mystToTexSettingsSchema: ZodType<MystToTexSettings> = z.preprocess(
         .optional()
         .describe("Beamer option for myst to tex conversion"),
     })
-    .describe("Myst to tex settings"),
+    .describe("Myst to tex settings")
 );
 
 const projectSettingsPreprocessor = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx,
+  ctx: RefinementCtx
 ): Record<string, unknown> => {
   for (const [alias, key] of Object.entries(PROJECT_SETTINGS_ALIAS)) {
     if (alias in data) {
       if (data[key] !== undefined) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
+        ctx.issues.push({
+          code: "custom",
           message: `Duplicate key "${key}"`,
+          input: data,
         });
       }
       data[key] = data[alias];
@@ -90,9 +90,7 @@ const projectSettingsPreprocessor = (
   return data;
 };
 
-// @ts-expect-error TS2322
 export const projectSettingsSchema: ZodType<ProjectSettings> = z.preprocess(
-  // @ts-expect-error TS2345
   projectSettingsPreprocessor,
   z
     .object({
@@ -109,5 +107,5 @@ export const projectSettingsSchema: ZodType<ProjectSettings> = z.preprocess(
         .optional()
         .describe("Myst to tex settings"),
     })
-    .describe("Project settings"),
+    .describe("Project settings")
 );
