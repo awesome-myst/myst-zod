@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z, type ZodType } from "zod";
+import { z, type ZodType } from "zod/v4";
 
 import { type Parent, parentSchema } from "../parent.ts";
 import { type ListItem, listItemSchema } from "./list-item.ts";

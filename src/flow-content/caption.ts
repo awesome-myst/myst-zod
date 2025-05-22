@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z, type ZodType } from "zod";
+import { z, type ZodType } from "zod/v4";
 
 import { type Parent, parentSchema } from "../parent.ts"; // Assuming Parent type is exported
 import { type FlowContent, flowContentSchema } from "./flow-content.ts"; // Assuming FlowContent type is exported
