@@ -32,7 +32,7 @@ await build({
       "orcid": "^1.0.0",
       "simple-validators": "^1.1.0",
       "spdx-correct": "^3.2.0",
-      "zod": "^3.24.2",
+      "zod": "^3.25.20",
     },
     devDependencies: {
       "@types/js-yaml": "^4.0.9",
