@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z, type ZodType } from "zod";
+import { z, type ZodType } from "zod/v4";
 
 const AWARD_ALIASES = {
   source: "sources",
@@ -35,14 +35,15 @@ export type Funding = {
  */
 const awardTransform = (
   data: Record<string, unknown>,
-  ctx: z.RefinementCtx,
+  ctx: z.RefinementCtx
 ): Record<string, unknown> => {
   for (const [alias, key] of Object.entries(AWARD_ALIASES)) {
     if (alias in data) {
       if (data[key] !== undefined) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
+        ctx.issues.push({
+          code: "custom",
           message: `Duplicate key "${key}"`,
+          input: data,
         });
       }
       data[key] = data[alias];
@@ -93,7 +94,7 @@ export const awardSchema: ZodType<Award> = z
 
 const fundingTransform = (
   data: string | Record<string, unknown>,
-  ctx: z.RefinementCtx,
+  ctx: z.RefinementCtx
 ): Record<string, unknown> => {
   if (typeof data === "string") {
     return { statement: data };
@@ -102,9 +103,10 @@ const fundingTransform = (
   for (const [alias, key] of Object.entries(FUNDING_ALIASES)) {
     if (alias in data) {
       if (data[key] !== undefined) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
+        ctx.issues.push({
+          code: "custom",
           message: `Duplicate key "${key}"`,
+          input: data,
         });
       }
       data[key] = data[alias];

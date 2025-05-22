@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z, type ZodType } from "zod";
+import { z, type ZodType } from "zod/v4";
 
 export type Node = {
   type: string;
@@ -24,10 +24,10 @@ export const nodeSchema: ZodType<Node> = z
   .object({
     type: z.string().describe("identifier for node variant"),
     data: z
-      .record(z.any())
+      .record(z.string(), z.any())
       .optional()
       .describe(
-        "information associated by the ecosystem with the node; never specified by mdast",
+        "information associated by the ecosystem with the node; never specified by mdast"
       ),
     position: z
       .object({
@@ -55,14 +55,14 @@ export const nodeSchema: ZodType<Node> = z
           .array(z.number())
           .optional()
           .describe(
-            "start column at each index in the source region, for elements that span multiple lines",
+            "start column at each index in the source region, for elements that span multiple lines"
           ),
       })
       .optional()
       .describe(
-        "location of node in source file; must not be present for generated nodes",
+        "location of node in source file; must not be present for generated nodes"
       ),
   })
   .describe(
-    "Base node object, based on the [unist](https://github.com/syntax-tree/unist) syntax tree.",
+    "Base node object, based on the [unist](https://github.com/syntax-tree/unist) syntax tree."
   );

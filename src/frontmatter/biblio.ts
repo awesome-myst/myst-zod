@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z, type ZodType } from "zod";
+import { z, type ZodType } from "zod/v4";
 
 export type PublicationMeta = {
   number?: string | number; // sometimes you'll get fun values like "Spring" and "Inside cover."

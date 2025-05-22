@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { type RefinementCtx, z, type ZodType } from "zod";
+import { type RefinementCtx, z, type ZodType } from "zod/v4";
 
 import { doi } from "doi-utils";
 import type { SocialLinks } from "./social-links.ts";
@@ -38,7 +38,7 @@ export type Affiliation = SocialLinks & {
 
 export const affiliationTransform = (
   data: string | Record<string, unknown>,
-  ctx: RefinementCtx,
+  ctx: RefinementCtx
 ): Record<string, unknown> => {
   if (typeof data === "string") {
     return { name: data };
@@ -50,9 +50,10 @@ export const affiliationTransform = (
   for (const [alias, key] of Object.entries(AFFILIATION_ALIASES)) {
     if (alias in data) {
       if (data[key] !== undefined) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
+        ctx.issues.push({
+          code: "custom",
           message: `Duplicate key "${key}"`,
+          input: data,
         });
       }
       data[key] = data[alias];
@@ -60,18 +61,23 @@ export const affiliationTransform = (
     }
   }
 
+  console.log("data.doi", data.doi);
+  console.log("data", data);
+  console.log("ctx.value", ctx.value);
   if (data.doi) {
     if (typeof data.doi === "string") {
       if (!doi.validate(data.doi, { strict: true })) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
+        ctx.issues.push({
+          code: "custom",
           message: `Invalid DOI "${data.doi}"`,
+          input: data,
         });
       }
     } else {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+      ctx.issues.push({
+        code: "custom",
         message: `DOI must be a string, got ${typeof data.doi}`,
+        input: data,
       });
     }
   }
@@ -100,12 +106,12 @@ export const affiliationSchemaBase: ZodType<Affiliation> = z
     ringgold: z.number().min(1000).max(999999).optional(),
     ror: z.string().optional(),
     doi: z.string().optional(),
-    email: z.string().email().optional(),
+    url: z.url().optional(),
+    email: z.email().optional(),
     phone: z.string().optional(),
     fax: z.string().optional(),
 
     // Social links
-    url: z.string().url().optional(),
     github: z.string().optional(),
     bluesky: z.string().optional(),
     mastodon: z.string().optional(),
@@ -135,7 +141,5 @@ export const affiliationSchemaBase: ZodType<Affiliation> = z
   .describe("Affiliation frontmatter");
 
 // @ts-ignore: // inconsistent TS2322
-export const affiliationSchema: ZodType<Affiliation> = z.union([
-  z.string(),
-  affiliationSchemaBase.superRefine(affiliationTransform),
-]);
+export const affiliationSchema: ZodType<Affiliation> =
+  affiliationSchemaBase.transform(affiliationTransform);
