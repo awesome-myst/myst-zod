@@ -21,6 +21,6 @@
     "orcid": "npm:orcid@^1.0.0",
     "simple-validators": "npm:simple-validators@^1.1.0",
     "spdx-correct": "npm:spdx-correct@^3.2.0",
-    "zod": "npm:zod@^3.24.2"
+    "zod": "npm:zod@^3.25.20"
   }
 }
