@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { type RefinementCtx, z, type ZodType } from "zod";
+import { type RefinementCtx, z, type ZodType } from "zod/v4";
 
 export type ThebeFrontmatter = boolean | string | ThebeFrontmatterObject;
 
@@ -31,17 +31,15 @@ export type ThebeFrontmatterObject = {
 };
 
 // NOTE: currently a subtle difference but will likely grow with lite options
-export type ExpandedThebeFrontmatter =
-  & Omit<
-    ThebeFrontmatterObject,
-    "binder"
-  >
-  & {
-    binder?: BinderHubOptions;
-  };
+export type ExpandedThebeFrontmatter = Omit<
+  ThebeFrontmatterObject,
+  "binder"
+> & {
+  binder?: BinderHubOptions;
+};
 
-export const wellKnownRepoProvidersSchema: ZodType<WellKnownRepoProviders> = z
-  .enum(["github", "gitlab", "git", "gist"]);
+export const wellKnownRepoProvidersSchema: ZodType<WellKnownRepoProviders> =
+  z.enum(["github", "gitlab", "git", "gist"]);
 
 export const binderProvidersSchema: ZodType<BinderProviders> = z.union([
   wellKnownRepoProvidersSchema,
@@ -87,7 +85,7 @@ export const thebeFrontmatterObjectSchema: ZodType<ThebeFrontmatterObject> = z
 
 const thebeTransform = (
   data: string | boolean | Record<string, unknown>,
-  ctx: RefinementCtx,
+  ctx: RefinementCtx
 ) => {
   if (typeof data === "boolean" || typeof data === "string") {
     if (data === true) {
@@ -97,10 +95,10 @@ const thebeTransform = (
     } else if (data === "binder") {
       data = { binder: true };
     } else {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message:
-          `Thebe frontmatter must be a boolean, an object, "lite" or "binder", not a string: ${data}`,
+      ctx.issues.push({
+        code: "custom",
+        message: `Thebe frontmatter must be a boolean, an object, "lite" or "binder", not a string: ${data}`,
+        input: data,
       });
       return z.NEVER;
     }
@@ -119,10 +117,10 @@ const thebeTransform = (
   ) {
     const binder = data.binder as BinderHubOptions;
     if (binder.provider === "custom" && binder.repo === undefined) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message:
-          `BinderHub options must include a repo when using a custom provider`,
+      ctx.issues.push({
+        code: "custom",
+        message: `BinderHub options must include a repo when using a custom provider`,
+        input: data,
       });
     }
   }
@@ -136,5 +134,5 @@ export const thebeFrontmatterSchema: ZodType<ThebeFrontmatter> = z
     z.string().describe("Thebe frontmatter string"),
     thebeFrontmatterObjectSchema,
   ])
-  .superRefine(thebeTransform)
+  .transform(thebeTransform)
   .describe("Thebe frontmatter");

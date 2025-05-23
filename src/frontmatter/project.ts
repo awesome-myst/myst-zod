@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { type RefinementCtx, z, type ZodType } from "zod";
+import { type RefinementCtx, z, type ZodType } from "zod/v4";
 
 import { doi } from "doi-utils";
 
@@ -121,16 +121,17 @@ export type ProjectFrontmatter = ProjectAndPageFrontmatter & {
 
 export const dateTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx,
+  ctx: RefinementCtx
 ): Record<string, unknown> => {
   if (defined(data.date)) {
     const opts: ValidationOptions = {
       property: "date",
       messages: {},
       errorLogFn: (msg) => {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
+        ctx.issues.push({
+          code: "custom",
           message: msg,
+          input: data,
         });
       },
     };
@@ -142,16 +143,17 @@ export const dateTransform = (
 
 export const licenseTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx,
+  ctx: RefinementCtx
 ): Record<string, unknown> => {
   if (defined(data.license)) {
     const opts: ValidationOptions = {
       property: "license",
       messages: {},
       errorLogFn: (msg) => {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
+        ctx.issues.push({
+          code: "custom",
           message: msg,
+          input: data,
         });
       },
     };
@@ -163,7 +165,7 @@ export const licenseTransform = (
 
 const identifiersTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx,
+  ctx: RefinementCtx
 ): Record<string, unknown> => {
   // move known external identifiers into the identifiers object
   for (const key of KNOWN_EXTERNAL_IDENTIFIERS) {
@@ -173,9 +175,10 @@ const identifiersTransform = (
       }
       // @ts-expect-error TS2339
       if (data.identifiers[key] !== undefined) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
+        ctx.issues.push({
+          code: "custom",
           message: `Duplicate identifier key "${key}"`,
+          input: data,
         });
       }
       // @ts-expect-error TS2339
@@ -189,9 +192,10 @@ const identifiersTransform = (
     defined((data.identifiers as Record<string, unknown>).doi)
   ) {
     if (defined(data.doi)) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+      ctx.issues.push({
+        code: "custom",
         message: `Duplicate DOI key "doi"`,
+        input: data,
       });
     }
     data.doi = (data.identifiers as Record<string, unknown>).doi;
@@ -205,17 +209,19 @@ const identifiersTransform = (
       (typeof identifiers.arxiv !== "string" ||
         !identifiers.arxiv.includes("arxiv.org"))
     ) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+      ctx.issues.push({
+        code: "custom",
         message: `Invalid arXiv ID "${identifiers.arxiv}"`,
+        input: data,
       });
     }
     if ("pmid" in identifiers && typeof identifiers.pmid === "string") {
       identifiers.pmid = parseInt(identifiers.pmid, 10);
       if (isNaN(identifiers.pmid)) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
+        ctx.issues.push({
+          code: "custom",
           message: `Invalid PubMed ID "${identifiers.pmid}"`,
+          input: data,
         });
       }
       // @ts-expect-error TS2339
@@ -228,9 +234,10 @@ const identifiersTransform = (
         identifiers.pmid < 2 ||
         identifiers.pmid > 99999999)
     ) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+      ctx.issues.push({
+        code: "custom",
         message: `Invalid PubMed ID "${identifiers.pmid}"`,
+        input: data,
       });
     }
     if (
@@ -238,9 +245,10 @@ const identifiersTransform = (
       (typeof identifiers.pmcid !== "string" ||
         !identifiers.pmcid.match(/^PMC\d+$/))
     ) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+      ctx.issues.push({
+        code: "custom",
         message: `Invalid PubMed Central ID "${identifiers.pmcid}"`,
+        input: data,
       });
     }
     if (
@@ -248,9 +256,10 @@ const identifiersTransform = (
       (typeof identifiers.zenodo !== "string" ||
         !identifiers.zenodo.includes("zenodo.org"))
     ) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+      ctx.issues.push({
+        code: "custom",
         message: `Invalid Zenodo ID "${identifiers.zenodo}"`,
+        input: data,
       });
     }
   }
@@ -259,20 +268,22 @@ const identifiersTransform = (
 
 const doiTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx,
+  ctx: RefinementCtx
 ): Record<string, unknown> => {
   if (defined(data.doi)) {
     if (typeof data.doi === "string") {
       if (!doi.validate(data.doi, { strict: true })) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
+        ctx.issues.push({
+          code: "custom",
           message: `Invalid DOI "${data.doi}"`,
+          input: data,
         });
       }
     } else {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+      ctx.issues.push({
+        code: "custom",
         message: `DOI must be a string, got ${typeof data.doi}`,
+        input: data,
       });
     }
   }
@@ -281,14 +292,14 @@ const doiTransform = (
 
 const abbreviationsTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx,
+  ctx: RefinementCtx
 ): Record<string, unknown> => {
   if (defined(data.abbreviations)) {
     if (typeof data.abbreviations !== "object") {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: `Abbreviations must be an object, got ${typeof data
-          .abbreviations}`,
+      ctx.issues.push({
+        code: "custom",
+        message: `Abbreviations must be an object, got ${typeof data.abbreviations}`,
+        input: data,
       });
     } else {
       const abbreviations = data.abbreviations as Record<string, unknown>;
@@ -297,11 +308,10 @@ const abbreviationsTransform = (
           abbreviations[key] = null;
         } else if (typeof abbreviations[key] === "string") {
           if (key.length < 2) {
-            ctx.addIssue({
-              code: z.ZodIssueCode.custom,
-              message: `Abbreviations must be two characters or more, got "${
-                abbreviations[key]
-              }"`,
+            ctx.issues.push({
+              code: "custom",
+              message: `Abbreviations must be two characters or more, got "${abbreviations[key]}"`,
+              input: data,
             });
           }
         }
@@ -314,7 +324,7 @@ const abbreviationsTransform = (
 
 const downloadsTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx,
+  ctx: RefinementCtx
 ): Record<string, unknown> => {
   if (defined(data.downloads)) {
     if (!Array.isArray(data.downloads)) {
@@ -326,18 +336,20 @@ const downloadsTransform = (
     for (const download of downloads) {
       if (defined(download.id)) {
         if (hasId) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
+          ctx.issues.push({
+            code: "custom",
             message: `Duplicate download id "${download.id}"`,
+            input: data,
           });
         }
         hasId = true;
       }
       if (defined(download.url)) {
         if (hasUrl) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
+          ctx.issues.push({
+            code: "custom",
             message: `Duplicate download url "${download.url}"`,
+            input: data,
           });
         }
         hasUrl = true;
@@ -350,9 +362,10 @@ const downloadsTransform = (
 const thebeTransform = (data: Record<string, unknown>, ctx: RefinementCtx) => {
   if (defined(data.jupyter)) {
     if (data.thebe !== undefined) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+      ctx.issues.push({
+        code: "custom",
         message: `Duplicate thebe key "jupyter"`,
+        input: data,
       });
     }
     data.thebe = data.jupyter;
@@ -364,21 +377,23 @@ const thebeTransform = (data: Record<string, unknown>, ctx: RefinementCtx) => {
 
 const referencesTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx,
+  ctx: RefinementCtx
 ): Record<string, unknown> => {
   if (defined(data.references)) {
     if (typeof data.references !== "object") {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+      ctx.issues.push({
+        code: "custom",
         message: `References must be an object, got ${typeof data.references}`,
+        input: data,
       });
     } else {
       const references = data.references as ExternalReferences;
       for (const key in references) {
         if (!key.match(/^[a-zA-Z0-9_-]*$/)) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
+          ctx.issues.push({
+            code: "custom",
             message: `Invalid reference key "${key}"`,
+            input: data,
           });
         }
       }
@@ -389,7 +404,7 @@ const referencesTransform = (
 
 export const projectAndPageTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx,
+  ctx: RefinementCtx
 ): Record<string, unknown> => {
   const siteResult = siteTransform(data, ctx);
   const dateResult = dateTransform(siteResult, ctx);
@@ -403,82 +418,80 @@ export const projectAndPageTransform = (
   return referencesResult;
 };
 
-export const projectAndPageFrontmatterSchemaBase: ZodType<
-  ProjectAndPageFrontmatter
-> = siteFrontmatterSchemaBase
-  // @ts-expect-error TS2339
-  .extend({
-    date: z.string().optional().describe("Date of the project"),
-    doi: z.string().optional().describe("DOI of the project"),
-    identifiers: z
-      .record(z.string(), z.union([z.string(), z.number()]))
-      .optional()
-      .describe("Identifiers of the project"),
-    open_access: z.boolean().optional().describe("Open access status"),
-    license: z
-      .union([z.string(), licensesSchema])
-      .optional()
-      .describe("License of the project"),
-    binder: z.string().optional().describe("Binder URL"),
-    source: z.string().optional().describe("Source code URL"),
-    subject: z.string().optional().describe("Subject of the project"),
-    volume: publicationMetaSchema
-      .optional()
-      .describe("Volume of the project"),
-    issue: publicationMetaSchema.optional().describe("Issue of the project"),
-    first_page: z
-      .union([z.string(), z.number()])
-      .optional()
-      .describe("First page of the project"),
-    last_page: z
-      .union([z.string(), z.number()])
-      .optional()
-      .describe("Last page of the project"),
-    oxa: z.string().optional().describe("OXA ID of the project"),
-    numbering: numberingSchema
-      .optional()
-      .describe("Numbering scheme for the project"),
-    bibliography: z
-      .union([z.string(), z.array(z.string())])
-      .optional()
-      .describe("Bibliography files for the project"),
-    math: z
-      .record(z.string(), mathMacroSchema)
-      .optional()
-      .describe("Math macros for the project"),
-    abbreviations: z
-      .record(z.string(), z.union([z.string(), z.boolean(), z.null()]))
-      .optional()
-      .describe("Abbreviations used in the project"),
-    exports: z
-      .union([exportSchema, exportSchema.array()])
-      .optional()
-      .describe("Exports for the project"),
-    downloads: downloadSchema
-      .array()
-      .optional()
-      .describe("Downloads for the project"),
-    settings: projectSettingsSchema.optional().describe("Project settings"),
-    edit_url: z
-      .string()
-      .optional()
-      .nullable()
-      .describe("Edit URL for the project"),
-    arxiv: z.string().optional().describe("arXiv ID of the project"),
-    pmid: z
-      .union([z.string(), z.number()])
-      .optional()
-      .describe("PMID of the project"),
-    pmcid: z.string().optional().describe("PMCID of the project"),
-    zenodo: z.string().optional().describe("Zenodo ID of the project"),
-  })
-  .describe(
-    "Project and page frontmatter. This is a superset of site frontmatter, and should be used in all projects.",
-  );
+export const projectAndPageFrontmatterSchemaBase: ZodType<ProjectAndPageFrontmatter> =
+  siteFrontmatterSchemaBase
+    // @ts-expect-error TS2339
+    .extend({
+      date: z.string().optional().describe("Date of the project"),
+      doi: z.string().optional().describe("DOI of the project"),
+      identifiers: z
+        .record(z.string(), z.union([z.string(), z.number()]))
+        .optional()
+        .describe("Identifiers of the project"),
+      open_access: z.boolean().optional().describe("Open access status"),
+      license: z
+        .union([z.string(), licensesSchema])
+        .optional()
+        .describe("License of the project"),
+      binder: z.string().optional().describe("Binder URL"),
+      source: z.string().optional().describe("Source code URL"),
+      subject: z.string().optional().describe("Subject of the project"),
+      volume: publicationMetaSchema
+        .optional()
+        .describe("Volume of the project"),
+      issue: publicationMetaSchema.optional().describe("Issue of the project"),
+      first_page: z
+        .union([z.string(), z.number()])
+        .optional()
+        .describe("First page of the project"),
+      last_page: z
+        .union([z.string(), z.number()])
+        .optional()
+        .describe("Last page of the project"),
+      oxa: z.string().optional().describe("OXA ID of the project"),
+      numbering: numberingSchema
+        .optional()
+        .describe("Numbering scheme for the project"),
+      bibliography: z
+        .union([z.string(), z.array(z.string())])
+        .optional()
+        .describe("Bibliography files for the project"),
+      math: z
+        .record(z.string(), mathMacroSchema)
+        .optional()
+        .describe("Math macros for the project"),
+      abbreviations: z
+        .record(z.string(), z.union([z.string(), z.boolean(), z.null()]))
+        .optional()
+        .describe("Abbreviations used in the project"),
+      exports: z
+        .union([exportSchema, exportSchema.array()])
+        .optional()
+        .describe("Exports for the project"),
+      downloads: downloadSchema
+        .array()
+        .optional()
+        .describe("Downloads for the project"),
+      settings: projectSettingsSchema.optional().describe("Project settings"),
+      edit_url: z
+        .string()
+        .optional()
+        .nullable()
+        .describe("Edit URL for the project"),
+      arxiv: z.string().optional().describe("arXiv ID of the project"),
+      pmid: z
+        .union([z.string(), z.number()])
+        .optional()
+        .describe("PMID of the project"),
+      pmcid: z.string().optional().describe("PMCID of the project"),
+      zenodo: z.string().optional().describe("Zenodo ID of the project"),
+    })
+    .describe(
+      "Project and page frontmatter. This is a superset of site frontmatter, and should be used in all projects."
+    );
 
-export const projectAndPageFrontmatterSchema: ZodType<
-  ProjectAndPageFrontmatter
-> = projectAndPageFrontmatterSchemaBase.superRefine(projectAndPageTransform);
+export const projectAndPageFrontmatterSchema: ZodType<ProjectAndPageFrontmatter> =
+  projectAndPageFrontmatterSchemaBase.transform(projectAndPageTransform);
 
 export const projectFrontmatterSchemaBase: ZodType<ProjectFrontmatter> =
   projectAndPageFrontmatterSchemaBase
@@ -507,8 +520,8 @@ export const projectFrontmatterSchemaBase: ZodType<ProjectFrontmatter> =
         .describe("Thebe frontmatter for the project"),
     })
     .describe(
-      "Project frontmatter. This is a superset of site frontmatter, and should be used in all projects.",
+      "Project frontmatter. This is a superset of site frontmatter, and should be used in all projects."
     );
 
 export const projectFrontmatterSchema: ZodType<ProjectFrontmatter> =
-  projectFrontmatterSchemaBase.superRefine(projectAndPageTransform);
+  projectFrontmatterSchemaBase.transform(projectAndPageTransform);

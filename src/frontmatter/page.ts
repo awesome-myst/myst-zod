@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z, type ZodType } from "zod";
+import { z, type ZodType } from "zod/v4";
 
 import { type Jupytext, jupytextSchema } from "./jupytext.ts";
 import { type KernelSpec, kernelSpecSchema } from "./kernelspec.ts";
@@ -66,4 +66,4 @@ export const pageFrontmatterSchemaBase: ZodType<PageFrontmatter> =
     .describe("Frontmatter for a page");
 
 export const pageFrontmatterSchema: ZodType<PageFrontmatter> =
-  pageFrontmatterSchemaBase.superRefine(projectAndPageTransform);
+  pageFrontmatterSchemaBase.transform(projectAndPageTransform);

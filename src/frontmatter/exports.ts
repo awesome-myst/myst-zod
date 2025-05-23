@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { type RefinementCtx, z, type ZodType } from "zod";
+import { type RefinementCtx, z, type ZodType } from "zod/v4";
 
 import { type TOC, tocSchema } from "../toc.ts";
 
@@ -72,16 +72,17 @@ export const exportFormatsSchema: ZodType<ExportFormats> = z
 
 const exportArticleTransform = (
   data: string | Record<string, unknown>,
-  ctx: RefinementCtx,
+  ctx: RefinementCtx
 ) => {
   if (typeof data === "string") {
     return { file: data };
   }
 
   if (!data.file && !data.title) {
-    ctx.addIssue({
-      code: z.ZodIssueCode.custom,
+    ctx.issues.push({
+      code: "custom",
       message: "Export article must have at least one of `file` or `title`",
+      input: data,
     });
   }
 
@@ -104,12 +105,12 @@ export const exportArticleSchema: ZodType<ExportArticle> = z
       title: z.string().optional().describe("title of the article"),
     }),
   ])
-  .superRefine(exportArticleTransform)
+  .transform(exportArticleTransform)
   .describe("Export article");
 
 const exportTransform = (
   data: string | Record<string, unknown>,
-  ctx: RefinementCtx,
+  ctx: RefinementCtx
 ) => {
   if (typeof data === "string") {
     // If export is a string it may be (1) format, (2) extension, or (3) output filename
@@ -132,9 +133,10 @@ const exportTransform = (
 
   if (data.article) {
     if (data.articles) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+      ctx.issues.push({
+        code: "custom",
         message: "Cannot use both `article` and `articles`",
+        input: data,
       });
     }
     data.articles = [data.article];
@@ -142,9 +144,10 @@ const exportTransform = (
   }
   if (data.sub_article) {
     if (data.sub_articles) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+      ctx.issues.push({
+        code: "custom",
         message: "Cannot use both `sub_article` and `sub_articles`",
+        input: data,
       });
     }
     data.sub_articles = [data.sub_article];
@@ -152,31 +155,34 @@ const exportTransform = (
   }
 
   if (!data.format && !data.template && !data.output) {
-    ctx.addIssue({
-      code: z.ZodIssueCode.custom,
+    ctx.issues.push({
+      code: "custom",
       message:
         "Export must have at least one of `format`, `template`, or `output`",
+      input: data,
     });
   }
 
   if (data.sub_articles && data.format !== ExportFormats.xml) {
-    ctx.addIssue({
-      code: z.ZodIssueCode.custom,
+    ctx.issues.push({
+      code: "custom",
       message: "sub_articles is only supported for jats export",
+      input: data,
     });
   }
 
   if (
     data.format &&
     [ExportFormats.md, ExportFormats.docx].includes(
-      data.format as ExportFormats,
+      data.format as ExportFormats
     ) &&
     data.articles &&
     (data.articles as ExportArticle[]).length > 1
   ) {
-    ctx.addIssue({
-      code: z.ZodIssueCode.custom,
+    ctx.issues.push({
+      code: "custom",
       message: "Export format does not support multiple articles",
+      input: data,
     });
   }
 
@@ -187,9 +193,10 @@ const exportTransform = (
       output.slice(1).includes(".") &&
       !Object.keys(EXT_TO_FORMAT).some((ext) => output.endsWith(ext))
     ) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+      ctx.issues.push({
+        code: "custom",
         message: "Unknown output format",
+        input: data,
       });
     }
   }
@@ -203,9 +210,10 @@ const exportTransform = (
         return article.file !== undefined;
       });
       if (!hasFile) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
+        ctx.issues.push({
+          code: "custom",
           message: "At least one article must have a file",
+          input: data,
         });
       }
     }
@@ -213,9 +221,10 @@ const exportTransform = (
 
   if (data.toc && typeof data.toc === "string") {
     if (data.tocFile) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+      ctx.issues.push({
+        code: "custom",
         message: "Cannot use both `toc` and `tocFile`",
+        input: data,
       });
     }
     data.tocFile = data.toc;
@@ -223,9 +232,10 @@ const exportTransform = (
   }
 
   if ((data.toc || data.tocFile) && (data.articles || data.sub_articles)) {
-    ctx.addIssue({
-      code: z.ZodIssueCode.custom,
+    ctx.issues.push({
+      code: "custom",
       message: "Cannot use both `toc` and `articles` or `sub_articles`",
+      input: data,
     });
     delete data.toc;
   }
@@ -270,5 +280,5 @@ export const exportSchema: ZodType<Export> = z
       sub_article: z.string().optional().describe("alias for sub_articles"),
     }),
   ])
-  .superRefine(exportTransform)
+  .transform(exportTransform)
   .describe("Export configuration");
