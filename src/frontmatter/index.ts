@@ -14,6 +14,7 @@ export * from "./numbering.ts";
 export * from "./page.ts";
 export * from "./project.ts";
 export * from "./references.ts";
+export * from "./social-links.ts";
 export * from "./site.ts";
 export * from "./thebe.ts";
 export * from "./venues.ts";
