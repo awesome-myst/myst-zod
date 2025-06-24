@@ -85,9 +85,10 @@ MIT License. See [LICENSE](./LICENSE.txt) for details.
 
 Contributions are welcome!
 
-To run the tests, use the following command:
+First, [install deno](https://docs.deno.com/runtime/getting_started/installation/), then
 
 ```shell
+deno install
 deno test -ER
 ```
 
