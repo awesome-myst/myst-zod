@@ -257,10 +257,12 @@ cases:
           affiliations:
             - name: University A
               url: https://example.com
+              twitter: '@abcd'
         - id: an
           name: A. Nother Name
           affiliations:
             - url: https://example.com
+              twitter: '@abcd'
               name: University A
     normalized:
       authors:
@@ -284,6 +286,7 @@ cases:
         - id: affiliations-generated-uid-0
           name: University A
           url: https://example.com
+          twitter: 'abcd'
   - title: Author with affiliation object replaces id at top level
     raw:
       authors:
@@ -335,7 +338,7 @@ cases:
       affiliations:
         - name: University A
           id: univa
-          extra: ""
+          extra: ''
     normalized:
       affiliations:
         - name: University A
@@ -348,14 +351,14 @@ cases:
           address: 123 Example St.
           city: Example town
           state: EX
-          postal_code: "00000"
+          postal_code: '00000'
           country: USA
           name: Example University
           department: Example department
           collaboration: true
-          isni: "0000000000000000"
+          isni: '0000000000000000'
           ringgold: 99999
-          ror: "0000000000000000"
+          ror: '0000000000000000'
           url: http://example.com
           email: example@example.com
           phone: 1-800-000-0000
@@ -366,14 +369,14 @@ cases:
           address: 123 Example St.
           city: Example town
           state: EX
-          postal_code: "00000"
+          postal_code: '00000'
           country: USA
           name: Example University
           department: Example department
           collaboration: true
-          isni: "0000000000000000"
+          isni: '0000000000000000'
           ringgold: 99999
-          ror: "0000000000000000"
+          ror: '0000000000000000'
           url: http://example.com
           email: example@example.com
           phone: 1-800-000-0000
@@ -399,4 +402,17 @@ cases:
       affiliations:
         - name: University A
           id: univa
-          postal_code: "91104"
+          postal_code: '91104'
+  - title: affiliations can have social logins
+    raw:
+      affiliations:
+        - name: University A
+          id: univa
+          x: '@abcd'
+          bsky: '@abc.com'
+    normalized:
+      affiliations:
+        - name: University A
+          id: univa
+          twitter: 'abcd'
+          bluesky: '@abc.com'
