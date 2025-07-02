@@ -31,7 +31,7 @@ export type SocialLinks = {
 
 export const socialLinksTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx
+  ctx: RefinementCtx,
 ): Record<string, unknown> => {
   for (const [alias, key] of Object.entries(SOCIAL_LINKS_ALIASES)) {
     if (alias in data) {
