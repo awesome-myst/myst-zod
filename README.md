@@ -85,7 +85,9 @@ MIT License. See [LICENSE](./LICENSE.txt) for details.
 
 Contributions are welcome!
 
-First, [install deno](https://docs.deno.com/runtime/getting_started/installation/), then
+First,
+[install deno](https://docs.deno.com/runtime/getting_started/installation/),
+then
 
 ```shell
 deno install

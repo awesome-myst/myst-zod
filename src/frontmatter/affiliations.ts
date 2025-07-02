@@ -38,7 +38,7 @@ export type Affiliation = SocialLinks & {
 
 export const affiliationTransform = (
   data: string | Record<string, unknown>,
-  ctx: RefinementCtx
+  ctx: RefinementCtx,
 ): Record<string, unknown> => {
   if (typeof data === "string") {
     return { name: data };

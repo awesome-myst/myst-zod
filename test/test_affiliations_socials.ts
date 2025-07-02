@@ -47,7 +47,7 @@ try {
 } catch (error: unknown) {
   console.log(
     "✓ Duplicate key test correctly failed:",
-    (error as { issues?: Array<{ message: string }> }).issues?.[0]?.message
+    (error as { issues?: Array<{ message: string }> }).issues?.[0]?.message,
   );
 }
 
