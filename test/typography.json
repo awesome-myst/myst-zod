@@ -1,0 +1,3706 @@
+{
+  "version": 2,
+  "kind": "Article",
+  "sha256": "e7326ca5a34c862539a8f6aafdd540db4b24b912bfa3883f5eca242bba26abd6",
+  "slug": "typography",
+  "location": "/authoring/typography.md",
+  "dependencies": [],
+  "frontmatter": {
+    "title": "Typography",
+    "description": "How to add everything from headers, inline code, to bold, italic and underline.",
+    "thumbnail": "/typography-3e1d1bb35cd80385921eb42c0cd07984.png",
+    "authors": [
+      {
+        "id": "Matt McCormick",
+        "name": "Matt McCormick"
+      }
+    ],
+    "github": "https://github.com/awesome-myst/myst-awesome-theme",
+    "keywords": [
+      "myst",
+      "myst-md",
+      "theme",
+      "web-awesome",
+      "shoelace",
+      "astro",
+      "book",
+      "furo"
+    ],
+    "numbering": {
+      "title": {
+        "offset": 1
+      }
+    },
+    "edit_url": "https://github.com/awesome-myst/myst-awesome-theme/blob/main/docs/authoring/typography.md",
+    "exports": [
+      {
+        "format": "md",
+        "filename": "typography.md",
+        "url": "/typography-75fa94ca09b109f8bb8f0ff4d0f21306.md"
+      }
+    ]
+  },
+  "mdast": {
+    "type": "root",
+    "children": [
+      {
+        "type": "block",
+        "children": [
+          {
+            "type": "heading",
+            "depth": 2,
+            "position": {
+              "start": {
+                "line": 7,
+                "column": 1
+              },
+              "end": {
+                "line": 7,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "Headings",
+                "position": {
+                  "start": {
+                    "line": 7,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 7,
+                    "column": 1
+                  }
+                },
+                "key": "ie5FLgZAUN"
+              }
+            ],
+            "identifier": "headings",
+            "label": "Headings",
+            "html_id": "headings",
+            "implicit": true,
+            "key": "PQ9Vn0OZxI"
+          },
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 9,
+                "column": 1
+              },
+              "end": {
+                "line": 10,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "Markdown syntax denotes headers starting with between 1 to 6 ",
+                "position": {
+                  "start": {
+                    "line": 9,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 9,
+                    "column": 1
+                  }
+                },
+                "key": "QnK8uDdfUQ"
+              },
+              {
+                "type": "inlineCode",
+                "value": "#",
+                "position": {
+                  "start": {
+                    "line": 9,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 9,
+                    "column": 1
+                  }
+                },
+                "key": "FBAiJTjJnl"
+              },
+              {
+                "type": "text",
+                "value": ".\nFor example, a level 3 header looks like:",
+                "position": {
+                  "start": {
+                    "line": 9,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 9,
+                    "column": 1
+                  }
+                },
+                "key": "uZMRAukqxb"
+              }
+            ],
+            "key": "bJFPV5vd02"
+          },
+          {
+            "type": "myst",
+            "value": "### Heading Level 3\n\nTry changing the number of `#`s to change the `depth`.",
+            "key": "ZoGz2mffuC"
+          },
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 18,
+                "column": 1
+              },
+              "end": {
+                "line": 18,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "An alternative syntax, ",
+                "position": {
+                  "start": {
+                    "line": 18,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 18,
+                    "column": 1
+                  }
+                },
+                "key": "rZZJILRluj"
+              },
+              {
+                "type": "crossReference",
+                "kind": "ref",
+                "identifier": "setex-headings",
+                "label": "setex-headings",
+                "key": "pLKoQ63bsU"
+              },
+              {
+                "type": "text",
+                "value": ", is also supported for level 1 and 2 headers.",
+                "position": {
+                  "start": {
+                    "line": 18,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 18,
+                    "column": 1
+                  }
+                },
+                "key": "e5gtwa2UtJ"
+              }
+            ],
+            "key": "GMEpD5QZsT"
+          },
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 20,
+                "column": 1
+              },
+              "end": {
+                "line": 20,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "To reference a heading in your text, you can use the ",
+                "position": {
+                  "start": {
+                    "line": 20,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 20,
+                    "column": 1
+                  }
+                },
+                "key": "cA59WhACCL"
+              },
+              {
+                "type": "inlineCode",
+                "value": "(target)=",
+                "position": {
+                  "start": {
+                    "line": 20,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 20,
+                    "column": 1
+                  }
+                },
+                "key": "PEPjiY5I5s"
+              },
+              {
+                "type": "text",
+                "value": " syntax, see ",
+                "position": {
+                  "start": {
+                    "line": 20,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 20,
+                    "column": 1
+                  }
+                },
+                "key": "I3VF2aGgT6"
+              },
+              {
+                "type": "link",
+                "url": "#targeting-headers",
+                "position": {
+                  "start": {
+                    "line": 20,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 20,
+                    "column": 1
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "{name}",
+                    "position": {
+                      "start": {
+                        "line": 20,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 20,
+                        "column": 1
+                      }
+                    },
+                    "key": "oGz9CeboYj"
+                  }
+                ],
+                "urlSource": "#targeting-headers",
+                "key": "IRgqT7kwAL"
+              },
+              {
+                "type": "text",
+                "value": " for more.",
+                "position": {
+                  "start": {
+                    "line": 20,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 20,
+                    "column": 1
+                  }
+                },
+                "key": "zq1ECSCsFB"
+              }
+            ],
+            "key": "ptyqc80Qlk"
+          },
+          {
+            "type": "heading",
+            "depth": 2,
+            "position": {
+              "start": {
+                "line": 22,
+                "column": 1
+              },
+              "end": {
+                "line": 22,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "Inline Text Formatting",
+                "position": {
+                  "start": {
+                    "line": 22,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 22,
+                    "column": 1
+                  }
+                },
+                "key": "o3BZkplSmk"
+              }
+            ],
+            "identifier": "inline-text-formatting",
+            "label": "Inline Text Formatting",
+            "html_id": "inline-text-formatting",
+            "implicit": true,
+            "key": "FvosyYaKL4"
+          },
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 24,
+                "column": 1
+              },
+              "end": {
+                "line": 24,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "Standard inline formatting including bold, italic, code, as well as escaped symbols and line breaks:",
+                "position": {
+                  "start": {
+                    "line": 24,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 24,
+                    "column": 1
+                  }
+                },
+                "key": "rEKVp06I1r"
+              }
+            ],
+            "key": "fxf4wAUzCe"
+          },
+          {
+            "type": "myst",
+            "value": "**strong**, _emphasis_, `literal text`, \\*escaped symbols\\*",
+            "key": "CvnAJclbsR"
+          },
+          {
+            "type": "definitionList",
+            "position": {
+              "start": {
+                "line": 30,
+                "column": 1
+              },
+              "end": {
+                "line": 39,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "definitionTerm",
+                "position": {
+                  "start": {
+                    "line": 30,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 29,
+                    "column": 1
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "strikethrough",
+                    "position": {
+                      "start": {
+                        "line": 30,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 30,
+                        "column": 1
+                      }
+                    },
+                    "key": "ZXNRr0dC8N"
+                  }
+                ],
+                "key": "yNNSVYfsZA"
+              },
+              {
+                "type": "definitionDescription",
+                "position": {
+                  "start": {
+                    "line": 31,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 32,
+                    "column": 1
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Use the ",
+                    "position": {
+                      "start": {
+                        "line": 31,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 31,
+                        "column": 1
+                      }
+                    },
+                    "key": "kYLGeRO6JZ"
+                  },
+                  {
+                    "type": "inlineCode",
+                    "value": "del",
+                    "position": {
+                      "start": {
+                        "line": 31,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 31,
+                        "column": 1
+                      }
+                    },
+                    "key": "TJp1KPzXHY"
+                  },
+                  {
+                    "type": "text",
+                    "value": " or ",
+                    "position": {
+                      "start": {
+                        "line": 31,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 31,
+                        "column": 1
+                      }
+                    },
+                    "key": "I440301kHC"
+                  },
+                  {
+                    "type": "inlineCode",
+                    "value": "strike",
+                    "position": {
+                      "start": {
+                        "line": 31,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 31,
+                        "column": 1
+                      }
+                    },
+                    "key": "vKgB4thxxW"
+                  },
+                  {
+                    "type": "text",
+                    "value": " role, for example, ",
+                    "position": {
+                      "start": {
+                        "line": 31,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 31,
+                        "column": 1
+                      }
+                    },
+                    "key": "xfOQ44m5Rm"
+                  },
+                  {
+                    "type": "inlineCode",
+                    "value": "{del}`text`",
+                    "position": {
+                      "start": {
+                        "line": 31,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 31,
+                        "column": 1
+                      }
+                    },
+                    "key": "rkiqz1e75i"
+                  },
+                  {
+                    "type": "text",
+                    "value": " yields ",
+                    "position": {
+                      "start": {
+                        "line": 31,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 31,
+                        "column": 1
+                      }
+                    },
+                    "key": "REjTEi7R3A"
+                  },
+                  {
+                    "type": "delete",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "text",
+                        "position": {
+                          "start": {
+                            "line": 31,
+                            "column": 1
+                          },
+                          "end": {
+                            "line": 31,
+                            "column": 1
+                          }
+                        },
+                        "key": "U40ciPVW4H"
+                      }
+                    ],
+                    "key": "YT8ET0ExL5"
+                  }
+                ],
+                "key": "Rwuw5DBpAu"
+              },
+              {
+                "type": "definitionTerm",
+                "position": {
+                  "start": {
+                    "line": 33,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 32,
+                    "column": 1
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "underline",
+                    "position": {
+                      "start": {
+                        "line": 33,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 33,
+                        "column": 1
+                      }
+                    },
+                    "key": "h1LRQBcGdz"
+                  }
+                ],
+                "key": "DkHOJNxmM2"
+              },
+              {
+                "type": "definitionDescription",
+                "position": {
+                  "start": {
+                    "line": 33,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 34,
+                    "column": 1
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Use the ",
+                    "position": {
+                      "start": {
+                        "line": 33,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 33,
+                        "column": 1
+                      }
+                    },
+                    "key": "nRd0irKEHA"
+                  },
+                  {
+                    "type": "inlineCode",
+                    "value": "u",
+                    "position": {
+                      "start": {
+                        "line": 33,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 33,
+                        "column": 1
+                      }
+                    },
+                    "key": "xwQCh2mEIs"
+                  },
+                  {
+                    "type": "text",
+                    "value": " or ",
+                    "position": {
+                      "start": {
+                        "line": 33,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 33,
+                        "column": 1
+                      }
+                    },
+                    "key": "BhUInG7JrW"
+                  },
+                  {
+                    "type": "inlineCode",
+                    "value": "underline",
+                    "position": {
+                      "start": {
+                        "line": 33,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 33,
+                        "column": 1
+                      }
+                    },
+                    "key": "tdAhqqR8U8"
+                  },
+                  {
+                    "type": "text",
+                    "value": " role, for example, ",
+                    "position": {
+                      "start": {
+                        "line": 33,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 33,
+                        "column": 1
+                      }
+                    },
+                    "key": "vea7t5lppT"
+                  },
+                  {
+                    "type": "inlineCode",
+                    "value": "{u}`text`",
+                    "position": {
+                      "start": {
+                        "line": 33,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 33,
+                        "column": 1
+                      }
+                    },
+                    "key": "O7LsLVYPH7"
+                  },
+                  {
+                    "type": "text",
+                    "value": " yields ",
+                    "position": {
+                      "start": {
+                        "line": 33,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 33,
+                        "column": 1
+                      }
+                    },
+                    "key": "Bt3EFsc4CU"
+                  },
+                  {
+                    "type": "underline",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "text",
+                        "position": {
+                          "start": {
+                            "line": 34,
+                            "column": 1
+                          },
+                          "end": {
+                            "line": 34,
+                            "column": 1
+                          }
+                        },
+                        "key": "RVy2dHvbbt"
+                      }
+                    ],
+                    "key": "DrDGZhjQtv"
+                  }
+                ],
+                "key": "JHtAeMjeWy"
+              },
+              {
+                "type": "definitionDescription",
+                "position": {
+                  "start": {
+                    "line": 35,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 36,
+                    "column": 1
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Note, using this can often be confused with a link and usage of underlines ",
+                    "position": {
+                      "start": {
+                        "line": 35,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 35,
+                        "column": 1
+                      }
+                    },
+                    "key": "Qa6pGj3udJ"
+                  },
+                  {
+                    "type": "link",
+                    "url": "https://practicaltypography.com/underlining.html",
+                    "position": {
+                      "start": {
+                        "line": 35,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 35,
+                        "column": 1
+                      }
+                    },
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "isn’t recommended",
+                        "position": {
+                          "start": {
+                            "line": 35,
+                            "column": 1
+                          },
+                          "end": {
+                            "line": 35,
+                            "column": 1
+                          }
+                        },
+                        "key": "e6qGHK8dHL"
+                      }
+                    ],
+                    "urlSource": "https://practicaltypography.com/underlining.html",
+                    "key": "F5yCXquzuP"
+                  },
+                  {
+                    "type": "text",
+                    "value": ", consider using strong or emphasis instead.",
+                    "position": {
+                      "start": {
+                        "line": 35,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 35,
+                        "column": 1
+                      }
+                    },
+                    "key": "kTK4mOseMn"
+                  }
+                ],
+                "key": "ErcGN6zKjZ"
+              },
+              {
+                "type": "definitionTerm",
+                "position": {
+                  "start": {
+                    "line": 37,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 36,
+                    "column": 1
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "smallcaps",
+                    "position": {
+                      "start": {
+                        "line": 37,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 37,
+                        "column": 1
+                      }
+                    },
+                    "key": "S5GdK9SUeG"
+                  }
+                ],
+                "key": "UkmGNVS9w6"
+              },
+              {
+                "type": "definitionDescription",
+                "position": {
+                  "start": {
+                    "line": 37,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 39,
+                    "column": 1
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Use the ",
+                    "position": {
+                      "start": {
+                        "line": 37,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 37,
+                        "column": 1
+                      }
+                    },
+                    "key": "vB3XPFOuNI"
+                  },
+                  {
+                    "type": "inlineCode",
+                    "value": "sc",
+                    "position": {
+                      "start": {
+                        "line": 37,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 37,
+                        "column": 1
+                      }
+                    },
+                    "key": "qQh7zVMWln"
+                  },
+                  {
+                    "type": "text",
+                    "value": " or ",
+                    "position": {
+                      "start": {
+                        "line": 37,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 37,
+                        "column": 1
+                      }
+                    },
+                    "key": "ymHLvjbVUo"
+                  },
+                  {
+                    "type": "inlineCode",
+                    "value": "smallcaps",
+                    "position": {
+                      "start": {
+                        "line": 37,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 37,
+                        "column": 1
+                      }
+                    },
+                    "key": "P1pNih8tt6"
+                  },
+                  {
+                    "type": "text",
+                    "value": " role, for example, ",
+                    "position": {
+                      "start": {
+                        "line": 37,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 37,
+                        "column": 1
+                      }
+                    },
+                    "key": "KH5hGmXPOT"
+                  },
+                  {
+                    "type": "inlineCode",
+                    "value": "{sc}`MyST`",
+                    "position": {
+                      "start": {
+                        "line": 37,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 37,
+                        "column": 1
+                      }
+                    },
+                    "key": "IxeeN9NpBL"
+                  },
+                  {
+                    "type": "text",
+                    "value": " yields ",
+                    "position": {
+                      "start": {
+                        "line": 37,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 37,
+                        "column": 1
+                      }
+                    },
+                    "key": "ulvHLNjD0Y"
+                  },
+                  {
+                    "type": "smallcaps",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "MyST",
+                        "position": {
+                          "start": {
+                            "line": 38,
+                            "column": 1
+                          },
+                          "end": {
+                            "line": 38,
+                            "column": 1
+                          }
+                        },
+                        "key": "azU0pLT2R4"
+                      }
+                    ],
+                    "key": "uEYrAmnbpk"
+                  }
+                ],
+                "key": "cXNZCa334M"
+              }
+            ],
+            "key": "UjcM0iNhDL"
+          },
+          {
+            "type": "myst",
+            "value": "In {sc}`MyST`, you {del}`should never` {u}`underline` _text_.",
+            "key": "P9KgsuXHlg"
+          },
+          {
+            "type": "heading",
+            "depth": 2,
+            "position": {
+              "start": {
+                "line": 44,
+                "column": 1
+              },
+              "end": {
+                "line": 44,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "Line Breaks",
+                "position": {
+                  "start": {
+                    "line": 44,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 44,
+                    "column": 1
+                  }
+                },
+                "key": "EbLjVyASLc"
+              }
+            ],
+            "identifier": "line-breaks",
+            "label": "Line Breaks",
+            "html_id": "line-breaks",
+            "implicit": true,
+            "key": "PuirTOV6sX"
+          },
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 46,
+                "column": 1
+              },
+              "end": {
+                "line": 46,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "To put a line break, without a paragraph, use a ",
+                "position": {
+                  "start": {
+                    "line": 46,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 46,
+                    "column": 1
+                  }
+                },
+                "key": "m2SSdPg0Mq"
+              },
+              {
+                "type": "inlineCode",
+                "value": "\\",
+                "position": {
+                  "start": {
+                    "line": 46,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 46,
+                    "column": 1
+                  }
+                },
+                "key": "DczQhZM6xZ"
+              },
+              {
+                "type": "text",
+                "value": " followed by a new line. This corresponds to a ",
+                "position": {
+                  "start": {
+                    "line": 46,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 46,
+                    "column": 1
+                  }
+                },
+                "key": "xyfzWTYoSy"
+              },
+              {
+                "type": "inlineCode",
+                "value": "<br>",
+                "position": {
+                  "start": {
+                    "line": 46,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 46,
+                    "column": 1
+                  }
+                },
+                "key": "LkFjAtHaIa"
+              },
+              {
+                "type": "text",
+                "value": " in HTML and ",
+                "position": {
+                  "start": {
+                    "line": 46,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 46,
+                    "column": 1
+                  }
+                },
+                "key": "PV4JPInPtl"
+              },
+              {
+                "type": "inlineCode",
+                "value": "\\\\",
+                "position": {
+                  "start": {
+                    "line": 46,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 46,
+                    "column": 1
+                  }
+                },
+                "key": "jytaT7N5uN"
+              },
+              {
+                "type": "text",
+                "value": " in ",
+                "position": {
+                  "start": {
+                    "line": 46,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 46,
+                    "column": 1
+                  }
+                },
+                "key": "eAAFnILwFS"
+              },
+              {
+                "type": "inlineMath",
+                "value": "\\LaTeX",
+                "position": {
+                  "start": {
+                    "line": 46,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 46,
+                    "column": 1
+                  }
+                },
+                "html": "<span class=\"katex\"><span class=\"katex-mathml\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mtext>LaTeX</mtext></mrow><annotation encoding=\"application/x-tex\">\\LaTeX</annotation></semantics></math></span><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.8988em;vertical-align:-0.2155em;\"></span><span class=\"mord text\"><span class=\"mord textrm\">L</span><span class=\"mspace\" style=\"margin-right:-0.36em;\"></span><span class=\"vlist-t\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.6833em;\"><span style=\"top:-2.905em;\"><span class=\"pstrut\" style=\"height:2.7em;\"></span><span class=\"mord\"><span class=\"mord textrm mtight sizing reset-size6 size3\">A</span></span></span></span></span></span><span class=\"mspace\" style=\"margin-right:-0.15em;\"></span><span class=\"mord text\"><span class=\"mord textrm\">T</span><span class=\"mspace\" style=\"margin-right:-0.1667em;\"></span><span class=\"vlist-t vlist-t2\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.4678em;\"><span style=\"top:-2.7845em;\"><span class=\"pstrut\" style=\"height:3em;\"></span><span class=\"mord\"><span class=\"mord textrm\">E</span></span></span></span><span class=\"vlist-s\">​</span></span><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.2155em;\"><span></span></span></span></span><span class=\"mspace\" style=\"margin-right:-0.125em;\"></span><span class=\"mord textrm\">X</span></span></span></span></span></span>",
+                "key": "HGYRW2ErxB"
+              },
+              {
+                "type": "text",
+                "value": ". For example, here is the ",
+                "position": {
+                  "start": {
+                    "line": 46,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 46,
+                    "column": 1
+                  }
+                },
+                "key": "Inau6oFWtf"
+              },
+              {
+                "type": "link",
+                "url": "https://en.wikipedia.org/wiki/Lines_on_the_Antiquity_of_Microbes",
+                "position": {
+                  "start": {
+                    "line": 46,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 46,
+                    "column": 1
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "worlds shortest poem",
+                    "position": {
+                      "start": {
+                        "line": 46,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 46,
+                        "column": 1
+                      }
+                    },
+                    "key": "SwL6eIoZRs"
+                  }
+                ],
+                "urlSource": "wiki:Lines_on_the_Antiquity_of_Microbes",
+                "data": {
+                  "page": "Lines_on_the_Antiquity_of_Microbes",
+                  "wiki": "https://en.wikipedia.org/",
+                  "lang": "en"
+                },
+                "internal": false,
+                "protocol": "wiki",
+                "key": "OPWSzRYhVE"
+              },
+              {
+                "type": "text",
+                "value": ":",
+                "position": {
+                  "start": {
+                    "line": 46,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 46,
+                    "column": 1
+                  }
+                },
+                "key": "oaRIgf3EHI"
+              }
+            ],
+            "key": "JUX8xtKIcR"
+          },
+          {
+            "type": "myst",
+            "value": "Fleas \\\nAdam \\\nHad 'em.\n\nBy Strickland Gillilan",
+            "key": "AdCMH59wRB"
+          },
+          {
+            "type": "heading",
+            "depth": 2,
+            "position": {
+              "start": {
+                "line": 56,
+                "column": 1
+              },
+              "end": {
+                "line": 56,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "Bullet points and numbered lists",
+                "position": {
+                  "start": {
+                    "line": 56,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 56,
+                    "column": 1
+                  }
+                },
+                "key": "BsYTClR7QD"
+              }
+            ],
+            "identifier": "bullet-points-and-numbered-lists",
+            "label": "Bullet points and numbered lists",
+            "html_id": "bullet-points-and-numbered-lists",
+            "implicit": true,
+            "key": "SsSQpj3XcJ"
+          },
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 58,
+                "column": 1
+              },
+              "end": {
+                "line": 58,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "You can use bullet points and numbered lists as you would in standard markdown. Starting a line with either a ",
+                "position": {
+                  "start": {
+                    "line": 58,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 58,
+                    "column": 1
+                  }
+                },
+                "key": "QbrKU2jvEp"
+              },
+              {
+                "type": "inlineCode",
+                "value": "-",
+                "position": {
+                  "start": {
+                    "line": 58,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 58,
+                    "column": 1
+                  }
+                },
+                "key": "YQDMPVry80"
+              },
+              {
+                "type": "text",
+                "value": " or ",
+                "position": {
+                  "start": {
+                    "line": 58,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 58,
+                    "column": 1
+                  }
+                },
+                "key": "peqlCU5AyG"
+              },
+              {
+                "type": "inlineCode",
+                "value": "*",
+                "position": {
+                  "start": {
+                    "line": 58,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 58,
+                    "column": 1
+                  }
+                },
+                "key": "Tcpsxe99Tv"
+              },
+              {
+                "type": "text",
+                "value": " for a bullet point, and ",
+                "position": {
+                  "start": {
+                    "line": 58,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 58,
+                    "column": 1
+                  }
+                },
+                "key": "gd9Zwslcpg"
+              },
+              {
+                "type": "inlineCode",
+                "value": "1.",
+                "position": {
+                  "start": {
+                    "line": 58,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 58,
+                    "column": 1
+                  }
+                },
+                "key": "Ff77ggPCpz"
+              },
+              {
+                "type": "text",
+                "value": " for numbered lists. These lists can be nested using two spaces at the start of the line.",
+                "position": {
+                  "start": {
+                    "line": 58,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 58,
+                    "column": 1
+                  }
+                },
+                "key": "PfjwmQeFvE"
+              }
+            ],
+            "key": "CephnqGwIK"
+          },
+          {
+            "type": "myst",
+            "value": "- Lists can start with `-` or `*`\n  * My other, nested\n  * bullet point list!\n\n1. My numbered list\n2. has two points",
+            "key": "q0TSP6JjSX"
+          },
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 69,
+                "column": 1
+              },
+              "end": {
+                "line": 69,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "For numbered lists, you can start following lines with any number, meaning they don’t have to be in numerical order, and this will not change the rendered output. The exception is the first number, which if it is not ",
+                "position": {
+                  "start": {
+                    "line": 69,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 69,
+                    "column": 1
+                  }
+                },
+                "key": "hk2aHKCOsd"
+              },
+              {
+                "type": "inlineCode",
+                "value": "1.",
+                "position": {
+                  "start": {
+                    "line": 69,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 69,
+                    "column": 1
+                  }
+                },
+                "key": "uM3Axahgy5"
+              },
+              {
+                "type": "text",
+                "value": " this will change the start number of the list.",
+                "position": {
+                  "start": {
+                    "line": 69,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 69,
+                    "column": 1
+                  }
+                },
+                "key": "KB6O6tt7tf"
+              }
+            ],
+            "key": "O0bgStwOCF"
+          },
+          {
+            "type": "heading",
+            "depth": 2,
+            "position": {
+              "start": {
+                "line": 71,
+                "column": 1
+              },
+              "end": {
+                "line": 71,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "Task Lists",
+                "position": {
+                  "start": {
+                    "line": 71,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 71,
+                    "column": 1
+                  }
+                },
+                "key": "aNLg5z3RDN"
+              }
+            ],
+            "identifier": "task-lists",
+            "label": "Task Lists",
+            "html_id": "task-lists",
+            "implicit": true,
+            "key": "Wm2dMkHTiZ"
+          },
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 73,
+                "column": 1
+              },
+              "end": {
+                "line": 73,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "You can use GitHub Flavoured Markdown to create task lists, these may be read only or editable depending on the use case or the theme used.",
+                "position": {
+                  "start": {
+                    "line": 73,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 73,
+                    "column": 1
+                  }
+                },
+                "key": "Dwd5tIRlVo"
+              }
+            ],
+            "key": "oOBe2iQuHK"
+          },
+          {
+            "type": "myst",
+            "value": "- [x] Create a community around MyST\n- [ ] Revolutionize technical communication",
+            "key": "vzw4C0UboF"
+          },
+          {
+            "type": "heading",
+            "depth": 2,
+            "position": {
+              "start": {
+                "line": 80,
+                "column": 1
+              },
+              "end": {
+                "line": 80,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "Subscript & Superscript",
+                "position": {
+                  "start": {
+                    "line": 80,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 80,
+                    "column": 1
+                  }
+                },
+                "key": "QLd033Bndm"
+              }
+            ],
+            "identifier": "subscript-superscript",
+            "label": "Subscript & Superscript",
+            "html_id": "subscript-superscript",
+            "implicit": true,
+            "key": "pT6HlFzOf0"
+          },
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 82,
+                "column": 1
+              },
+              "end": {
+                "line": 84,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "For inline typography for subscript and superscript formatting, it is best practice to use a text-based representation over resorting to math exponents, i.e. ",
+                "position": {
+                  "start": {
+                    "line": 82,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 82,
+                    "column": 1
+                  }
+                },
+                "key": "S7tKnXeC8U"
+              },
+              {
+                "type": "inlineCode",
+                "value": "4$^{th}$",
+                "position": {
+                  "start": {
+                    "line": 82,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 82,
+                    "column": 1
+                  }
+                },
+                "key": "Ip5cMVWUeQ"
+              },
+              {
+                "type": "text",
+                "value": ".\nThis is required in some journal submissions, and using these roles ensure that the output in HTML and ",
+                "position": {
+                  "start": {
+                    "line": 82,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 82,
+                    "column": 1
+                  }
+                },
+                "key": "vNVeAnLzPI"
+              },
+              {
+                "type": "inlineMath",
+                "value": "\\LaTeX",
+                "position": {
+                  "start": {
+                    "line": 82,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 82,
+                    "column": 1
+                  }
+                },
+                "html": "<span class=\"katex\"><span class=\"katex-mathml\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mtext>LaTeX</mtext></mrow><annotation encoding=\"application/x-tex\">\\LaTeX</annotation></semantics></math></span><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.8988em;vertical-align:-0.2155em;\"></span><span class=\"mord text\"><span class=\"mord textrm\">L</span><span class=\"mspace\" style=\"margin-right:-0.36em;\"></span><span class=\"vlist-t\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.6833em;\"><span style=\"top:-2.905em;\"><span class=\"pstrut\" style=\"height:2.7em;\"></span><span class=\"mord\"><span class=\"mord textrm mtight sizing reset-size6 size3\">A</span></span></span></span></span></span><span class=\"mspace\" style=\"margin-right:-0.15em;\"></span><span class=\"mord text\"><span class=\"mord textrm\">T</span><span class=\"mspace\" style=\"margin-right:-0.1667em;\"></span><span class=\"vlist-t vlist-t2\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.4678em;\"><span style=\"top:-2.7845em;\"><span class=\"pstrut\" style=\"height:3em;\"></span><span class=\"mord\"><span class=\"mord textrm\">E</span></span></span></span><span class=\"vlist-s\">​</span></span><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.2155em;\"><span></span></span></span></span><span class=\"mspace\" style=\"margin-right:-0.125em;\"></span><span class=\"mord textrm\">X</span></span></span></span></span></span>",
+                "key": "aqxfqMPZ8m"
+              },
+              {
+                "type": "text",
+                "value": " is correct.\nThe two roles for subscript and superscript are ",
+                "position": {
+                  "start": {
+                    "line": 82,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 82,
+                    "column": 1
+                  }
+                },
+                "key": "hqR2Qhg4tp"
+              },
+              {
+                "type": "crossReference",
+                "identifier": "role-subscript",
+                "children": [
+                  {
+                    "type": "inlineCode",
+                    "value": "{sub}",
+                    "key": "C8HbZzvgAd"
+                  }
+                ],
+                "key": "o5peU36iVW"
+              },
+              {
+                "type": "text",
+                "value": " and ",
+                "position": {
+                  "start": {
+                    "line": 82,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 82,
+                    "column": 1
+                  }
+                },
+                "key": "vahmeuVGU8"
+              },
+              {
+                "type": "crossReference",
+                "identifier": "role-superscript",
+                "children": [
+                  {
+                    "type": "inlineCode",
+                    "value": "{sup}",
+                    "key": "ATZvUG5fYY"
+                  }
+                ],
+                "key": "J42PFk72DF"
+              },
+              {
+                "type": "footnoteReference",
+                "identifier": "long-names",
+                "label": "long-names",
+                "position": {
+                  "start": {
+                    "line": 82,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 82,
+                    "column": 1
+                  }
+                },
+                "enumerator": "1",
+                "key": "hrKzgWA1pv"
+              },
+              {
+                "type": "text",
+                "value": ", respectively.",
+                "position": {
+                  "start": {
+                    "line": 82,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 82,
+                    "column": 1
+                  }
+                },
+                "key": "QiWu9O1AgP"
+              }
+            ],
+            "key": "ttfyiXirDw"
+          },
+          {
+            "type": "myst",
+            "value": "H{sub}`2`O, and 4{sup}`th` of July",
+            "key": "h2DfQCsAYD"
+          },
+          {
+            "type": "comment",
+            "value": "For chemicals you can use the {chem}`H2O`",
+            "position": {
+              "start": {
+                "line": 92,
+                "column": 1
+              },
+              "end": {
+                "line": 92,
+                "column": 1
+              }
+            },
+            "key": "gtF4gcgugF"
+          },
+          {
+            "type": "heading",
+            "depth": 2,
+            "position": {
+              "start": {
+                "line": 96,
+                "column": 1
+              },
+              "end": {
+                "line": 96,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "Keyboard Input",
+                "position": {
+                  "start": {
+                    "line": 96,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 96,
+                    "column": 1
+                  }
+                },
+                "key": "FukG5xojJZ"
+              }
+            ],
+            "label": "keyboard-input",
+            "identifier": "keyboard-input",
+            "html_id": "keyboard-input",
+            "key": "L2h1YPuY86"
+          },
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 98,
+                "column": 1
+              },
+              "end": {
+                "line": 98,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "To denote textual ",
+                "position": {
+                  "start": {
+                    "line": 98,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 98,
+                    "column": 1
+                  }
+                },
+                "key": "sPVZxkjE5w"
+              },
+              {
+                "type": "emphasis",
+                "position": {
+                  "start": {
+                    "line": 98,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 98,
+                    "column": 1
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "user",
+                    "position": {
+                      "start": {
+                        "line": 98,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 98,
+                        "column": 1
+                      }
+                    },
+                    "key": "JPysfoRIZv"
+                  }
+                ],
+                "key": "XPvsl3Rev3"
+              },
+              {
+                "type": "text",
+                "value": " input from a keyboard, such as ",
+                "position": {
+                  "start": {
+                    "line": 98,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 98,
+                    "column": 1
+                  }
+                },
+                "key": "aYqAX0gcGi"
+              },
+              {
+                "type": "keyboard",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Ctrl",
+                    "key": "uThfcTaDKj"
+                  }
+                ],
+                "key": "hz4ZnpW7L5"
+              },
+              {
+                "type": "text",
+                "value": " + ",
+                "position": {
+                  "start": {
+                    "line": 98,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 98,
+                    "column": 1
+                  }
+                },
+                "key": "zL1K6YPZiO"
+              },
+              {
+                "type": "keyboard",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Space",
+                    "key": "lHSFcqrOp2"
+                  }
+                ],
+                "key": "qOGmOr9FHC"
+              },
+              {
+                "type": "text",
+                "value": ", you can use the ",
+                "position": {
+                  "start": {
+                    "line": 98,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 98,
+                    "column": 1
+                  }
+                },
+                "key": "wwF3LUCOZM"
+              },
+              {
+                "type": "crossReference",
+                "identifier": "role-keyboard",
+                "children": [
+                  {
+                    "type": "inlineCode",
+                    "value": "{kbd}",
+                    "key": "UMDX21cUNO"
+                  }
+                ],
+                "key": "r0ouIjFcUO"
+              },
+              {
+                "type": "text",
+                "value": " role",
+                "position": {
+                  "start": {
+                    "line": 98,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 98,
+                    "column": 1
+                  }
+                },
+                "key": "auee8NQIFI"
+              },
+              {
+                "type": "footnoteReference",
+                "identifier": "long-names-kbd",
+                "label": "long-names-kbd",
+                "position": {
+                  "start": {
+                    "line": 98,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 98,
+                    "column": 1
+                  }
+                },
+                "enumerator": "2",
+                "key": "iEfsZwkYJz"
+              },
+              {
+                "type": "text",
+                "value": ".",
+                "position": {
+                  "start": {
+                    "line": 98,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 98,
+                    "column": 1
+                  }
+                },
+                "key": "vHkkEPfUdx"
+              }
+            ],
+            "key": "g60BhTfLjy"
+          },
+          {
+            "type": "myst",
+            "value": "{kbd}`Ctrl` + {kbd}`Space`",
+            "key": "sbpwSMmKBi"
+          },
+          {
+            "type": "heading",
+            "depth": 2,
+            "position": {
+              "start": {
+                "line": 108,
+                "column": 1
+              },
+              "end": {
+                "line": 108,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "Abbreviations",
+                "position": {
+                  "start": {
+                    "line": 108,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 108,
+                    "column": 1
+                  }
+                },
+                "key": "bnPlMHbKm6"
+              }
+            ],
+            "label": "abbr-role",
+            "identifier": "abbr-role",
+            "html_id": "abbr-role",
+            "key": "zD5aTkawBS"
+          },
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 110,
+                "column": 1
+              },
+              "end": {
+                "line": 110,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "To create an abbreviation, you can use the ",
+                "position": {
+                  "start": {
+                    "line": 110,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 110,
+                    "column": 1
+                  }
+                },
+                "key": "OU01GWQEqG"
+              },
+              {
+                "type": "crossReference",
+                "identifier": "role-abbreviation",
+                "children": [
+                  {
+                    "type": "inlineCode",
+                    "value": "{abbr}",
+                    "key": "lMmUEDSxrd"
+                  }
+                ],
+                "key": "cfunkIIwEI"
+              },
+              {
+                "type": "text",
+                "value": " role, in HTML this will ensure that the title of the acronym or abbreviation appears in the title when you hover over the element. In the role, follow the syntax ",
+                "position": {
+                  "start": {
+                    "line": 110,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 110,
+                    "column": 1
+                  }
+                },
+                "key": "ZgnrR76eaX"
+              },
+              {
+                "type": "inlineCode",
+                "value": "HR (Heart Rate)",
+                "position": {
+                  "start": {
+                    "line": 110,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 110,
+                    "column": 1
+                  }
+                },
+                "key": "bKYw04d5eL"
+              },
+              {
+                "type": "text",
+                "value": " with the abbreviation first followed by the expanded title in parenthesis.",
+                "position": {
+                  "start": {
+                    "line": 110,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 110,
+                    "column": 1
+                  }
+                },
+                "key": "AJDU1piaYC"
+              }
+            ],
+            "key": "bwI5wRQJEz"
+          },
+          {
+            "type": "myst",
+            "value": "Well {abbr}`MyST (Markedly Structured Text)` is cool!",
+            "key": "mUTFizc5Qb"
+          },
+          {
+            "type": "admonition",
+            "kind": "seealso",
+            "children": [
+              {
+                "type": "admonitionTitle",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Abbreviations in Frontmatter",
+                    "position": {
+                      "start": {
+                        "line": 116,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 116,
+                        "column": 1
+                      }
+                    },
+                    "key": "hvDXSM23tP"
+                  }
+                ],
+                "key": "lD2NdSiEUX"
+              },
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 119,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 119,
+                    "column": 1
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "You can also set abbreviations in your page or project frontmatter to replace all instances of your abbreviation without writing the role every time!",
+                    "position": {
+                      "start": {
+                        "line": 119,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 119,
+                        "column": 1
+                      }
+                    },
+                    "key": "zy9iUVWmwY"
+                  }
+                ],
+                "key": "FZqWON8gCI"
+              },
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 121,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 121,
+                    "column": 1
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "See ",
+                    "position": {
+                      "start": {
+                        "line": 121,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 121,
+                        "column": 1
+                      }
+                    },
+                    "key": "wcikwEzEgC"
+                  },
+                  {
+                    "type": "link",
+                    "url": "#abbreviations",
+                    "position": {
+                      "start": {
+                        "line": 121,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 121,
+                        "column": 1
+                      }
+                    },
+                    "children": [],
+                    "urlSource": "#abbreviations",
+                    "key": "MZUEuUsBJK"
+                  },
+                  {
+                    "type": "text",
+                    "value": " for more information.",
+                    "position": {
+                      "start": {
+                        "line": 121,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 121,
+                        "column": 1
+                      }
+                    },
+                    "key": "YKTt2Q6Klp"
+                  }
+                ],
+                "key": "vkZ7OGlV0u"
+              }
+            ],
+            "class": "dropdown",
+            "key": "kSAx2pKps6"
+          },
+          {
+            "type": "heading",
+            "depth": 2,
+            "position": {
+              "start": {
+                "line": 124,
+                "column": 1
+              },
+              "end": {
+                "line": 124,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "Quotations",
+                "position": {
+                  "start": {
+                    "line": 124,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 124,
+                    "column": 1
+                  }
+                },
+                "key": "XvmXTt0uUs"
+              }
+            ],
+            "identifier": "quotations",
+            "label": "Quotations",
+            "html_id": "quotations",
+            "implicit": true,
+            "key": "ON037GunpB"
+          },
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 126,
+                "column": 1
+              },
+              "end": {
+                "line": 126,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "Quotations are controlled with standard Markdown syntax, by inserting a caret (",
+                "position": {
+                  "start": {
+                    "line": 126,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 126,
+                    "column": 1
+                  }
+                },
+                "key": "tOmbeIeTVr"
+              },
+              {
+                "type": "inlineCode",
+                "value": ">",
+                "position": {
+                  "start": {
+                    "line": 126,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 126,
+                    "column": 1
+                  }
+                },
+                "key": "zSUw2Ia3gU"
+              },
+              {
+                "type": "text",
+                "value": ") symbol in front of one or more lines of text. You can provide an attribution to a blockquote by adding a final paragraph whose text starts with ",
+                "position": {
+                  "start": {
+                    "line": 126,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 126,
+                    "column": 1
+                  }
+                },
+                "key": "Dzbj58a8aP"
+              },
+              {
+                "type": "inlineCode",
+                "value": "--",
+                "position": {
+                  "start": {
+                    "line": 126,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 126,
+                    "column": 1
+                  }
+                },
+                "key": "Zc3ArqjIMz"
+              },
+              {
+                "type": "text",
+                "value": " or an em-dash (",
+                "position": {
+                  "start": {
+                    "line": 126,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 126,
+                    "column": 1
+                  }
+                },
+                "key": "zvmGqPQyXx"
+              },
+              {
+                "type": "inlineCode",
+                "value": "—",
+                "position": {
+                  "start": {
+                    "line": 126,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 126,
+                    "column": 1
+                  }
+                },
+                "key": "eUIfHQQcGW"
+              },
+              {
+                "type": "text",
+                "value": "), followed by the author or source. The blank ",
+                "position": {
+                  "start": {
+                    "line": 126,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 126,
+                    "column": 1
+                  }
+                },
+                "key": "YrtWGEPONr"
+              },
+              {
+                "type": "inlineCode",
+                "value": ">",
+                "position": {
+                  "start": {
+                    "line": 126,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 126,
+                    "column": 1
+                  }
+                },
+                "key": "l6pWbiWbh1"
+              },
+              {
+                "type": "text",
+                "value": " line is required!",
+                "position": {
+                  "start": {
+                    "line": 126,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 126,
+                    "column": 1
+                  }
+                },
+                "key": "AwPnAqjFsD"
+              }
+            ],
+            "key": "k5r28LI7K5"
+          },
+          {
+            "type": "myst",
+            "value": "> We know what we are, but know not what we may be.\n>\n> -- Hamlet act 4, Scene 5",
+            "key": "IRglxkHGu8"
+          },
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 134,
+                "column": 1
+              },
+              "end": {
+                "line": 134,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "The quotes can also be created using a directive (either ",
+                "position": {
+                  "start": {
+                    "line": 134,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 134,
+                    "column": 1
+                  }
+                },
+                "key": "M8CFhGZwRs"
+              },
+              {
+                "type": "crossReference",
+                "identifier": "directive-blockquote",
+                "children": [
+                  {
+                    "type": "inlineCode",
+                    "value": "{blockquote}",
+                    "key": "ftJRwYRXge"
+                  }
+                ],
+                "key": "kJMGCHtR8U"
+              },
+              {
+                "type": "text",
+                "value": " or ",
+                "position": {
+                  "start": {
+                    "line": 134,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 134,
+                    "column": 1
+                  }
+                },
+                "key": "iFbbDfZ4qy"
+              },
+              {
+                "type": "crossReference",
+                "identifier": "directive-blockquote",
+                "children": [
+                  {
+                    "type": "inlineCode",
+                    "value": "{epigraph}",
+                    "key": "nRhRNReJ1E"
+                  }
+                ],
+                "key": "QzHAC8qyeA"
+              },
+              {
+                "type": "text",
+                "value": "), which allows you to add classes or labels to the quote. MyST also supports ",
+                "position": {
+                  "start": {
+                    "line": 134,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 134,
+                    "column": 1
+                  }
+                },
+                "key": "a0wnHTpG3y"
+              },
+              {
+                "type": "crossReference",
+                "identifier": "directive-blockquote",
+                "children": [
+                  {
+                    "type": "inlineCode",
+                    "value": "{pull-quote}",
+                    "key": "Cp1926XDqk"
+                  }
+                ],
+                "key": "emh3Jj2wjN"
+              },
+              {
+                "type": "text",
+                "value": " directive, which act as attention-grabbing visual elements.",
+                "position": {
+                  "start": {
+                    "line": 134,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 134,
+                    "column": 1
+                  }
+                },
+                "key": "ApCTNGn0zt"
+              }
+            ],
+            "key": "A9s8LnTXWl"
+          },
+          {
+            "type": "myst",
+            "value": ":::{pull-quote}\nWe know what we are, but know not what we may be.\n:::\n\nThey say the owl was a baker’s daughter. Lord, we know what we are, but know not what we may be. God be at your table.",
+            "key": "nYFQB41fz6"
+          },
+          {
+            "type": "heading",
+            "depth": 2,
+            "position": {
+              "start": {
+                "line": 146,
+                "column": 1
+              },
+              "end": {
+                "line": 146,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "Definition Lists",
+                "position": {
+                  "start": {
+                    "line": 146,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 146,
+                    "column": 1
+                  }
+                },
+                "key": "Ofhnxb2tEh"
+              }
+            ],
+            "label": "definition-lists",
+            "identifier": "definition-lists",
+            "html_id": "definition-lists",
+            "key": "x4K6QbONZq"
+          },
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 148,
+                "column": 1
+              },
+              "end": {
+                "line": 148,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "Definition lists are based on the ",
+                "position": {
+                  "start": {
+                    "line": 148,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 148,
+                    "column": 1
+                  }
+                },
+                "key": "QrOBYIvR48"
+              },
+              {
+                "type": "link",
+                "url": "http://johnmacfarlane.net/pandoc/README.html#definition-lists",
+                "position": {
+                  "start": {
+                    "line": 148,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 148,
+                    "column": 1
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Pandoc definition list specification",
+                    "position": {
+                      "start": {
+                        "line": 148,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 148,
+                        "column": 1
+                      }
+                    },
+                    "key": "sRWP62P1nh"
+                  }
+                ],
+                "urlSource": "http://johnmacfarlane.net/pandoc/README.html#definition-lists",
+                "key": "TcVxdFoUm7"
+              },
+              {
+                "type": "text",
+                "value": ", starting with the term followed by a colon on the next line. For example:",
+                "position": {
+                  "start": {
+                    "line": 148,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 148,
+                    "column": 1
+                  }
+                },
+                "key": "DwQCgaenxv"
+              }
+            ],
+            "key": "cV5Av89pF4"
+          },
+          {
+            "type": "myst",
+            "value": "Term 1\n: Definition\n\nTerm 2\n: Definition",
+            "key": "pIOKbTyNCA"
+          },
+          {
+            "type": "blockquote",
+            "position": {
+              "start": {
+                "line": 158,
+                "column": 1
+              },
+              "end": {
+                "line": 162,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 158,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 158,
+                    "column": 1
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Each term must fit on one line, which may optionally be followed by a blank line, and must be followed by one or more definitions. A definition begins with a colon or tilde, which may be indented one or two spaces.",
+                    "position": {
+                      "start": {
+                        "line": 158,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 158,
+                        "column": 1
+                      }
+                    },
+                    "key": "YIFLMDPs0J"
+                  }
+                ],
+                "key": "kYDWvBGZ12"
+              },
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 160,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 160,
+                    "column": 1
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "A term may have multiple definitions, and each definition may consist of one or more block elements (paragraphs, code blocks, lists, etc.)",
+                    "position": {
+                      "start": {
+                        "line": 160,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 160,
+                        "column": 1
+                      }
+                    },
+                    "key": "lEGYJ7Q1Q4"
+                  }
+                ],
+                "key": "iMdXSeBQhv"
+              },
+              {
+                "type": "list",
+                "ordered": false,
+                "spread": false,
+                "position": {
+                  "start": {
+                    "line": 162,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 162,
+                    "column": 1
+                  }
+                },
+                "children": [
+                  {
+                    "type": "listItem",
+                    "spread": true,
+                    "position": {
+                      "start": {
+                        "line": 162,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 162,
+                        "column": 1
+                      }
+                    },
+                    "children": [
+                      {
+                        "type": "link",
+                        "url": "https://pandoc.org/MANUAL.html#definition-lists",
+                        "position": {
+                          "start": {
+                            "line": 162,
+                            "column": 1
+                          },
+                          "end": {
+                            "line": 162,
+                            "column": 1
+                          }
+                        },
+                        "children": [
+                          {
+                            "type": "text",
+                            "value": "Pandoc documentation",
+                            "position": {
+                              "start": {
+                                "line": 162,
+                                "column": 1
+                              },
+                              "end": {
+                                "line": 162,
+                                "column": 1
+                              }
+                            },
+                            "key": "j6t933vklQ"
+                          }
+                        ],
+                        "urlSource": "https://pandoc.org/MANUAL.html#definition-lists",
+                        "key": "bHONUtqW4y"
+                      }
+                    ],
+                    "key": "JKDmzyySzV"
+                  }
+                ],
+                "key": "YWxH4P0wCa"
+              }
+            ],
+            "key": "hH6vcHqavI"
+          },
+          {
+            "type": "admonition",
+            "kind": "tip",
+            "children": [
+              {
+                "type": "admonitionTitle",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Complex Definition Lists",
+                    "position": {
+                      "start": {
+                        "line": 166,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 166,
+                        "column": 1
+                      }
+                    },
+                    "key": "ZNH6N62UiG"
+                  }
+                ],
+                "key": "VtqwvymWYi"
+              },
+              {
+                "type": "myst",
+                "value": "Term _with Markdown_\n: Definition [with reference](content/definition-lists)\n\nA second paragraph\n: A second definition\n\nTerm 2\n~ Definition 2a\n~ Definition 2b\n\nTerm 3\n: A code block\n: > A quote\n: A final definition, that can even include images:\n\n  ![Sunset at the Beach!](https://github.com/rowanc1/pics/blob/main/sunset.png?raw=true)",
+                "key": "UMX81I7pBY"
+              }
+            ],
+            "class": "dropdown",
+            "key": "QQUUgE3oaM"
+          },
+          {
+            "type": "heading",
+            "depth": 2,
+            "position": {
+              "start": {
+                "line": 190,
+                "column": 1
+              },
+              "end": {
+                "line": 190,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "Footnotes",
+                "position": {
+                  "start": {
+                    "line": 190,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 190,
+                    "column": 1
+                  }
+                },
+                "key": "Nv2E98GsPM"
+              }
+            ],
+            "label": "footnotes",
+            "identifier": "footnotes",
+            "html_id": "footnotes",
+            "key": "mcOmOFqqWo"
+          },
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 192,
+                "column": 1
+              },
+              "end": {
+                "line": 192,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "Footnotes use the ",
+                "position": {
+                  "start": {
+                    "line": 192,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 192,
+                    "column": 1
+                  }
+                },
+                "key": "vlOnZOCfjK"
+              },
+              {
+                "type": "link",
+                "url": "https://pandoc.org/MANUAL.html#footnotes",
+                "position": {
+                  "start": {
+                    "line": 192,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 192,
+                    "column": 1
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "pandoc specification",
+                    "position": {
+                      "start": {
+                        "line": 192,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 192,
+                        "column": 1
+                      }
+                    },
+                    "key": "gjBX6orp6x"
+                  }
+                ],
+                "urlSource": "https://pandoc.org/MANUAL.html#footnotes",
+                "key": "oeSwI8Svw3"
+              },
+              {
+                "type": "text",
+                "value": ". A footnote is labeled with ",
+                "position": {
+                  "start": {
+                    "line": 192,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 192,
+                    "column": 1
+                  }
+                },
+                "key": "BjPuTpgcXF"
+              },
+              {
+                "type": "inlineCode",
+                "value": "[^label]",
+                "position": {
+                  "start": {
+                    "line": 192,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 192,
+                    "column": 1
+                  }
+                },
+                "key": "eNwiA9sdwV"
+              },
+              {
+                "type": "text",
+                "value": " and can then be any alphanumeric string (no spaces), which is case-insensitive. This creates a link to the footnote definition, which is a line that starts with the same ",
+                "position": {
+                  "start": {
+                    "line": 192,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 192,
+                    "column": 1
+                  }
+                },
+                "key": "QucJCmMm8L"
+              },
+              {
+                "type": "inlineCode",
+                "value": "[^label]: ",
+                "position": {
+                  "start": {
+                    "line": 192,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 192,
+                    "column": 1
+                  }
+                },
+                "key": "vDG6qI6RHg"
+              },
+              {
+                "type": "text",
+                "value": " and then the text of the footnote.",
+                "position": {
+                  "start": {
+                    "line": 192,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 192,
+                    "column": 1
+                  }
+                },
+                "key": "foqhegaRfW"
+              }
+            ],
+            "key": "NL81N9JIk8"
+          },
+          {
+            "type": "myst",
+            "value": "- A footnote reference[^myref]\n- Manually-numbered footnote reference[^3]\n\n[^myref]: This is an auto-numbered footnote definition.\n[^3]: This is a manually-numbered footnote definition.",
+            "key": "ubMm7kLP1e"
+          },
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 202,
+                "column": 1
+              },
+              "end": {
+                "line": 202,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "If the label is an integer, then it will always use that integer for the rendered label (i.e. they are manually numbered). For any other labels, they will be auto-numbered in the order which they are referenced, skipping any manually numbered labels.",
+                "position": {
+                  "start": {
+                    "line": 202,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 202,
+                    "column": 1
+                  }
+                },
+                "key": "lTBm9oNgWC"
+              }
+            ],
+            "key": "ygqGye5fz2"
+          },
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 204,
+                "column": 1
+              },
+              "end": {
+                "line": 205,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "All footnote definitions are collected, and displayed at the bottom of the page for print or as hover-notes online.\nNote that un-referenced footnote definitions will not be displayed.",
+                "position": {
+                  "start": {
+                    "line": 204,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 204,
+                    "column": 1
+                  }
+                },
+                "key": "W0OigEFydo"
+              }
+            ],
+            "key": "PVbsD5a9qM"
+          },
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 207,
+                "column": 1
+              },
+              "end": {
+                "line": 207,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "value": "Any preceding text after a footnote definitions, which is indented by four or more spaces, will also be included in the footnote definition.",
+                "position": {
+                  "start": {
+                    "line": 207,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 207,
+                    "column": 1
+                  }
+                },
+                "key": "JLT6PqPFYs"
+              }
+            ],
+            "key": "BFAE7ajxyY"
+          },
+          {
+            "type": "admonition",
+            "kind": "tip",
+            "children": [
+              {
+                "type": "admonitionTitle",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Complex Footnotes",
+                    "position": {
+                      "start": {
+                        "line": 211,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 211,
+                        "column": 1
+                      }
+                    },
+                    "key": "bePo6V0LkL"
+                  }
+                ],
+                "key": "Rqi1t6i7zm"
+              },
+              {
+                "type": "myst",
+                "value": "That's exactly right[^1].\n\n[^1]: Sometimes, you need to explain a point\n\n    with some extra text!\n\n    - and some *serious* points 💥\n    - and even images!\n\n    ![Mountains!](https://github.com/rowanc1/pics/blob/main/mountains.png?raw=true)\n\n    Plus any preceding unindented lines,\nthat are not separated by a blank line\n\nThis is not part of the footnote!",
+                "key": "Oslgidt7Ym"
+              }
+            ],
+            "class": "dropdown",
+            "key": "qEGGz9oPJG"
+          },
+          {
+            "type": "footnoteDefinition",
+            "identifier": "long-names",
+            "label": "long-names",
+            "position": {
+              "start": {
+                "line": 228,
+                "column": 1
+              },
+              "end": {
+                "line": 228,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 90,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 90,
+                    "column": 1
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "These two roles are also accessible through ",
+                    "position": {
+                      "start": {
+                        "line": 90,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 90,
+                        "column": 1
+                      }
+                    },
+                    "key": "bdp3cBfvLr"
+                  },
+                  {
+                    "type": "crossReference",
+                    "identifier": "role-subscript",
+                    "children": [
+                      {
+                        "type": "inlineCode",
+                        "value": "{subscript}",
+                        "key": "QCORYpivDC"
+                      }
+                    ],
+                    "key": "xFO3ZpY8P5"
+                  },
+                  {
+                    "type": "text",
+                    "value": " and ",
+                    "position": {
+                      "start": {
+                        "line": 90,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 90,
+                        "column": 1
+                      }
+                    },
+                    "key": "fTd48LpHIz"
+                  },
+                  {
+                    "type": "crossReference",
+                    "identifier": "role-superscript",
+                    "children": [
+                      {
+                        "type": "inlineCode",
+                        "value": "{superscript}",
+                        "key": "BvuERw9ahg"
+                      }
+                    ],
+                    "key": "URp4ze7CqR"
+                  },
+                  {
+                    "type": "text",
+                    "value": ".",
+                    "position": {
+                      "start": {
+                        "line": 90,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 90,
+                        "column": 1
+                      }
+                    },
+                    "key": "MKCxu4psWg"
+                  }
+                ],
+                "key": "UZS9gjkq7B"
+              }
+            ],
+            "enumerator": "1",
+            "key": "wkQM6pBrIg"
+          },
+          {
+            "type": "footnoteDefinition",
+            "identifier": "long-names-kbd",
+            "label": "long-names-kbd",
+            "position": {
+              "start": {
+                "line": 90,
+                "column": 1
+              },
+              "end": {
+                "line": 90,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 100,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 100,
+                    "column": 1
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "This role is also accessible through ",
+                    "position": {
+                      "start": {
+                        "line": 100,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 100,
+                        "column": 1
+                      }
+                    },
+                    "key": "x9shqNrLm9"
+                  },
+                  {
+                    "type": "crossReference",
+                    "identifier": "role-keyboard",
+                    "children": [
+                      {
+                        "type": "inlineCode",
+                        "value": "{keyboard}",
+                        "key": "LgB0Iey9ut"
+                      }
+                    ],
+                    "key": "rHrPFfNxyv"
+                  },
+                  {
+                    "type": "text",
+                    "value": ".",
+                    "position": {
+                      "start": {
+                        "line": 100,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 100,
+                        "column": 1
+                      }
+                    },
+                    "key": "DtkECpBmNf"
+                  }
+                ],
+                "key": "BxmBQ86dyT"
+              }
+            ],
+            "enumerator": "2",
+            "key": "QStyYmKHVj"
+          },
+          {
+            "type": "footnoteDefinition",
+            "identifier": "myref",
+            "label": "myref",
+            "position": {
+              "start": {
+                "line": 100,
+                "column": 1
+              },
+              "end": {
+                "line": 100,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 198,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 198,
+                    "column": 1
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "This is an auto-numbered footnote definition.",
+                    "position": {
+                      "start": {
+                        "line": 198,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 198,
+                        "column": 1
+                      }
+                    },
+                    "key": "bZpswh2gP8"
+                  }
+                ],
+                "key": "PKY3N4YAzS"
+              }
+            ],
+            "key": "m1Ulvza98u"
+          },
+          {
+            "type": "footnoteDefinition",
+            "identifier": "3",
+            "label": "3",
+            "position": {
+              "start": {
+                "line": 198,
+                "column": 1
+              },
+              "end": {
+                "line": 198,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 199,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 199,
+                    "column": 1
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "This is a manually-numbered footnote definition.",
+                    "position": {
+                      "start": {
+                        "line": 199,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 199,
+                        "column": 1
+                      }
+                    },
+                    "key": "i1BUgca7V6"
+                  }
+                ],
+                "key": "NqLuZSLksm"
+              }
+            ],
+            "key": "SCqswwHrMU"
+          },
+          {
+            "type": "footnoteDefinition",
+            "identifier": "1",
+            "label": "1",
+            "position": {
+              "start": {
+                "line": 199,
+                "column": 1
+              },
+              "end": {
+                "line": 199,
+                "column": 1
+              }
+            },
+            "children": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 216,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 216,
+                    "column": 1
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Sometimes, you need to explain a point",
+                    "position": {
+                      "start": {
+                        "line": 216,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 216,
+                        "column": 1
+                      }
+                    },
+                    "key": "DZ7m9rc1Nf"
+                  }
+                ],
+                "key": "x6eKiybcjZ"
+              },
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 218,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 218,
+                    "column": 1
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "with some extra text!",
+                    "position": {
+                      "start": {
+                        "line": 218,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 218,
+                        "column": 1
+                      }
+                    },
+                    "key": "AsRcRbKuBY"
+                  }
+                ],
+                "key": "xsbKdqKAdd"
+              },
+              {
+                "type": "list",
+                "ordered": false,
+                "spread": false,
+                "position": {
+                  "start": {
+                    "line": 220,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 222,
+                    "column": 1
+                  }
+                },
+                "children": [
+                  {
+                    "type": "listItem",
+                    "spread": true,
+                    "position": {
+                      "start": {
+                        "line": 220,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 220,
+                        "column": 1
+                      }
+                    },
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "and some ",
+                        "position": {
+                          "start": {
+                            "line": 220,
+                            "column": 1
+                          },
+                          "end": {
+                            "line": 220,
+                            "column": 1
+                          }
+                        },
+                        "key": "YHEWd72Xse"
+                      },
+                      {
+                        "type": "emphasis",
+                        "position": {
+                          "start": {
+                            "line": 220,
+                            "column": 1
+                          },
+                          "end": {
+                            "line": 220,
+                            "column": 1
+                          }
+                        },
+                        "children": [
+                          {
+                            "type": "text",
+                            "value": "serious",
+                            "position": {
+                              "start": {
+                                "line": 220,
+                                "column": 1
+                              },
+                              "end": {
+                                "line": 220,
+                                "column": 1
+                              }
+                            },
+                            "key": "i1zSSgHlPI"
+                          }
+                        ],
+                        "key": "k0NDtbLFTs"
+                      },
+                      {
+                        "type": "text",
+                        "value": " points 💥",
+                        "position": {
+                          "start": {
+                            "line": 220,
+                            "column": 1
+                          },
+                          "end": {
+                            "line": 220,
+                            "column": 1
+                          }
+                        },
+                        "key": "bANcsnD771"
+                      }
+                    ],
+                    "key": "wFElYK6BYd"
+                  },
+                  {
+                    "type": "listItem",
+                    "spread": true,
+                    "position": {
+                      "start": {
+                        "line": 221,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 222,
+                        "column": 1
+                      }
+                    },
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "and even images!",
+                        "position": {
+                          "start": {
+                            "line": 221,
+                            "column": 1
+                          },
+                          "end": {
+                            "line": 221,
+                            "column": 1
+                          }
+                        },
+                        "key": "vZzWb1QUEX"
+                      }
+                    ],
+                    "key": "oW8EnK3RKP"
+                  }
+                ],
+                "key": "lTawEalZqu"
+              },
+              {
+                "type": "image",
+                "url": "/e18f93c1a505d76c1d42cf6b874a6a0d.png",
+                "alt": "Mountains!",
+                "position": {
+                  "start": {
+                    "line": 223,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 223,
+                    "column": 1
+                  }
+                },
+                "key": "KLzHbnXqLG",
+                "urlSource": "https://github.com/rowanc1/pics/blob/main/mountains.png?raw=true"
+              },
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 225,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 226,
+                    "column": 1
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Plus any preceding unindented lines,\nthat are not separated by a blank line",
+                    "position": {
+                      "start": {
+                        "line": 225,
+                        "column": 1
+                      },
+                      "end": {
+                        "line": 225,
+                        "column": 1
+                      }
+                    },
+                    "key": "EmWGOJ07ai"
+                  }
+                ],
+                "key": "g1sXfLcesi"
+              }
+            ],
+            "key": "nM5BHAR1B3"
+          }
+        ],
+        "key": "x38SEZKVCx"
+      }
+    ],
+    "key": "x75cSGb0WQ"
+  },
+  "references": {
+    "cite": {
+      "order": [],
+      "data": {}
+    }
+  }
+}

@@ -65,9 +65,10 @@ The example allows for selection from three commonly-used MyST schemas:
 2. `pageFrontmatterSchema` - the
    [frontmatter](https://mystmd.org/guide/frontmatter) schema for a MyST
    Markdown article or documentation page.
-3. `projectFrontmatterSchema` - the frontmatter schema for a MyST book or
+3. `pageSchema` - the schema for a MyST Markdown article or documentation page.
+4. `projectFrontmatterSchema` - the frontmatter schema for a MyST book or
    project documentation.
-4. `xrefSchema` - the
+5. `xrefSchema` - the
    [cross-reference schema](https://mystmd.org/guide/website-metadata#myst-xref-json)
    for a MyST Markdown project.
 

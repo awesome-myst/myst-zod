@@ -32,11 +32,10 @@ export const blockSchema: ZodType<Block> = parentSchema
     children: z.lazy(() =>
       z
         .array(
-          z.discriminatedUnion("type", [
-            // @ts-expect-error TS2339
-            flowContentSchema,
-            listItemSchema,
-            phrasingContentSchema,
+          z.union([
+            z.lazy(() => flowContentSchema),
+            z.lazy(() => listItemSchema),
+            z.lazy(() => phrasingContentSchema),
           ]),
         )
         .optional()
