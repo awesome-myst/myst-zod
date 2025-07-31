@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { z, type ZodType } from "zod";
+import { z, type ZodType } from "zod/v4";
 
 import { type Paragraph, paragraphSchema } from "./paragraph.ts";
 import { type Definition, definitionSchema } from "./definition.ts";

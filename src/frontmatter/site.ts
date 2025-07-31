@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { type RefinementCtx, z, type ZodType } from "zod";
+import { type RefinementCtx, z, type ZodType } from "zod/v4";
 
 import { type Affiliation, affiliationSchema } from "./affiliations.ts";
 import { type Contributor, contributorSchema } from "./contributors.ts";
@@ -112,12 +112,12 @@ export type SiteFrontmatter = {
   contributors?: Contributor[];
   options?: Record<string, unknown>;
   parts?: Record<string, string[]>;
-  exports: Export[];
+  exports?: Export[];
 };
 
 const aliasTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx,
+  ctx: RefinementCtx
 ): Record<string, unknown> => {
   for (const [alias, key] of Object.entries(FRONTMATTER_ALIASES)) {
     if (alias in data) {
@@ -127,9 +127,10 @@ const aliasTransform = (
         key !== "authors" &&
         key !== "affiliations"
       ) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
+        ctx.issues.push({
+          code: "custom",
           message: `Duplicate key "${key}"`,
+          input: data,
         });
       }
       data[key] = data[alias];
@@ -155,9 +156,10 @@ const aliasTransform = (
     (data.exports as Export[]).forEach((exp) => {
       if (exp.id) {
         if (exportIds.has(exp.id)) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
+          ctx.issues.push({
+            code: "custom",
             message: `Duplicate export id "${exp.id}"`,
+            input: data,
           });
         } else {
           exportIds.add(exp.id);
@@ -190,9 +192,10 @@ const partsTransform = (data: SiteFrontmatter, ctx: RefinementCtx) => {
     if (val !== undefined) {
       // If the key is already in parts, addIssue
       if (parts[key]) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
+        ctx.issues.push({
+          code: "custom",
           message: `Duplicate part key "${key}"`,
+          input: data,
         });
       }
       parts[key] = Array.isArray(val) ? val : [val as string];
@@ -217,7 +220,7 @@ const partsTransform = (data: SiteFrontmatter, ctx: RefinementCtx) => {
 
 const githubTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx,
+  ctx: RefinementCtx
 ): Record<string, unknown> => {
   if (defined(data.github)) {
     if (typeof data.github === "string") {
@@ -227,15 +230,17 @@ const githubTransform = (
         data.github = `https://github.com/${repo}`;
       }
       if (!(data.github as string).includes("github")) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
+        ctx.issues.push({
+          code: "custom",
           message: `Invalid github, "${data.github}"`,
+          input: data,
         });
       }
     } else {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+      ctx.issues.push({
+        code: "custom",
         message: `github must be a string, got ${typeof data.github}`,
+        input: data,
       });
     }
   }
@@ -243,7 +248,7 @@ const githubTransform = (
 };
 
 const fundingTransform = (
-  data: Record<string, unknown>,
+  data: Record<string, unknown>
 ): Record<string, unknown> => {
   if (data.funding && !Array.isArray(data.funding)) {
     data.funding = [data.funding];
@@ -253,7 +258,7 @@ const fundingTransform = (
 
 const optionsTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx,
+  ctx: RefinementCtx
 ): Record<string, unknown> => {
   if (data.options) {
     const disallowedKeys = [
@@ -269,9 +274,10 @@ const optionsTransform = (
     const optionKeys = Object.keys(data.options as object);
     for (const key of optionKeys) {
       if (disallowedKeys.includes(key)) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
+        ctx.issues.push({
+          code: "custom",
           message: `Attempt to use reserved option "${key}"`,
+          input: data,
         });
       }
     }
@@ -281,7 +287,7 @@ const optionsTransform = (
 
 export const siteTransform = (
   data: Record<string, unknown>,
-  ctx: RefinementCtx,
+  ctx: RefinementCtx
 ): Record<string, unknown> => {
   const aliasResult = aliasTransform(data, ctx);
   const partsResult = partsTransform(aliasResult as SiteFrontmatter, ctx);
@@ -431,4 +437,4 @@ export const siteFrontmatterSchemaBase: ZodType<SiteFrontmatter> = z
   .describe("Site frontmatter");
 
 export const siteFrontmatterSchema: ZodType<SiteFrontmatter> =
-  siteFrontmatterSchemaBase.superRefine(siteTransform);
+  siteFrontmatterSchemaBase.transform(siteTransform);

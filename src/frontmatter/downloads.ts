@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { type RefinementCtx, z, type ZodType } from "zod";
+import { type RefinementCtx, z, type ZodType } from "zod/v4";
 
 import { type ExportFormats, exportFormatsSchema } from "./exports.ts";
 
@@ -15,7 +15,7 @@ export type Download = {
 
 const downloadTransform = (
   data: string | Record<string, unknown>,
-  ctx: RefinementCtx,
+  ctx: RefinementCtx
 ) => {
   if (typeof data === "string") {
     return { url: data };
@@ -23,9 +23,10 @@ const downloadTransform = (
 
   if (data.ref) {
     if (data.id) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+      ctx.issues.push({
+        code: "custom",
         message: "download must define only one of id and ref, not both",
+        input: data,
       });
     }
     data.id = data.ref;
@@ -33,9 +34,10 @@ const downloadTransform = (
   }
   if (data.file) {
     if (data.url) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+      ctx.issues.push({
+        code: "custom",
         message: "download must define only one of id and file/url, not both",
+        input: data,
       });
     }
     data.url = data.file;
@@ -43,15 +45,17 @@ const downloadTransform = (
   }
 
   if (data.url && data.id) {
-    ctx.addIssue({
-      code: z.ZodIssueCode.custom,
+    ctx.issues.push({
+      code: "custom",
       message: "download must define only one of id and file/url, not both",
+      input: data,
     });
   }
   if (!data.url && !data.id) {
-    ctx.addIssue({
-      code: z.ZodIssueCode.custom,
+    ctx.issues.push({
+      code: "custom",
       message: "download must define either id or file/url",
+      input: data,
     });
   }
   return data;

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { type RefinementCtx, z, type ZodType } from "zod";
+import { type RefinementCtx, z, type ZodType } from "zod/v4";
 
 export type NumberingItem = {
   enabled?: boolean;
@@ -33,9 +33,10 @@ const numberingItemTransform = (data: unknown, ctx: RefinementCtx) => {
   if (typeof data === "number") {
     // check that the number is positive and not a fraction
     if (data < 0 || !Number.isInteger(data)) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+      ctx.issues.push({
+        code: "custom",
         message: "Numbering item must be a positive integer",
+        input: data,
       });
     }
   }
@@ -109,6 +110,6 @@ export const numberingSchema: ZodType<Numbering> = z
       heading_4: numberingItemSchema.optional().describe("Heading 4"),
       heading_5: numberingItemSchema.optional().describe("Heading 5"),
       heading_6: numberingItemSchema.optional().describe("Heading 6"),
-    }),
+    })
   )
   .describe("Numbering configuration for the notebook");
