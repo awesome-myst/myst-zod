@@ -33,7 +33,7 @@
     "npm:orcid@1": "1.0.0",
     "npm:simple-validators@^1.1.0": "1.1.0",
     "npm:spdx-correct@^3.2.0": "3.2.0",
-    "npm:zod@^3.24.2": "3.24.2"
+    "npm:zod@^3.25.76": "3.25.76"
   },
   "jsr": {
     "@david/code-block-writer@13.0.3": {
@@ -383,8 +383,8 @@
         "strip-ansi@7.1.0"
       ]
     },
-    "zod@3.24.2": {
-      "integrity": "sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ=="
+    "zod@3.25.76": {
+      "integrity": "sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ=="
     }
   },
   "workspace": {
@@ -400,7 +400,7 @@
       "npm:orcid@1",
       "npm:simple-validators@^1.1.0",
       "npm:spdx-correct@^3.2.0",
-      "npm:zod@^3.24.2"
+      "npm:zod@^3.25.76"
     ]
   }
 }
