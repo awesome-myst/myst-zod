@@ -64,3 +64,5 @@ export * from "./toc.ts";
 export * from "./frontmatter/index.ts";
 
 export * from "./myst-xref.ts";
+
+export * from "./page.ts";

@@ -46,5 +46,6 @@ await build({
     Deno.copyFileSync("README.md", "npm/README.md");
     Deno.mkdirSync("npm/esm/test", { recursive: true });
     Deno.copyFileSync("test/myst.tests.json", "npm/esm/test/myst.tests.json");
+    Deno.copyFileSync("test/typography.json", "npm/esm/test/typography.json");
   },
 });
