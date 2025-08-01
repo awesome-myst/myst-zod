@@ -4,10 +4,14 @@ import { z, type ZodType } from "zod";
 
 import { type Parent, parentSchema } from "../parent.ts";
 import { type FlowContent, flowContentSchema } from "./flow-content.ts";
+import {
+  type PhrasingContent,
+  phrasingContentSchema,
+} from "../phrasing-content/phrasing-content.ts";
 
 export type FootnoteDefinition = Parent & {
   type: "footnoteDefinition";
-  children?: FlowContent[];
+  children?: (FlowContent | PhrasingContent)[];
   identifier?: string;
   label?: string;
 };
@@ -21,7 +25,7 @@ export const footnoteDefinitionSchema: ZodType<FootnoteDefinition> =
         .describe("identifier for node variant"),
       children: z.lazy(() =>
         z
-          .array(flowContentSchema)
+          .array(z.union([flowContentSchema, phrasingContentSchema]))
           .optional()
           .describe("children of the footnote definition node")
       ),
