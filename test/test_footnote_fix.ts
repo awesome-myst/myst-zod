@@ -12,19 +12,19 @@ const footnoteNode = {
         {
           "type": "text",
           "value": "Sometimes, you need to explain a point",
-          "key": "Kq7kEiouEG"
-        }
+          "key": "Kq7kEiouEG",
+        },
       ],
-      "key": "ORyvePRIyo"
+      "key": "ORyvePRIyo",
     },
     {
       "type": "image",
       "url": "/e18f93c1a505d76c1d42cf6b874a6a0d.png",
       "alt": "Mountains!",
-      "key": "lXc9QLdUCm"
-    }
+      "key": "lXc9QLdUCm",
+    },
   ],
-  "key": "M9jcOesEv0"
+  "key": "M9jcOesEv0",
 };
 
 console.log("Testing footnote definition with image...");

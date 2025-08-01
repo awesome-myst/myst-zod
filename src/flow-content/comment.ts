@@ -21,7 +21,7 @@ export const mystCommentSchema: ZodType<MystComment> = nodeSchema
     value: z.string().optional().describe("The text content of the comment"),
   })
   .describe(
-    "Comment nodes for comments present in myst but ignored upon render"
+    "Comment nodes for comments present in myst but ignored upon render",
   );
 
 export const commentSchema: ZodType<Comment> = nodeSchema
@@ -31,5 +31,5 @@ export const commentSchema: ZodType<Comment> = nodeSchema
     value: z.string().optional().describe("The text content of the comment"),
   })
   .describe(
-    "Comment nodes for comments present in myst but ignored upon render"
+    "Comment nodes for comments present in myst but ignored upon render",
   );

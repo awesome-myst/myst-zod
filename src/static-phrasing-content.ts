@@ -56,8 +56,8 @@ export type StaticPhrasingContent =
   | InlineMath;
 
 // @ts-expect-error TS2740
-export const staticPhrasingContentSchema: ZodType<StaticPhrasingContent> =
-  z.discriminatedUnion("type", [
+export const staticPhrasingContentSchema: ZodType<StaticPhrasingContent> = z
+  .discriminatedUnion("type", [
     // @ts-expect-error TS2740
     textSchema,
     htmlSchema,

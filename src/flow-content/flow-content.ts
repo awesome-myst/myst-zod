@@ -11,10 +11,10 @@ import { type List, listSchema } from "./list.ts";
 import { type HTML, htmlSchema } from "../html.ts";
 import { type Code, codeSchema } from "./code.ts";
 import {
-  type MystComment,
   type Comment,
-  mystCommentSchema,
   commentSchema,
+  type MystComment,
+  mystCommentSchema,
 } from "./comment.ts";
 import { type Target, targetSchema } from "./target.ts";
 import { type Directive, directiveSchema } from "./directive.ts";
@@ -29,12 +29,12 @@ import {
 import type { Myst } from "./myst.ts";
 import { mystSchema } from "./myst.ts";
 import {
-  type DefinitionList,
-  type DefinitionTerm,
   type DefinitionDescription,
-  definitionListSchema,
-  definitionTermSchema,
   definitionDescriptionSchema,
+  type DefinitionList,
+  definitionListSchema,
+  type DefinitionTerm,
+  definitionTermSchema,
 } from "./definition-list.ts";
 
 export type FlowContent =
@@ -88,5 +88,5 @@ export const flowContentSchema: ZodType<FlowContent> = z
   // @ts-expect-error TS2740
   .discriminatedUnion("type", uniqueFlowContentSchema.concat([htmlSchema]))
   .describe(
-    "Flow content is a block of text that can contain other blocks of text. It is the most common type of content in Markdown. It includes paragraphs, definitions, headings, and thematic breaks."
+    "Flow content is a block of text that can contain other blocks of text. It is the most common type of content in Markdown. It includes paragraphs, definitions, headings, and thematic breaks.",
   );
