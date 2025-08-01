@@ -14,6 +14,7 @@ import { type Subscript, subscriptSchema } from "./subscript.ts";
 import { type Underline, underlineSchema } from "./underline.ts";
 import { type Delete, deleteSchema } from "./delete.ts";
 import { type Smallcaps, smallcapsSchema } from "./smallcaps.ts";
+import { type Keyboard, keyboardSchema } from "./keyboard.ts";
 import { type Abbreviation, abbreviationSchema } from "./abbreviation.ts";
 import {
   type CrossReference,
@@ -35,6 +36,7 @@ export type PhrasingContent =
   | Underline
   | Delete
   | Smallcaps
+  | Keyboard
   | Abbreviation
   | FootnoteReference
   | CrossReference;
@@ -56,6 +58,7 @@ export const phrasingContentSchema: ZodType<PhrasingContent> = z
       underlineSchema,
       deleteSchema,
       smallcapsSchema,
+      keyboardSchema,
       abbreviationSchema,
       footnoteReferenceSchema,
       crossReferenceSchema,
