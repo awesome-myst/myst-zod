@@ -21,6 +21,8 @@ import {
   type FootnoteDefinition,
   footnoteDefinitionSchema,
 } from "./footnote-definition.ts";
+import type { Myst } from "./myst.ts";
+import { mystSchema } from "./myst.ts";
 
 export type FlowContent =
   | Paragraph
@@ -38,7 +40,8 @@ export type FlowContent =
   | Container
   | Math
   | Table
-  | FootnoteDefinition;
+  | FootnoteDefinition
+  | Myst;
 
 export const uniqueFlowContentSchema = [
   paragraphSchema,
@@ -56,6 +59,7 @@ export const uniqueFlowContentSchema = [
   mathSchema,
   tableSchema,
   footnoteDefinitionSchema,
+  mystSchema,
 ] as const;
 
 // @ts-ignore - Error thrown during test but not during deno publish
@@ -63,5 +67,5 @@ export const flowContentSchema: ZodType<FlowContent> = z
   // @ts-expect-error TS2740
   .discriminatedUnion("type", uniqueFlowContentSchema.concat([htmlSchema]))
   .describe(
-    "Flow content is a block of text that can contain other blocks of text. It is the most common type of content in Markdown. It includes paragraphs, definitions, headings, and thematic breaks.",
+    "Flow content is a block of text that can contain other blocks of text. It is the most common type of content in Markdown. It includes paragraphs, definitions, headings, and thematic breaks."
   );

@@ -23,6 +23,7 @@ export * from "./flow-content/list.ts";
 export * from "./flow-content/list-content.ts";
 export * from "./flow-content/list-item.ts";
 export * from "./flow-content/math.ts";
+export * from "./flow-content/myst.ts";
 export * from "./flow-content/paragraph.ts";
 export * from "./flow-content/table-cell.ts";
 export * from "./flow-content/target.ts";
