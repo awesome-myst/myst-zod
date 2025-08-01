@@ -23,6 +23,14 @@ import {
 } from "./footnote-definition.ts";
 import type { Myst } from "./myst.ts";
 import { mystSchema } from "./myst.ts";
+import {
+  type DefinitionList,
+  type DefinitionTerm,
+  type DefinitionDescription,
+  definitionListSchema,
+  definitionTermSchema,
+  definitionDescriptionSchema,
+} from "./definition-list.ts";
 
 export type FlowContent =
   | Paragraph
@@ -41,7 +49,10 @@ export type FlowContent =
   | Math
   | Table
   | FootnoteDefinition
-  | Myst;
+  | Myst
+  | DefinitionList
+  | DefinitionTerm
+  | DefinitionDescription;
 
 export const uniqueFlowContentSchema = [
   paragraphSchema,
@@ -60,6 +71,9 @@ export const uniqueFlowContentSchema = [
   tableSchema,
   footnoteDefinitionSchema,
   mystSchema,
+  definitionListSchema,
+  definitionTermSchema,
+  definitionDescriptionSchema,
 ] as const;
 
 // @ts-ignore - Error thrown during test but not during deno publish

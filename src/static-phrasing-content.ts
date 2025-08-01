@@ -2,34 +2,34 @@
 
 import { z, type ZodType } from "zod";
 
-import { type Text, textSchema } from "./text.ts";
-import { type HTML, htmlSchema } from "../../html.ts";
+import { type Text, textSchema } from "./phrasing-content/static/text.ts";
+import { type HTML, htmlSchema } from "./html.ts";
 import {
   type EmphasisStatic,
   emphasisStaticSchema,
-} from "./emphasis-static.ts";
-import { type StrongStatic, strongStaticSchema } from "./strong-static.ts";
-import { type InlineCode, inlineCodeSchema } from "./inline-code.ts";
-import { type Break, breakSchema } from "./break.ts";
-import { type Image, imageSchema } from "./image.ts";
+} from "./phrasing-content/static/emphasis-static.ts";
+import { type StrongStatic, strongStaticSchema } from "./phrasing-content/static/strong-static.ts";
+import { type InlineCode, inlineCodeSchema } from "./phrasing-content/static/inline-code.ts";
+import { type Break, breakSchema } from "./phrasing-content/static/break.ts";
+import { type Image, imageSchema } from "./phrasing-content/static/image.ts";
 import {
   type ImageReference,
   imageReferenceSchema,
-} from "./image-reference.ts";
-import { type Role, roleSchema } from "./role.ts";
+} from "./phrasing-content/static/image-reference.ts";
+import { type Role, roleSchema } from "./phrasing-content/static/role.ts";
 import {
   type SubscriptStatic,
   subscriptStaticSchema,
-} from "./subscript-static.ts";
+} from "./phrasing-content/static/subscript-static.ts";
 import {
   type SuperscriptStatic,
   superscriptStaticSchema,
-} from "./superscript-static.ts";
+} from "./phrasing-content/static/superscript-static.ts";
 import {
   type UnderlineStatic,
   underlineStaticSchema,
-} from "./underline-static.ts";
-import { type InlineMath, inlineMathSchema } from "./inline-math.ts";
+} from "./phrasing-content/static/underline-static.ts";
+import { type InlineMath, inlineMathSchema } from "./phrasing-content/static/inline-math.ts";
 
 export type StaticPhrasingContent =
   | Text
