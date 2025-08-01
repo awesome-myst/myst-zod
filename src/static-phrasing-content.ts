@@ -8,8 +8,14 @@ import {
   type EmphasisStatic,
   emphasisStaticSchema,
 } from "./phrasing-content/static/emphasis-static.ts";
-import { type StrongStatic, strongStaticSchema } from "./phrasing-content/static/strong-static.ts";
-import { type InlineCode, inlineCodeSchema } from "./phrasing-content/static/inline-code.ts";
+import {
+  type StrongStatic,
+  strongStaticSchema,
+} from "./phrasing-content/static/strong-static.ts";
+import {
+  type InlineCode,
+  inlineCodeSchema,
+} from "./phrasing-content/static/inline-code.ts";
 import { type Break, breakSchema } from "./phrasing-content/static/break.ts";
 import { type Image, imageSchema } from "./phrasing-content/static/image.ts";
 import {
@@ -29,7 +35,10 @@ import {
   type UnderlineStatic,
   underlineStaticSchema,
 } from "./phrasing-content/static/underline-static.ts";
-import { type InlineMath, inlineMathSchema } from "./phrasing-content/static/inline-math.ts";
+import {
+  type InlineMath,
+  inlineMathSchema,
+} from "./phrasing-content/static/inline-math.ts";
 
 export type StaticPhrasingContent =
   | Text
@@ -47,8 +56,8 @@ export type StaticPhrasingContent =
   | InlineMath;
 
 // @ts-expect-error TS2740
-export const staticPhrasingContentSchema: ZodType<StaticPhrasingContent> = z
-  .discriminatedUnion("type", [
+export const staticPhrasingContentSchema: ZodType<StaticPhrasingContent> =
+  z.discriminatedUnion("type", [
     // @ts-expect-error TS2740
     textSchema,
     htmlSchema,

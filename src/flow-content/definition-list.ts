@@ -34,16 +34,19 @@ export const definitionTermSchema: ZodType<DefinitionTerm> = parentSchema
   })
   .describe("Definition term in a definition list");
 
-export const definitionDescriptionSchema: ZodType<DefinitionDescription> = parentSchema
-  // @ts-expect-error TS2740
-  .extend({
-    type: z.literal("definitionDescription").describe("identifier for node variant"),
-    children: z
-      .array(z.union([phrasingContentSchema, z.unknown()]))
-      .optional()
-      .describe("phrasing content or flow content that describes the term"),
-  })
-  .describe("Definition description in a definition list");
+export const definitionDescriptionSchema: ZodType<DefinitionDescription> =
+  parentSchema
+    // @ts-expect-error TS2740
+    .extend({
+      type: z
+        .literal("definitionDescription")
+        .describe("identifier for node variant"),
+      children: z
+        .array(z.union([phrasingContentSchema, z.unknown()]))
+        .optional()
+        .describe("phrasing content or flow content that describes the term"),
+    })
+    .describe("Definition description in a definition list");
 
 export const definitionListSchema: ZodType<DefinitionList> = parentSchema
   // @ts-expect-error TS2740
