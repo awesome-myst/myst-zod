@@ -16,5 +16,5 @@ export const mystSchema: ZodType<Myst> = nodeSchema
     value: z.string().describe("The MyST content to be parsed and rendered"),
   })
   .describe(
-    "MyST node containing raw MyST markup that should be parsed and rendered"
+    "MyST node containing raw MyST markup that should be parsed and rendered",
   );
