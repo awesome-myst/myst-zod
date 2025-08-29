@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { tocSchema } from "../src/toc.ts";
 
 import { assert, assertEquals } from "jsr:@std/assert@1";

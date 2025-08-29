@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import type { ValidationOptions } from "simple-validators";
 import {
   defined,
