@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { build, emptyDir } from "@deno/dnt";
 import denoJson from "../deno.json" with { type: "json" };
 

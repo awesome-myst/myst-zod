@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { assertEquals } from "jsr:@std/assert@1";
 import { xrefReferenceSchema, xrefSchema } from "../src/myst-xref.ts";
 

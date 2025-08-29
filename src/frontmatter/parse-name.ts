@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // Vendored from myst-frontmatter
 
 export type Name = {

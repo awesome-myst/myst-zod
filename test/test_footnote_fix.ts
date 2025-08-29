@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { flowContentSchema } from "./src/flow-content/flow-content.ts";
 
 // Test the footnote definition from your error

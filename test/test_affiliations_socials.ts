@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // Test file to verify social links functionality in affiliations
 import { affiliationSchema } from "./src/frontmatter/affiliations.ts";
 

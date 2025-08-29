@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import type { License } from "./types.ts";
 
 // This file can be updated by:
