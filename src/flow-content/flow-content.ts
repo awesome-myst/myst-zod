@@ -36,6 +36,7 @@ import {
   type DefinitionTerm,
   definitionTermSchema,
 } from "./definition-list.ts";
+import { type TabSet, tabSetSchema, type TabItem, tabItemSchema } from "./tab-set.ts";
 
 export type FlowContent =
   | Paragraph
@@ -58,7 +59,9 @@ export type FlowContent =
   | Myst
   | DefinitionList
   | DefinitionTerm
-  | DefinitionDescription;
+  | DefinitionDescription
+  | TabSet
+  | TabItem;
 
 export const uniqueFlowContentSchema = [
   paragraphSchema,
@@ -81,6 +84,8 @@ export const uniqueFlowContentSchema = [
   definitionListSchema,
   definitionTermSchema,
   definitionDescriptionSchema,
+  tabSetSchema,
+  tabItemSchema,
 ] as const;
 
 // @ts-ignore - Error thrown during test but not during deno publish

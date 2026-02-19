@@ -29,6 +29,7 @@ export * from "./flow-content/paragraph.ts";
 export * from "./flow-content/table-cell.ts";
 export * from "./flow-content/target.ts";
 export * from "./flow-content/thematic-break.ts";
+export * from "./flow-content/tab-set.ts";
 
 export * from "./flow-content/caption.ts";
 export * from "./flow-content/legend.ts";
