@@ -3,7 +3,6 @@
 import { z, type ZodType } from "zod";
 
 import { type Parent, parentSchema } from "../parent.ts";
-import { type FlowContent, flowContentSchema } from "./flow-content.ts";
 
 export type TabSet = Parent & {
   type: "tabSet";
