@@ -2,6 +2,7 @@
 
 import { tocSchema } from "../src/toc.ts";
 
+// deno-lint-ignore no-import-prefix
 import { assert, assertEquals } from "jsr:@std/assert@1";
 
 Deno.test("Single file entry passes", () => {
