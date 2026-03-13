@@ -5,6 +5,7 @@ import {
   projectFrontmatterSchema,
 } from "../src/index.ts";
 
+// deno-lint-ignore no-import-prefix
 import { assertEquals } from "jsr:@std/assert@1";
 
 import yaml from "js-yaml";
